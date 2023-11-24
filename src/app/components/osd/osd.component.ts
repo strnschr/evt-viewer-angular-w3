@@ -70,21 +70,23 @@ To:
 @Component({
   selector: 'evt-osd',
   templateUrl: './osd.component.html',
-  styleUrls: ['./osd.component.scss'],
+  styleUrls: ['./osd.component.scss']
 })
 export class OsdComponent implements AfterViewInit, OnDestroy {
-
   @ViewChild('osd', { read: ElementRef, static: true }) div: ElementRef;
 
   // tslint:disable-next-line: variable-name
   private _options;
-  @Input() set options(v) { // TODO: add interface to better type this object
+  @Input() set options(v) {
+    // TODO: add interface to better type this object
     if (v !== this._options) {
       this._options = v;
       this.optionsChange.next(this._options);
     }
   }
-  get options() { return this._options; }
+  get options() {
+    return this._options;
+  }
   optionsChange = new BehaviorSubject({});
 
   private _viewerDataType: string; // tslint:disable-line: variable-name
@@ -105,7 +107,9 @@ export class OsdComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  get page() { return this._page; }
+  get page() {
+    return this._page;
+  }
 
   @Output() pageChange = new EventEmitter<number>();
 
@@ -119,14 +123,8 @@ export class OsdComponent implements AfterViewInit, OnDestroy {
 
   tileSources: Observable<OsdTileSource[]>;
 
-  constructor(
-    private http: HttpClient,
-  ) {
-    this.subscriptions.push(
-      this.pageChange.pipe(
-        distinctUntilChanged(),
-      ).subscribe((x) => this.viewer?.goToPage(x - 1)),
-    );
+  constructor(private http: HttpClient) {
+    this.subscriptions.push(this.pageChange.pipe(distinctUntilChanged()).subscribe(x => this.viewer?.goToPage(x - 1)));
   }
 
   ngAfterViewInit() {
@@ -140,29 +138,29 @@ export class OsdComponent implements AfterViewInit, OnDestroy {
       minZoomLevel: 0.5,
       defaultZoomLevel: 1,
       sequenceMode: true,
-      prefixUrl: 'assets/osd/images/',
+      prefixUrl: 'assets%5Cosd%5Cimages%5C',
       id: this.div.nativeElement.id,
       navigatorBackground: '#606060',
       showNavigator: false,
       gestureSettingsMouse: {
         clickToZoom: false,
-        dblClickToZoom: true,
+        dblClickToZoom: true
       },
-      placeholderFillStyle: 'assets/images/empty-image.jpg',
+      placeholderFillStyle: 'assets%5Cimages%5Cempty-image.jpg'
     };
 
-    this.subscriptions.push(combineLatest([this.optionsChange, this.tileSources])
-      .subscribe(([_, tileSources]) => {
+    this.subscriptions.push(
+      combineLatest([this.optionsChange, this.tileSources]).subscribe(([_, tileSources]) => {
         if (!!tileSources) {
           this.viewer = OpenSeadragon({
             ...commonOptions,
             ...this.options,
-            tileSources,
+            tileSources
           });
         } else {
           this.viewer = OpenSeadragon({
             ...commonOptions,
-            ...this.options,
+            ...this.options
           });
         }
         this.viewer.goToPage(this.page);
@@ -176,10 +174,11 @@ export class OsdComponent implements AfterViewInit, OnDestroy {
             context.clearRect(0, 0, canvasEl.width, canvasEl.height);
           }
         });
-      }));
+      })
+    );
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach((s) => s.unsubscribe());
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 }
