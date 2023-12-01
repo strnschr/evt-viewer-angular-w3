@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component, HostListener, Input, Optional, SkipSelf } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { AppConfig } from 'src/app/app.config';
-import { ApparatusEntry } from '../../models/evt-models';
+import { AppConfig, EditionLevelType } from 'src/app/app.config';
+import { ApparatusEntry, HighlightData } from '../../models/evt-models';
 import { register } from '../../services/component-register.service';
 import { EVTModelService } from '../../services/evt-model.service';
 import { EditionlevelSusceptible, Highlightable } from '../components-mixins';
 import { ApparatusEntryDetailComponent } from './apparatus-entry-detail/apparatus-entry-detail.component';
-
-export interface ApparatusEntryComponent extends EditionlevelSusceptible, Highlightable {}
+import { EntitiesSelectItem } from '../entities-select/entities-select.component';
 
 @Component({
   selector: 'evt-apparatus-entry',
@@ -17,7 +16,10 @@ export interface ApparatusEntryComponent extends EditionlevelSusceptible, Highli
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 @register(ApparatusEntry)
-export class ApparatusEntryComponent {
+export class ApparatusEntryComponent implements EditionlevelSusceptible, Highlightable {
+  @Input() editionLevel: EditionLevelType;
+  @Input() highlightData: HighlightData;
+  @Input() itemsToHighlight: EntitiesSelectItem[];
   @Input() data: ApparatusEntry;
 
   public opened = false;

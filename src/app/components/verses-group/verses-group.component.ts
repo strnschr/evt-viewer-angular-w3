@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { map } from 'rxjs/operators';
 
-import { VersesGroup } from '../../models/evt-models';
+import { HighlightData, VersesGroup } from '../../models/evt-models';
 import { register } from '../../services/component-register.service';
 import { EVTModelService } from '../../services/evt-model.service';
 import { EditionlevelSusceptible, Highlightable } from '../components-mixins';
-
-export interface VersesGroupComponent extends EditionlevelSusceptible, Highlightable {}
+import { EditionLevelType } from 'src/app/app.config';
+import { EntitiesSelectItem } from '../entities-select/entities-select.component';
 
 @Component({
   selector: 'evt-verses-group',
@@ -14,7 +14,10 @@ export interface VersesGroupComponent extends EditionlevelSusceptible, Highlight
   styleUrls: ['./verses-group.component.scss']
 })
 @register(VersesGroup)
-export class VersesGroupComponent {
+export class VersesGroupComponent implements EditionlevelSusceptible, Highlightable {
+  @Input() editionLevel: EditionLevelType;
+  @Input() highlightData: HighlightData;
+  @Input() itemsToHighlight: EntitiesSelectItem[];
   @Input() data: VersesGroup;
 
   get displayBlock$() {

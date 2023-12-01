@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { Supplied } from 'src/app/models/evt-models';
+import { HighlightData, Supplied } from 'src/app/models/evt-models';
 import { register } from 'src/app/services/component-register.service';
 import { EditionlevelSusceptible, Highlightable } from '../components-mixins';
-
-export interface SuppliedComponent extends EditionlevelSusceptible, Highlightable {}
+import { EditionLevelType } from 'src/app/app.config';
+import { EntitiesSelectItem } from '../entities-select/entities-select.component';
 
 @Component({
   selector: 'evt-supplied',
@@ -11,6 +11,9 @@ export interface SuppliedComponent extends EditionlevelSusceptible, Highlightabl
   styleUrls: ['./supplied.component.scss']
 })
 @register(Supplied)
-export class SuppliedComponent {
+export class SuppliedComponent implements EditionlevelSusceptible, Highlightable {
+  @Input() editionLevel: EditionLevelType;
+  @Input() highlightData: HighlightData;
+  @Input() itemsToHighlight: EntitiesSelectItem[];
   @Input() data: Supplied;
 }

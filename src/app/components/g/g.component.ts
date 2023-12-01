@@ -2,12 +2,13 @@ import { Component, Input } from '@angular/core';
 
 import { map } from 'rxjs/operators';
 
-import { G } from '../../models/evt-models';
+import { G, HighlightData } from '../../models/evt-models';
 import { register } from '../../services/component-register.service';
 import { EVTModelService } from '../../services/evt-model.service';
 import { EditionlevelSusceptible, Highlightable, TextFlowSusceptible } from '../components-mixins';
-
-export interface GComponent extends EditionlevelSusceptible, Highlightable, TextFlowSusceptible {}
+import { EditionLevelType } from 'src/app/app.config';
+import { EntitiesSelectItem } from '../entities-select/entities-select.component';
+import { TextFlow } from 'src/app/app.config';
 
 @Component({
   selector: 'evt-g',
@@ -15,8 +16,12 @@ export interface GComponent extends EditionlevelSusceptible, Highlightable, Text
   styleUrls: ['./g.component.scss']
 })
 @register(G)
-export class GComponent {
+export class GComponent implements EditionlevelSusceptible, Highlightable, TextFlowSusceptible {
   @Input() data: G;
+  @Input() editionLevel: EditionLevelType;
+  @Input() highlightData: HighlightData;
+  @Input() itemsToHighlight: EntitiesSelectItem[];
+  @Input() textFlow: TextFlow;
 
   specialChars$ = this.evtModelService.specialChars$.pipe(
     map(specialChars => specialChars.find(char => char.id === this.data.charId))

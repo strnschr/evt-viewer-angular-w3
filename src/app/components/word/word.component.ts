@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 
-import { GenericElement, Lb, Word } from '../../models/evt-models';
+import { GenericElement, HighlightData, Lb, Word } from '../../models/evt-models';
 import { register } from '../../services/component-register.service';
 import { EditionlevelSusceptible, Highlightable } from '../components-mixins';
-
-export interface WordComponent extends EditionlevelSusceptible, Highlightable {}
+import { EditionLevelType } from 'src/app/app.config';
+import { EntitiesSelectItem } from '../entities-select/entities-select.component';
 
 @Component({
   selector: 'evt-word',
@@ -12,7 +12,10 @@ export interface WordComponent extends EditionlevelSusceptible, Highlightable {}
   styleUrls: ['./word.component.scss']
 })
 @register(Word)
-export class WordComponent {
+export class WordComponent implements EditionlevelSusceptible, Highlightable {
+  @Input() editionLevel: EditionLevelType;
+  @Input() highlightData: HighlightData;
+  @Input() itemsToHighlight: EntitiesSelectItem[];
   @Input() data: Word;
 
   get word() {

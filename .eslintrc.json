@@ -61,7 +61,7 @@
             "default": ["static-field", "instance-field", "static-method", "instance-method"]
           }
         ],
-        "no-empty-function": "error",
+        "@typescript-eslint/no-empty-function": "error",
         "@typescript-eslint/no-empty-interface": "error",
         "@typescript-eslint/no-explicit-any": "error",
         "@typescript-eslint/no-for-in-array": "error",

@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { Reading } from '../../models/evt-models';
+import { HighlightData, Reading } from '../../models/evt-models';
 import { register } from '../../services/component-register.service';
 import { Highlightable } from '../components-mixins';
+import { EntitiesSelectItem } from '../entities-select/entities-select.component';
 
 @Component({
   selector: 'evt-reading',
@@ -9,6 +10,8 @@ import { Highlightable } from '../components-mixins';
   styleUrls: ['./reading.component.scss']
 })
 @register(Reading)
-export class ReadingComponent extends Highlightable {
+export class ReadingComponent implements Highlightable {
+  @Input() highlightData: HighlightData;
+  @Input() itemsToHighlight: EntitiesSelectItem[];
   @Input() data: Reading;
 }

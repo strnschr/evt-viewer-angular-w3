@@ -2,12 +2,11 @@ import { Component, Input } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { EVTModelService } from '../../services/evt-model.service';
 
-import { AppConfig } from '../../app.config';
-import { Verse } from '../../models/evt-models';
+import { AppConfig, EditionLevelType, TextFlow } from '../../app.config';
+import { HighlightData, Verse } from '../../models/evt-models';
 import { register } from '../../services/component-register.service';
 import { EditionlevelSusceptible, Highlightable, TextFlowSusceptible } from '../components-mixins';
-
-export interface VerseComponent extends EditionlevelSusceptible, Highlightable, TextFlowSusceptible {}
+import { EntitiesSelectItem } from '../entities-select/entities-select.component';
 
 @Component({
   selector: 'evt-verse',
@@ -15,7 +14,11 @@ export interface VerseComponent extends EditionlevelSusceptible, Highlightable, 
   styleUrls: ['./verse.component.scss']
 })
 @register(Verse)
-export class VerseComponent {
+export class VerseComponent implements EditionlevelSusceptible, Highlightable, TextFlowSusceptible {
+  @Input() editionLevel: EditionLevelType;
+  @Input() highlightData: HighlightData;
+  @Input() itemsToHighlight: EntitiesSelectItem[];
+  @Input() textFlow: TextFlow;
   @Input() data: Verse;
 
   get displayBlock$() {
