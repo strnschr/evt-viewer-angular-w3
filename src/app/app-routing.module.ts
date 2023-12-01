@@ -17,7 +17,7 @@ const appRoutes: Routes = [
   { path: 'w3up', loadChildren: () => import('./web3/web3.module').then(m => m.Web3Module) }
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(appRoutes, {})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

@@ -245,7 +245,7 @@ const DynamicComponents = [
     NgbPopoverModule,
     NgxSliderModule,
     NgxSpinnerModule,
-    RouterModule.forRoot(routes, { useHash: true, relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(routes, { useHash: true }),
     ScrollingModule,
     UiComponentsModule,
     Web3Module
