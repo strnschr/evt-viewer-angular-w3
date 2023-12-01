@@ -1,10 +1,75 @@
-<h4>{{ 'w3.upload.title' | translate }}</h4>
-
-<div>
-  <label for="emailInput">{{ 'w3.upload.email' | translate }}</label>
-  <input type="email" id="emailInput" class="form-control" placeholder="name@example.com" [(ngModel)]="email" />
+<div class="title">
+  <h4>{{ 'w3.upload.title' | translate }}</h4>
+  <span *ngIf="isAccountReady">{{ account.toEmail() }}</span>
 </div>
 
-<button type="submit" class="btn btn-primary" [disabled]="!email" (click)="onAuthenticateClick()">
-  {{ 'w3.upload.authenticate' | translate }}
-</button>
+<div *ngIf="!isAuthenticating && !account" class="email-authenticate">
+  <label for="emailInput">{{ 'w3.upload.email' | translate }}</label>
+  <input type="email" id="emailInput" class="form-control" placeholder="name@example.com" [(ngModel)]="email" />
+
+  <button type="submit" class="btn btn-primary" [disabled]="!email" (click)="onAuthenticateClick()">
+    {{ 'w3.upload.authenticate' | translate }}
+  </button>
+</div>
+
+<div class="loading" *ngIf="isAuthenticating">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <span>{{ 'w3.upload.pleaseCheckEmailLink' | translate }}</span>
+</div>
+
+<span *ngIf="error">Error: {{ error }}</span>
+
+<ng-container *ngIf="isAccountReady">
+  <ng-container *ngIf="!isCreatingSpace && !currentSpace">
+    <div class="create-space">
+      <div>
+        <label for="spaceInput">{{ 'w3.upload.createSpace' | translate }}</label>
+        <input type="text" id="spaceInput" class="form-control" placeholder="space-name" [(ngModel)]="spaceName" />
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="!spaceName" (click)="onSpaceCreateClick()">
+        {{ 'w3.upload.create' | translate }}
+      </button>
+    </div>
+
+    <div *ngIf="spaces.length">
+      <label for="spaces">{{ 'w3.upload.selectSpace' | translate }}</label>
+      <select class="form-select mb-3" name="spaces" id="spaces" [(ngModel)]="selectedSpaceId" name="selectedSpaceId">
+        <option *ngFor="let space of spaces" [value]="space.id">{{ space.space.name }} {{ space.id }}</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary" (click)="onSelectSpaceClick()">
+      {{ 'w3.upload.select' | translate }}
+    </button>
+  </ng-container>
+
+  <div class="loading" *ngIf="isCreatingSpace && !currentSpace">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <span>{{ 'w3.upload.creatingSpace' | translate }}</span>
+  </div>
+
+  <ng-container *ngIf="currentSpace">
+    <span>{{ 'w3.upload.currentSpace' | translate }}: {{ currentSpace.meta.name }} -- {{ currentSpace.did }}</span>
+
+    <div class="mb-3">
+      <label for="formFileMultiple" class="form-label">{{ 'w3.upload.uploadFiles' | translate }}</label>
+      <input
+        class="form-control"
+        type="file"
+        id="formFileMultiple"
+        multiple
+        [(ngModel)]="files"
+        (change)="onFilesSelected($event)"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary" (click)="onUploadClick()">
+      {{ 'w3.upload.upload' | translate }}
+    </button>
+  </ng-container>
+</ng-container>

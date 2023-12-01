@@ -4,4 +4,23 @@
   margin: auto;
   padding: 10px 20px;
   gap: 8px;
+
+  > div {
+    display: grid;
+    gap: 8px;
+  }
+}
+
+.title {
+  grid-template-columns: auto auto;
+  align-items: center;
+}
+
+.loading {
+  display: grid;
+  justify-items: center;
+}
+
+.create-space {
+  align-items: flex-end;
 }
