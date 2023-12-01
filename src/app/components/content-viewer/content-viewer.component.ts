@@ -1,4 +1,13 @@
-import { Component, ComponentRef, Input, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  ComponentRef,
+  Input,
+  OnChanges,
+  OnDestroy,
+  SimpleChanges,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 
 import { AttributesMap } from 'ng-dynamic-component';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
@@ -8,53 +17,26 @@ import { GenericElement } from '../../models/evt-models';
 import { ComponentRegisterService } from '../../services/component-register.service';
 import { EntitiesSelectService } from '../../services/entities-select.service';
 import { EntitiesSelectItem } from '../entities-select/entities-select.component';
+import { TextFlowSusceptible } from '../components-mixins';
 
 @Component({
   selector: 'evt-content-viewer',
   templateUrl: './content-viewer.component.html'
 })
-export class ContentViewerComponent implements OnDestroy {
-  private v: GenericElement;
-  @Input() set content(v: GenericElement) {
-    this.v = v;
-    this.contentChange.next(v);
-  }
-  get content() {
-    return this.v;
-  }
-
-  private ith: EntitiesSelectItem[];
-  @Input() set itemsToHighlight(i: EntitiesSelectItem[]) {
-    this.ith = i;
-    this.itemsToHighlightChange.next(i);
-  }
-  get itemsToHighlight() {
-    return this.ith;
-  }
-
+export class ContentViewerComponent implements OnChanges, OnDestroy, TextFlowSusceptible {
+  @Input() content: GenericElement;
   contentChange = new BehaviorSubject<GenericElement>(undefined);
-  @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
+
+  @Input() itemsToHighlight: EntitiesSelectItem[];
   itemsToHighlightChange = new BehaviorSubject<EntitiesSelectItem[]>([]);
 
-  private edLevel: EditionLevelType;
-  @Input() set editionLevel(el: EditionLevelType) {
-    this.edLevel = el;
-    this.editionLevelChange.next(el);
-  }
-  get editionLevel() {
-    return this.edLevel;
-  }
+  @Input() editionLevel: EditionLevelType | '' = '';
   editionLevelChange = new BehaviorSubject<EditionLevelType | ''>('');
 
-  private txtFlow: TextFlow;
-  @Input() set textFlow(t: TextFlow) {
-    this.txtFlow = t;
-    this.textFlowChange.next(t);
-  }
-  get textFlow() {
-    return this.txtFlow;
-  }
+  @Input() textFlow: TextFlow;
   textFlowChange = new BehaviorSubject<TextFlow>(undefined);
+
+  @ViewChild('container', { read: ViewContainerRef }) container: ViewContainerRef;
 
   constructor(
     private componentRegister: ComponentRegisterService,
@@ -131,6 +113,23 @@ export class ContentViewerComponent implements OnDestroy {
         ) ?? false,
       highlightColor: this.entitiesSelectService.getHighlightColor(data?.attributes ?? {}, data?.class, ith)
     };
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const { textFlow, editionLevel, itemsToHighlight, content } = changes;
+
+    if (textFlow) {
+      this.textFlowChange.next(textFlow.currentValue);
+    }
+    if (editionLevel) {
+      this.editionLevelChange.next(editionLevel.currentValue);
+    }
+    if (itemsToHighlight) {
+      this.itemsToHighlightChange.next(itemsToHighlight.currentValue);
+    }
+    if (content) {
+      this.contentChange.next(content.currentValue);
+    }
   }
 
   ngOnDestroy() {
