@@ -8,9 +8,8 @@ describe('NamedEntityComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ NamedEntityComponent ],
-    })
-    .compileComponents();
+      declarations: [NamedEntityComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -10,7 +10,7 @@ import { EVTStatusService } from '../../services/evt-status.service';
 @Component({
   selector: 'evt-image-text',
   templateUrl: './image-text.component.html',
-  styleUrls: ['./image-text.component.scss'],
+  styleUrls: ['./image-text.component.scss']
 })
 export class ImageTextComponent {
   public layoutOptions: GridsterConfig = {
@@ -22,11 +22,11 @@ export class ImageTextComponent {
     draggable: {
       enabled: true,
       ignoreContent: true,
-      dragHandleClass: 'panel-header',
+      dragHandleClass: 'panel-header'
     },
     resizable: {
-      enabled: false,
-    },
+      enabled: false
+    }
   };
   public imagePanelItem: GridsterItem = { cols: 1, rows: 1, y: 0, x: 0 };
   public textPanelItem: GridsterItem = { cols: 1, rows: 1, y: 0, x: 1 };
@@ -44,26 +44,23 @@ export class ImageTextComponent {
       return {
         type: 'default',
         value: {
-          xmlImages: pages.map((page) => ({ url: page.facsUrl })) as XMLImagesValues[],
-        },
+          xmlImages: pages.map(page => ({ url: page.facsUrl })) as XMLImagesValues[]
+        }
       };
-    }),
+    })
   );
 
-  public currentPageID$ = this.evtStatusService.currentStatus$.pipe(
-    map(({ page }) => page.id),
-  );
+  public currentPageID$ = this.evtStatusService.currentStatus$.pipe(map(({ page }) => page.id));
 
   public currentEditionLevel$ = this.evtStatusService.currentStatus$.pipe(
     map(({ editionLevels }) => editionLevels[0]),
-    shareReplay(1),
+    shareReplay(1)
   );
 
   constructor(
     private evtStatusService: EVTStatusService,
-    private evtModelService: EVTModelService,
-  ) {
-  }
+    private evtModelService: EVTModelService
+  ) {}
 
   changePage(selectedPage: Page) {
     this.evtStatusService.updatePage$.next(selectedPage);

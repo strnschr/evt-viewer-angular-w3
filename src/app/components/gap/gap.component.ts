@@ -7,7 +7,7 @@ import { register } from 'src/app/services/component-register.service';
 @Component({
   selector: 'evt-gap',
   templateUrl: './gap.component.html',
-  styleUrls: ['./gap.component.scss'],
+  styleUrls: ['./gap.component.scss']
 })
 @register(Gap)
 export class GapComponent {
@@ -33,9 +33,10 @@ export class GapComponent {
   }
 
   get gapDescription$() {
-    return this.translateService.get([this.data.unit, `${this.data.unit}s`, 'missingS', 'missingP', this.data.extent, this.data.reason])
+    return this.translateService
+      .get([this.data.unit, `${this.data.unit}s`, 'missingS', 'missingP', this.data.extent, this.data.reason])
       .pipe(
-        map((translations) => {
+        map(translations => {
           let desc = '';
           if (!!this.data.unit || !!this.data.quantity) {
             const unit = this.data.quantity > 1 ? translations[`${this.data.unit}s`] : translations[this.data.unit];
@@ -47,12 +48,9 @@ export class GapComponent {
           desc += (this.data.reason ? ` (${translations[this.data.reason]})` : '').trim();
 
           return translations[this.data.extent] === desc ? '' : desc;
-        }),
+        })
       );
   }
 
-  constructor(
-    private translateService: TranslateService,
-  ) {
-  }
+  constructor(private translateService: TranslateService) {}
 }

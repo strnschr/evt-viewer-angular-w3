@@ -5,7 +5,7 @@ import { register } from '../../services/component-register.service';
 @Component({
   selector: 'evt-resp-stmt',
   templateUrl: './resp-stmt.component.html',
-  styleUrls: ['./resp-stmt.component.scss'],
+  styleUrls: ['./resp-stmt.component.scss']
 })
 @register(RespStmt)
 export class RespStmtComponent {

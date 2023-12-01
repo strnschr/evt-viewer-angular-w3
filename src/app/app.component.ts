@@ -12,7 +12,7 @@ import { EvtIconInfo } from './ui-components/icon/icon.component';
 @Component({
   selector: 'evt-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnDestroy {
   @ViewChild('mainSpinner') mainSpinner: ElementRef;
@@ -21,7 +21,7 @@ export class AppComponent implements OnDestroy {
   public navbarOpened$ = new BehaviorSubject(this.hasNavBar && AppConfig.evtSettings.ui.initNavBarOpened);
 
   public navbarTogglerIcon$: Observable<EvtIconInfo> = this.navbarOpened$.pipe(
-    map((opened: boolean) => opened ? { icon: 'caret-down', iconSet: 'fas' } : { icon: 'caret-up', iconSet: 'fas' }),
+    map((opened: boolean) => (opened ? { icon: 'caret-down', iconSet: 'fas' } : { icon: 'caret-up', iconSet: 'fas' }))
   );
 
   constructor(
@@ -29,9 +29,9 @@ export class AppComponent implements OnDestroy {
     private spinner: NgxSpinnerService,
     private shortcutsService: ShortcutsService,
     private themes: ThemesService,
-    private titleService: Title,
+    private titleService: Title
   ) {
-    this.router.events.subscribe((event) => {
+    this.router.events.subscribe(event => {
       switch (true) {
         case event instanceof NavigationStart:
           this.spinner.show();
@@ -48,7 +48,9 @@ export class AppComponent implements OnDestroy {
     this.titleService.setTitle(AppConfig.evtSettings.edition.editionTitle || 'EVT');
   }
 
-  @HostBinding('attr.data-theme') get dataTheme() { return this.themes.getCurrentTheme().value; }
+  @HostBinding('attr.data-theme') get dataTheme() {
+    return this.themes.getCurrentTheme().value;
+  }
 
   toggleToolbar() {
     this.navbarOpened$.next(!this.navbarOpened$.getValue());
@@ -56,7 +58,7 @@ export class AppComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   @HostListener('window:keyup', ['$event'])

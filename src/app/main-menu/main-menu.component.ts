@@ -1,4 +1,3 @@
-
 import { Component, EventEmitter, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -19,7 +18,7 @@ import { ModalService } from '../ui-components/modal/modal.service';
 @Component({
   selector: 'evt-main-menu',
   templateUrl: './main-menu.component.html',
-  styleUrls: ['./main-menu.component.scss'],
+  styleUrls: ['./main-menu.component.scss']
 })
 export class MainMenuComponent {
   @Output() itemClicked = new EventEmitter<string>();
@@ -29,15 +28,14 @@ export class MainMenuComponent {
   public editionConfig = AppConfig.evtSettings.edition;
 
   private isOpened = true;
-  private availableLangs = AppConfig.evtSettings.ui.availableLanguages.filter((l) => l.enable);
+  private availableLangs = AppConfig.evtSettings.ui.availableLanguages.filter(l => l.enable);
 
   constructor(
     public themes: ThemesService,
     public translate: TranslateService,
     private modalService: ModalService,
-    private evtModelService: EVTModelService,
-  ) {
-  }
+    private evtModelService: EVTModelService
+  ) {}
 
   closeMenu() {
     if (this.isOpened) {
@@ -53,44 +51,44 @@ export class MainMenuComponent {
         id: 'projectInfo',
         iconInfo: {
           icon: 'info-circle',
-          additionalClasses: 'icon',
+          additionalClasses: 'icon'
         },
         label: 'projectInfo',
         enabled$: of(true),
-        callback: () => this.openGlobalDialogInfo(),
+        callback: () => this.openGlobalDialogInfo()
       },
       {
         id: 'openLists',
         iconInfo: {
           icon: 'clipboard-list',
-          additionalClasses: 'icon',
+          additionalClasses: 'icon'
         },
         label: 'openLists',
         enabled$: this.evtModelService.namedEntities$.pipe(
-          map((ne) => this.editionConfig.showLists && ne.all.entities.length > 0),
+          map(ne => this.editionConfig.showLists && ne.all.entities.length > 0)
         ),
-        callback: () => this.openGlobalDialogLists(),
+        callback: () => this.openGlobalDialogLists()
       },
       {
         id: 'bookmark',
         iconInfo: {
           icon: 'bookmark',
-          additionalClasses: 'icon',
+          additionalClasses: 'icon'
         },
         label: 'bookmark',
         enabled$: of(true),
-        callback: () => this.generateBookmark(),
+        callback: () => this.generateBookmark()
       },
       {
         id: 'downloadXML',
         iconInfo: {
           icon: 'download',
-          additionalClasses: 'icon',
+          additionalClasses: 'icon'
         },
         label: 'downloadXML',
         enabled$: of(true),
-        callback: () => this.downloadXML(),
-      },
+        callback: () => this.downloadXML()
+      }
     ];
   }
 
@@ -129,7 +127,7 @@ export class MainMenuComponent {
     // TODO downloadXML
     this.itemClicked.emit('downloadXML');
     if (this.fileConfig && this.fileConfig.editionUrls) {
-      this.fileConfig.editionUrls.forEach((url) => window.open(url, '_blank'));
+      this.fileConfig.editionUrls.forEach(url => window.open(url, '_blank'));
     } else {
       alert('Loading data... \nPlease try again later.');
     }
@@ -199,7 +197,6 @@ export class MainMenuComponent {
   trackTheme(_index: number, item: ColorTheme) {
     return item.value;
   }
-
 }
 
 export interface Language {

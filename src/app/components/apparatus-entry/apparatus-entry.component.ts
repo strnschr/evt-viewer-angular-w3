@@ -8,13 +8,13 @@ import { EVTModelService } from '../../services/evt-model.service';
 import { EditionlevelSusceptible, Highlightable } from '../components-mixins';
 import { ApparatusEntryDetailComponent } from './apparatus-entry-detail/apparatus-entry-detail.component';
 
-export interface ApparatusEntryComponent extends EditionlevelSusceptible, Highlightable { }
+export interface ApparatusEntryComponent extends EditionlevelSusceptible, Highlightable {}
 
 @Component({
   selector: 'evt-apparatus-entry',
   templateUrl: './apparatus-entry.component.html',
   styleUrls: ['./apparatus-entry.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 @register(ApparatusEntry)
 export class ApparatusEntryComponent {
@@ -26,22 +26,22 @@ export class ApparatusEntryComponent {
   public nestedApps: ApparatusEntry[] = [];
 
   variance$ = this.evtModelService.appVariance$.pipe(
-    map((variances) => variances[this.data.id]),
-    shareReplay(1),
+    map(variances => variances[this.data.id]),
+    shareReplay(1)
   );
 
   highlightColor$ = new BehaviorSubject<string>(AppConfig.evtSettings.edition.readingColorLight);
   highlightData$ = this.highlightColor$.pipe(
-    map((color) => ({
+    map(color => ({
       highlight: true,
-      highlightColor: color,
-    })),
+      highlightColor: color
+    }))
   );
 
   constructor(
     private evtModelService: EVTModelService,
     @Optional() private parentDetailComponent?: ApparatusEntryDetailComponent,
-    @Optional() @SkipSelf() private parentAppComponent?: ApparatusEntryComponent,
+    @Optional() @SkipSelf() private parentAppComponent?: ApparatusEntryComponent
   ) {
     this.isInsideAppDetail = !!this.parentDetailComponent;
     this.isNestedApp = !!this.parentAppComponent;
@@ -58,7 +58,7 @@ export class ApparatusEntryComponent {
     if (this.opened) {
       this.highlightColor$.next(AppConfig.evtSettings.edition.readingColorDark);
     } else {
-      this.highlightColor$.next(AppConfig.evtSettings.edition.readingColorLight)
+      this.highlightColor$.next(AppConfig.evtSettings.edition.readingColorLight);
     }
   }
 

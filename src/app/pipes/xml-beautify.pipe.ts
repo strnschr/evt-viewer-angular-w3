@@ -3,13 +3,11 @@ import * as vkbeautify from 'vkbeautify';
 import { replaceMultispaces } from '../utils/xml-utils';
 
 @Pipe({
-    name: 'xmlBeautify',
+  name: 'xmlBeautify'
 })
 @Injectable()
 export class XmlBeautifyPipe implements PipeTransform {
-
-    transform(value: string) {
-        return vkbeautify.xml(replaceMultispaces('\n' + value));
-    }
-
+  transform(value: string) {
+    return vkbeautify.xml(replaceMultispaces('\n' + value));
+  }
 }

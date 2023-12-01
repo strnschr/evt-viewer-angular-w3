@@ -8,9 +8,8 @@ describe('PinboardComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ PinboardComponent ],
-    })
-    .compileComponents();
+      declarations: [PinboardComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

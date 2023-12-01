@@ -6,21 +6,21 @@ import { register } from '../../services/component-register.service';
 import { EVTModelService } from '../../services/evt-model.service';
 import { EditionlevelSusceptible, TextFlowSusceptible } from '../components-mixins';
 
-export interface LbComponent extends EditionlevelSusceptible, TextFlowSusceptible { }
+export interface LbComponent extends EditionlevelSusceptible, TextFlowSusceptible {}
 
 @register(Lb)
 @Component({
   selector: 'evt-lb',
   templateUrl: './lb.component.html',
-  styleUrls: ['./lb.component.scss'],
+  styleUrls: ['./lb.component.scss']
 })
 export class LbComponent {
   @Input() data: Lb;
 
   get displayBlock$() {
     return this.evtModelService.lines$.pipe(
-      map((lines) => lines.length > 0),
-      map((hasLines) => {
+      map(lines => lines.length > 0),
+      map(hasLines => {
         // If line has no information about number or the ID line is shown as a block item, no matters what
         if (!this.data.attributes.id && !this.data.attributes.n) {
           return true;
@@ -36,18 +36,13 @@ export class LbComponent {
           case 'critical':
             return this.textFlow === 'prose';
         }
-      }),
+      })
     );
   }
 
   get displayInline$() {
-    return this.displayBlock$.pipe(
-      map((displayBlock) => !displayBlock),
-    );
+    return this.displayBlock$.pipe(map(displayBlock => !displayBlock));
   }
 
-  constructor(
-    private evtModelService: EVTModelService,
-  ) {
-  }
+  constructor(private evtModelService: EVTModelService) {}
 }

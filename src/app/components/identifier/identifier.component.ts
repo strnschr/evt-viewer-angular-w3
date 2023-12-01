@@ -5,9 +5,8 @@ import { register } from '../../services/component-register.service';
 @Component({
   selector: 'evt-identifier',
   templateUrl: './identifier.component.html',
-  styleUrls: ['./identifier.component.scss'],
+  styleUrls: ['./identifier.component.scss']
 })
-
 @register(Identifier)
 export class IdentifierComponent {
   @Input() data: Identifier;

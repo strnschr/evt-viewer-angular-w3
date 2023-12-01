@@ -8,9 +8,8 @@ describe('WordComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ WordComponent ],
-    })
-    .compileComponents();
+      declarations: [WordComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -8,9 +8,8 @@ describe('PageSelectorComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [PageSelectorComponent],
-    })
-      .compileComponents();
+      declarations: [PageSelectorComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

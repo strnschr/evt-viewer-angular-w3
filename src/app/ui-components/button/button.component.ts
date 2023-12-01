@@ -1,10 +1,19 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 import { EvtIconInfo } from '../icon/icon.component';
 
 @Component({
   selector: 'evt-button',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss'],
+  styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent implements OnInit, OnChanges {
   @Input() public iconLeft: EvtIconInfo;
@@ -20,7 +29,7 @@ export class ButtonComponent implements OnInit, OnChanges {
   @Input() type: 'button' | 'submit';
   @Output() btnClick: EventEmitter<EVTBtnClickEvent> = new EventEmitter();
 
-  constructor(private cdRef: ChangeDetectorRef) { }
+  constructor(private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.active = this.active !== undefined ? this.active : false;
@@ -28,13 +37,13 @@ export class ButtonComponent implements OnInit, OnChanges {
     if (this.iconLeft) {
       this.iconLeft = {
         ...this.iconLeft,
-        additionalClasses: 'icon ' + (this.iconLeft.additionalClasses || ''),
+        additionalClasses: 'icon ' + (this.iconLeft.additionalClasses || '')
       };
     }
     if (this.iconRight) {
       this.iconRight = {
         ...this.iconRight,
-        additionalClasses: 'icon ' + (this.iconRight.additionalClasses || ''),
+        additionalClasses: 'icon ' + (this.iconRight.additionalClasses || '')
       };
     }
   }

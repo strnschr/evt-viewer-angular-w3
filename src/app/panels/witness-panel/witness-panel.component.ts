@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'evt-witness-panel',
   templateUrl: './witness-panel.component.html',
-  styleUrls: ['./witness-panel.component.scss'],
+  styleUrls: ['./witness-panel.component.scss']
 })
 export class WitnessPanelComponent {
   @Input() witness: string;
@@ -12,5 +12,4 @@ export class WitnessPanelComponent {
   emitHide() {
     this.hide.emit(true);
   }
-
 }

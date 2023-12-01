@@ -22,10 +22,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "node_modules/prismjs/themes/prism.css",
@@ -88,11 +85,7 @@
                 {
                   "glob": "**/*",
                   "input": "src/assets/",
-                  "ignore": [
-                    "fonts/evt-icons-project.json",
-                    "scss/**",
-                    "data/**"
-                  ],
+                  "ignore": ["fonts/evt-icons-project.json", "scss/**", "data/**"],
                   "output": "./../assets/"
                 }
               ],
@@ -155,10 +148,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "node_modules/prismjs/themes/prism.css",
@@ -189,10 +179,7 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
@@ -200,8 +187,6 @@
   },
   "cli": {
     "analytics": "c373e515-eb44-4b1b-85c7-56dd668954af",
-    "schematicCollections": [
-      "@angular-eslint/schematics"
-    ]
+    "schematicCollections": ["@angular-eslint/schematics"]
   }
 }

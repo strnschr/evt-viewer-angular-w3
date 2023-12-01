@@ -1,4 +1,3 @@
-import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { ScrollingModule as ExperimentalScrollingModule } from '@angular/cdk-experimental/scrolling';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HttpClientModule } from '@angular/common/http';
@@ -19,7 +18,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppTranslationModule } from './app-translation.module';
 import { AppComponent } from './app.component';
 
-import { Ng2HandySyntaxHighlighterModule } from 'ng2-handy-syntax-highlighter';
 import { AppConfig } from './app.config';
 
 import { AdditionComponent } from './components/addition/addition.component';
@@ -240,10 +238,8 @@ const DynamicComponents = [
     FormsModule,
     GridsterModule,
     HttpClientModule,
-    Ng2HandySyntaxHighlighterModule,
     NgbModule,
     NgbPopoverModule,
-    NgxSliderModule,
     NgxSpinnerModule,
     RouterModule.forRoot(routes, { useHash: true }),
     ScrollingModule,

@@ -8,9 +8,8 @@ describe('ImagePanelComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImagePanelComponent ],
-    })
-    .compileComponents();
+      declarations: [ImagePanelComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

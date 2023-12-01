@@ -5,7 +5,7 @@ import { register } from '../../services/component-register.service';
 @Component({
   selector: 'evt-namespace',
   templateUrl: './namespace.component.html',
-  styleUrls: ['./namespace.component.scss'],
+  styleUrls: ['./namespace.component.scss']
 })
 @register(Namespace)
 export class NamespaceComponent {

@@ -2,7 +2,7 @@
   position: relative;
   margin-bottom: 0.5rem;
   border-bottom: 1px solid lightgray;
-  padding-bottom: .5rem;
+  padding-bottom: 0.5rem;
 
   &-header {
     min-height: 31px;
@@ -13,7 +13,7 @@
 
     .pin-type,
     .pin-date {
-      font-size: .7rem;
+      font-size: 0.7rem;
       color: grey;
     }
 
@@ -25,7 +25,7 @@
       z-index: 99;
 
       &:hover {
-        background: rgba(0, 0, 0, .1);
+        background: rgba(0, 0, 0, 0.1);
       }
     }
   }

@@ -9,9 +9,8 @@ import { EVTModelService } from 'src/app/services/evt-model.service';
   selector: 'evt-apparatus-entry-readings',
   templateUrl: './apparatus-entry-readings.component.html',
   styleUrls: ['./apparatus-entry-readings.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-
 @register(ApparatusEntryReadingsComponent)
 export class ApparatusEntryReadingsComponent {
   @Input() data: ApparatusEntry;
@@ -21,19 +20,21 @@ export class ApparatusEntryReadingsComponent {
 
   groups$ = this.evtModelService.groups$;
 
-  constructor(
-    public evtModelService: EVTModelService,
-  ) {
-  }
+  constructor(public evtModelService: EVTModelService) {}
 
   get significantRdg(): Reading[] {
-    return this.data.readings.filter((rdg) => rdg.significant);
+    return this.data.readings.filter(rdg => rdg.significant);
   }
 
   getWits$(witID: string): Observable<string[]> {
     return this.groups$.pipe(
-      map((groups) => groups.filter((g) => g.id === witID).map((g) => g.witnesses).reduce((x, y) => ([ ...x, ...y ]), [])),
-      map((groupWits) => groupWits.length > 0 ? groupWits : [witID]),
+      map(groups =>
+        groups
+          .filter(g => g.id === witID)
+          .map(g => g.witnesses)
+          .reduce((x, y) => [...x, ...y], [])
+      ),
+      map(groupWits => (groupWits.length > 0 ? groupWits : [witID]))
     );
   }
 }

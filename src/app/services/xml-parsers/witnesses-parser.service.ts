@@ -8,7 +8,7 @@ import { GenericParserService } from './generic-parser.service';
 import { createParser, getID } from './parser-models';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class WitnessesParserService {
   private witListTagName = 'listWit';
@@ -17,31 +17,28 @@ export class WitnessesParserService {
   private groupTagName = 'head';
   private attributeParser = createParser(AttributeParser, parse);
 
-  constructor(
-    private genericParserService: GenericParserService,
-  ) {
-  }
+  constructor(private genericParserService: GenericParserService) {}
 
   public parseWitnessesData(document: XMLElement): Witnesses {
     const lists = Array.from(document.querySelectorAll<XMLElement>(this.witListTagName));
 
     return {
       witnesses: this.parseWitnessesList(lists),
-      groups: this.parseWitnessesGroups(lists),
+      groups: this.parseWitnessesGroups(lists)
     };
   }
 
   private parseWitnessesList(lists: XMLElement[]) {
-    const parsedList = lists.filter((list) => !isNestedInElem(list, list.tagName))
-      .map((list) => this.parseWitnesses(list))
+    const parsedList = lists
+      .filter(list => !isNestedInElem(list, list.tagName))
+      .map(list => this.parseWitnesses(list))
       .reduce((x, y) => x.concat(y), []);
 
     return parsedList;
   }
 
   private parseWitnesses(list: XMLElement) {
-    return Array.from(list.querySelectorAll<XMLElement>(this.witTagName))
-      .map((wit) => this.parseWitness(wit));
+    return Array.from(list.querySelectorAll<XMLElement>(this.witTagName)).map(wit => this.parseWitness(wit));
   }
 
   private parseWitness(wit: XMLElement): Witness {
@@ -52,7 +49,7 @@ export class WitnessesParserService {
       name: this.parseWitnessName(wit) || id,
       attributes: this.attributeParser.parse(wit),
       content: this.parseWitnessContent(wit),
-      groupId: this.parseParentGroupId(wit),
+      groupId: this.parseParentGroupId(wit)
     };
   }
 
@@ -61,8 +58,7 @@ export class WitnessesParserService {
     const witNameEl = wit.querySelector<XMLElement>(`*[${this.witNameAttr}]`);
 
     if (witNameEl) {
-      return Array.from(witNameEl.childNodes)
-        .map((child: XMLElement) => this.genericParserService.parse(child));
+      return Array.from(witNameEl.childNodes).map((child: XMLElement) => this.genericParserService.parse(child));
     }
 
     return witNameEl;
@@ -70,13 +66,14 @@ export class WitnessesParserService {
 
   private parseWitnessContent(wit: XMLElement): Description {
     return Array.from(wit.childNodes)
-      .filter((child) => child.nodeName !== this.witListTagName && child.textContent.trim().length !== 0)
+      .filter(child => child.nodeName !== this.witListTagName && child.textContent.trim().length !== 0)
       .map((child: XMLElement) => this.genericParserService.parse(child));
   }
 
   private parseWitnessesGroups(lists: XMLElement[]) {
-    const parsedGroups = lists.filter((list) => isNestedInElem(list, list.tagName))
-      .map((list) => this.parseWitnessGroup(list));
+    const parsedGroups = lists
+      .filter(list => isNestedInElem(list, list.tagName))
+      .map(list => this.parseWitnessGroup(list));
 
     return parsedGroups;
   }
@@ -87,13 +84,12 @@ export class WitnessesParserService {
       name: this.parseGroupName(list) || replaceNotWordChar(list.getAttribute('xml:id')) || xpath(list),
       attributes: this.attributeParser.parse(list),
       witnesses: this.parseGroupWitnesses(list),
-      groupId: this.parseParentGroupId(list),
+      groupId: this.parseParentGroupId(list)
     };
   }
 
   private parseGroupName(list: XMLElement) {
-    const groupEl = Array.from(list.children)
-      .find((child) => child.nodeName === this.groupTagName);
+    const groupEl = Array.from(list.children).find(child => child.nodeName === this.groupTagName);
 
     return groupEl && groupEl.textContent;
   }
@@ -101,7 +97,7 @@ export class WitnessesParserService {
   private parseGroupWitnesses(list: XMLElement) {
     return Array.from(list.children)
       .filter(({ nodeName }) => nodeName === this.witListTagName || nodeName === this.witTagName)
-      .map((child) => child.getAttribute('xml:id'));
+      .map(child => child.getAttribute('xml:id'));
   }
 
   private parseParentGroupId(element: XMLElement) {

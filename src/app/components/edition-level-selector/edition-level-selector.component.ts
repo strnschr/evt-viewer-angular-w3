@@ -7,10 +7,10 @@ import { EvtIconInfo } from '../../ui-components/icon/icon.component';
 @Component({
   selector: 'evt-edition-level-selector',
   templateUrl: './edition-level-selector.component.html',
-  styleUrls: ['./edition-level-selector.component.scss'],
+  styleUrls: ['./edition-level-selector.component.scss']
 })
 export class EditionLevelSelectorComponent {
-  public editionLevels = (AppConfig.evtSettings.edition.availableEditionLevels || []).filter((el) => el.enable);
+  public editionLevels = (AppConfig.evtSettings.edition.availableEditionLevels || []).filter(el => el.enable);
 
   // tslint:disable-next-line: variable-name
   private _edLevelID: EditionLevelType;
@@ -18,22 +18,24 @@ export class EditionLevelSelectorComponent {
     this._edLevelID = p;
     this.selectedEditionLevel$.next(this._edLevelID);
   }
-  get editionLevelID() { return this._edLevelID; }
+  get editionLevelID() {
+    return this._edLevelID;
+  }
 
   selectedEditionLevel$ = new BehaviorSubject<EditionLevelType>(undefined);
 
   @Output() selectionChange = combineLatest([
     of(this.editionLevels),
-    this.selectedEditionLevel$.pipe(distinctUntilChanged()),
+    this.selectedEditionLevel$.pipe(distinctUntilChanged())
   ]).pipe(
     filter(([edLevels, edLevelID]) => !!edLevelID && !!edLevels && edLevels.length > 0),
-    map(([edLevels, edLevelID]) => !!edLevelID ? edLevels.find((p) => p.id === edLevelID) || edLevels[0] : edLevels[0]),
-    filter((e) => !!e),
+    map(([edLevels, edLevelID]) => (!!edLevelID ? edLevels.find(p => p.id === edLevelID) || edLevels[0] : edLevels[0])),
+    filter(e => !!e)
   );
 
   icon: EvtIconInfo = {
     icon: 'layer-group', // TODO: Choose better icon
-    additionalClasses: 'me-2',
+    additionalClasses: 'me-2'
   };
 
   stopPropagation(event: MouseEvent) {

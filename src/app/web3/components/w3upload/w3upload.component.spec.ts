@@ -8,9 +8,8 @@ describe('W3uploadComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ W3uploadComponent ]
-    })
-    .compileComponents();
+      declarations: [W3uploadComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

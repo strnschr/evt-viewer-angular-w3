@@ -6,13 +6,13 @@ import { register } from '../../services/component-register.service';
 import { EditorialConventionDefaults } from '../../services/editorial-conventions.service';
 import { EditionlevelSusceptible, Highlightable } from '../components-mixins';
 
-export interface AdditionComponent extends EditionlevelSusceptible, Highlightable { }
+export interface AdditionComponent extends EditionlevelSusceptible, Highlightable {}
 
 @register(Addition)
 @Component({
   selector: 'evt-addition',
   templateUrl: './addition.component.html',
-  styleUrls: ['./addition.component.scss'],
+  styleUrls: ['./addition.component.scss']
 })
 export class AdditionComponent {
   @Input() data: Addition;
@@ -22,7 +22,7 @@ export class AdditionComponent {
       name: 'add',
       attributes: this.data.attributes,
       editionLevel: this.editionLevel,
-      defaultsKey: this._getDefaultLayoutsKeys(),
+      defaultsKey: this._getDefaultLayoutsKeys()
     };
   }
 

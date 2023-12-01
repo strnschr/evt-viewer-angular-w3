@@ -5,7 +5,7 @@ import { register } from '../../services/component-register.service';
 @Component({
   selector: 'evt-text',
   templateUrl: './text.component.html',
-  styleUrls: ['./text.component.scss'],
+  styleUrls: ['./text.component.scss']
 })
 @register(Text)
 export class TextComponent {

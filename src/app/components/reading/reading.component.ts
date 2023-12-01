@@ -6,7 +6,7 @@ import { Highlightable } from '../components-mixins';
 @Component({
   selector: 'evt-reading',
   templateUrl: './reading.component.html',
-  styleUrls: ['./reading.component.scss'],
+  styleUrls: ['./reading.component.scss']
 })
 @register(Reading)
 export class ReadingComponent extends Highlightable {
