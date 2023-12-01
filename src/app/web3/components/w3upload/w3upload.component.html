@@ -1,1 +1,10 @@
-<p>w3upload works!</p>
+<h4>{{ 'w3.upload.title' | translate }}</h4>
+
+<div>
+  <label for="emailInput">{{ 'w3.upload.email' | translate }}</label>
+  <input type="email" id="emailInput" class="form-control" placeholder="name@example.com" [(ngModel)]="email" />
+</div>
+
+<button type="submit" class="btn btn-primary" [disabled]="!email" (click)="onAuthenticateClick()">
+  {{ 'w3.upload.authenticate' | translate }}
+</button>
