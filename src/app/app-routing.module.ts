@@ -14,10 +14,10 @@ const appRoutes: Routes = [
   { path: 'collation', component: CollationComponent },
   { path: 'textSources', component: TextSourcesComponent },
   { path: 'textVersions', component: TextVersionsComponent },
+  { path: 'w3up', loadChildren: () => import('./web3/web3.module').then(m => m.Web3Module) }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' })],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}

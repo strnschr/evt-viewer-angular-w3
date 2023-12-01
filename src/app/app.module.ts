@@ -120,9 +120,9 @@ import { TextSourcesComponent } from './view-modes/text-sources/text-sources.com
 import { TextTextComponent } from './view-modes/text-text/text-text.component';
 import { TextVersionsComponent } from './view-modes/text-versions/text-versions.component';
 import { HandleImgErrorDirective } from './directives/handle-img-error.directive';
+import { Web3Module } from './web3/web3.module';
 
-const routes: Routes = [
-];
+const routes: Routes = [];
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
@@ -180,7 +180,7 @@ const DynamicComponents = [
   TitleStmtComponent,
   VerseComponent,
   VersesGroupComponent,
-  WordComponent,
+  WordComponent
 ];
 
 @NgModule({
@@ -227,7 +227,7 @@ const DynamicComponents = [
     VersionPanelComponent,
     WitnessPanelComponent,
     XmlBeautifyPipe,
-    ...DynamicComponents,
+    ...DynamicComponents
   ],
   imports: [
     AppRoutingModule,
@@ -248,6 +248,7 @@ const DynamicComponents = [
     RouterModule.forRoot(routes, { useHash: true, relativeLinkResolution: 'legacy' }),
     ScrollingModule,
     UiComponentsModule,
+    Web3Module
   ],
   providers: [
     AnnotatorService,
@@ -255,27 +256,23 @@ const DynamicComponents = [
     {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
-      deps: [AppConfig], multi: true,
+      deps: [AppConfig],
+      multi: true
     },
     AppConfig,
     GenericParserService,
     IdbService,
     ThemesService,
-    XMLParsers,
+    XMLParsers
   ],
-  bootstrap: [
-    AppComponent,
-  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule implements DoBootstrap {
-  constructor(
-    library: FaIconLibrary,
-  ) {
+  constructor(library: FaIconLibrary) {
     library.addIconPacks(fas);
-
   }
 
   ngDoBootstrap(appRef: ApplicationRef): void {
-    DynamicComponents.forEach((c) => appRef.bootstrap(c));
+    DynamicComponents.forEach(c => appRef.bootstrap(c));
   }
 }
