@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -12,8 +12,6 @@ import { filter } from 'rxjs';
   styleUrls: ['./w3upload.component.scss']
 })
 export class W3uploadComponent implements OnInit {
-  files: File[] = [];
-
   isAuthenticating = false;
   account: Account.Account;
   isAccountReady = false;
@@ -21,6 +19,7 @@ export class W3uploadComponent implements OnInit {
   currentSpace;
 
   readonly spacesDropdown = new FormControl('');
+  @ViewChild('fileInput') fileInput?: ElementRef<HTMLInputElement>;
 
   get spaces() {
     return Array.from(this.account.agent.spaces.entries()).map(([id, space]) => ({ id, space }));
@@ -104,12 +103,18 @@ export class W3uploadComponent implements OnInit {
     }
   }
 
-  onFilesSelected(event: Event) {
-    console.log(event);
+  openFilePicker() {
+    this.fileInput?.nativeElement.click();
   }
 
-  async onUploadClick() {
-    console.log(this.files);
+  onFilesSelected(files: FileList | null) {
+    if (!files.length) {
+      return;
+    }
+
+    const filesArray = Array.from(Array(files.length)).map((_, index) => files.item(index));
+
+    console.log(filesArray);
   }
 
   openCreationDialog() {

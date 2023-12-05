@@ -36,23 +36,18 @@
 }
 
 @if (currentSpace) {
-  <div class="mb-3">
-    <label for="formFileMultiple" class="form-label"
-      >{{ 'w3.upload.uploadFilesToSpace' | translate }} "{{ currentSpace.meta.name }}"</label
-    >
-    <input
-      class="form-control"
-      type="file"
-      id="formFileMultiple"
-      multiple
-      [(ngModel)]="files"
-      (change)="onFilesSelected($event)"
-    />
-  </div>
+  <span>{{ 'w3.upload.uploadFilesToSpace' | translate }} "{{ currentSpace.meta.name }}</span>
 
-  <button type="submit" class="btn btn-primary" (click)="onUploadClick()">
-    {{ 'w3.upload.upload' | translate }}
-  </button>
+  <input
+    type="file"
+    accept="application/json,application/xml"
+    style="display: none"
+    #fileInput
+    (change)="onFilesSelected(fileInput.files)"
+    multiple
+  />
+
+  <button mat-flat-button color="primary" (click)="openFilePicker()">{{ 'w3.upload.upload' | translate }}</button>
 }
 
 <ng-template #loadingSpinner let-text="text">
