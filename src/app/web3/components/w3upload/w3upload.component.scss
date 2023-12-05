@@ -1,19 +1,24 @@
 :host {
   display: grid;
   max-width: 800px;
+  height: 100%;
+  align-content: flex-start;
   margin: auto;
   padding: 10px 20px;
   gap: 8px;
 
   > div {
     display: grid;
-    gap: 8px;
   }
 }
 
 .title {
-  grid-template-columns: auto auto;
-  align-items: center;
+  margin-bottom: 20px;
+
+  span {
+    font-size: 14px;
+    opacity: 0.8;
+  }
 }
 
 .loading {
@@ -21,6 +26,11 @@
   justify-items: center;
 }
 
-.create-space {
-  align-items: flex-end;
+.space-selection {
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+.create-space-button {
+  height: 56px;
 }

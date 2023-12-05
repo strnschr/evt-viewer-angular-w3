@@ -175,19 +175,22 @@
   "xml": "XML",
   "w3": {
     "upload": {
-      "title": "Upload files to Web.Storage",
+      "title": "Upload files to Web3.Storage",
+      "loggedInAs": "Logged in as",
       "email": "Email address",
       "authenticate": "Authenticate",
       "error": "Error",
       "pleaseCheckEmailLink": "Please check your email and click on the link to authenticate.",
       "createSpace": "Create a space",
-      "create": "Create",
+      "spaceName": "Space name",
+      "create": "Create new",
       "creatingSpace": "Creating space...",
       "selectSpace": "Select a space",
       "select": "Select",
       "currentSpace": "Current space",
-      "uploadFiles": "Upload Files",
-      "upload": "Upload"
+      "uploadFilesToSpace": "Upload Files to space",
+      "upload": "Upload",
+      "cancel": "Cancel"
     }
   }
 }

@@ -1,75 +1,65 @@
 <div class="title">
   <h4>{{ 'w3.upload.title' | translate }}</h4>
-  <span *ngIf="isAccountReady">{{ account.toEmail() }}</span>
+
+  @if (isAccountReady) {
+    <span>{{ 'w3.upload.loggedInAs' | translate }}: {{ account.toEmail() }}</span>
+  }
 </div>
 
-<div *ngIf="!isAuthenticating && !account" class="email-authenticate">
-  <label for="emailInput">{{ 'w3.upload.email' | translate }}</label>
-  <input type="email" id="emailInput" class="form-control" placeholder="name@example.com" [(ngModel)]="email" />
+@if (!isAccountReady) {
+  <evt-w3login [isLoading]="isAuthenticating" (login)="login($event)"></evt-w3login>
+}
 
-  <button type="submit" class="btn btn-primary" [disabled]="!email" (click)="onAuthenticateClick()">
-    {{ 'w3.upload.authenticate' | translate }}
-  </button>
-</div>
+@if (isAuthenticating) {
+  <ng-container *ngTemplateOutlet="loadingSpinner; context: { text: 'w3.upload.pleaseCheckEmailLink' }"></ng-container>
+}
 
-<div class="loading" *ngIf="isAuthenticating">
-  <div class="spinner-border" role="status">
-    <span class="visually-hidden">Loading...</span>
-  </div>
-  <span>{{ 'w3.upload.pleaseCheckEmailLink' | translate }}</span>
-</div>
+@if (isAccountReady) {
+  @if (!isCreatingSpace) {
+    <div class="space-selection">
+      <mat-form-field>
+        <mat-label>{{ 'w3.upload.selectSpace' | translate }}</mat-label>
+        <mat-select [formControl]="spacesDropdown">
+          @for (space of spaces; track space.id) {
+            <mat-option [value]="space.id">{{ space.space.name }} [{{ space.id }}]</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
 
-<span *ngIf="error">Error: {{ error }}</span>
-
-<ng-container *ngIf="isAccountReady">
-  <ng-container *ngIf="!isCreatingSpace && !currentSpace">
-    <div class="create-space">
-      <div>
-        <label for="spaceInput">{{ 'w3.upload.createSpace' | translate }}</label>
-        <input type="text" id="spaceInput" class="form-control" placeholder="space-name" [(ngModel)]="spaceName" />
-      </div>
-
-      <button type="submit" class="btn btn-primary" [disabled]="!spaceName" (click)="onSpaceCreateClick()">
+      <button mat-flat-button color="primary" class="create-space-button" (click)="openCreationDialog()">
         {{ 'w3.upload.create' | translate }}
       </button>
     </div>
+  } @else {
+    <ng-container *ngTemplateOutlet="loadingSpinner; context: { text: 'w3.upload.creatingSpace' }"></ng-container>
+  }
+}
 
-    <div *ngIf="spaces.length">
-      <label for="spaces">{{ 'w3.upload.selectSpace' | translate }}</label>
-      <select class="form-select mb-3" name="spaces" id="spaces" [(ngModel)]="selectedSpaceId" name="selectedSpaceId">
-        <option *ngFor="let space of spaces" [value]="space.id">{{ space.space.name }} {{ space.id }}</option>
-      </select>
-    </div>
+@if (currentSpace) {
+  <div class="mb-3">
+    <label for="formFileMultiple" class="form-label"
+      >{{ 'w3.upload.uploadFilesToSpace' | translate }} "{{ currentSpace.meta.name }}"</label
+    >
+    <input
+      class="form-control"
+      type="file"
+      id="formFileMultiple"
+      multiple
+      [(ngModel)]="files"
+      (change)="onFilesSelected($event)"
+    />
+  </div>
 
-    <button type="submit" class="btn btn-primary" (click)="onSelectSpaceClick()">
-      {{ 'w3.upload.select' | translate }}
-    </button>
-  </ng-container>
+  <button type="submit" class="btn btn-primary" (click)="onUploadClick()">
+    {{ 'w3.upload.upload' | translate }}
+  </button>
+}
 
-  <div class="loading" *ngIf="isCreatingSpace && !currentSpace">
+<ng-template #loadingSpinner let-text="text">
+  <div class="loading">
     <div class="spinner-border" role="status">
       <span class="visually-hidden">Loading...</span>
     </div>
-    <span>{{ 'w3.upload.creatingSpace' | translate }}</span>
+    <span>{{ text | translate }}</span>
   </div>
-
-  <ng-container *ngIf="currentSpace">
-    <span>{{ 'w3.upload.currentSpace' | translate }}: {{ currentSpace.meta.name }} -- {{ currentSpace.did }}</span>
-
-    <div class="mb-3">
-      <label for="formFileMultiple" class="form-label">{{ 'w3.upload.uploadFiles' | translate }}</label>
-      <input
-        class="form-control"
-        type="file"
-        id="formFileMultiple"
-        multiple
-        [(ngModel)]="files"
-        (change)="onFilesSelected($event)"
-      />
-    </div>
-
-    <button type="submit" class="btn btn-primary" (click)="onUploadClick()">
-      {{ 'w3.upload.upload' | translate }}
-    </button>
-  </ng-container>
-</ng-container>
+</ng-template>

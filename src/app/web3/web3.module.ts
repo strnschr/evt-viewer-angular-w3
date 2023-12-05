@@ -3,10 +3,32 @@ import { NgModule } from '@angular/core';
 import { Web3RoutingModule } from './web3-routing.module';
 import { W3uploadComponent } from './components/w3upload/w3upload.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { W3loginComponent } from './components/w3login/w3login.component';
+import { W3spaceCreateComponent } from './components/w3space-create/w3space-create.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [W3uploadComponent],
-  imports: [CommonModule, Web3RoutingModule, TranslateModule, FormsModule]
+  declarations: [W3uploadComponent, W3loginComponent, W3spaceCreateComponent],
+  imports: [
+    CommonModule,
+    Web3RoutingModule,
+    TranslateModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    MatSelectModule,
+    MatDialogModule
+  ]
 })
 export class Web3Module {}

@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Account, Client, create } from '@web3-storage/w3up-client';
+import { W3spaceCreateComponent } from '../w3space-create/w3space-create.component';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'evt-w3upload',
@@ -7,17 +12,15 @@ import { Account, Client, create } from '@web3-storage/w3up-client';
   styleUrls: ['./w3upload.component.scss']
 })
 export class W3uploadComponent implements OnInit {
-  email?: `${string}@${string}`;
-  spaceName?: string;
-  selectedSpaceId: `did:key:${string}` | null = null;
   files: File[] = [];
 
-  error: string | null = null;
   isAuthenticating = false;
   account: Account.Account;
   isAccountReady = false;
   isCreatingSpace = false;
   currentSpace;
+
+  readonly spacesDropdown = new FormControl('');
 
   get spaces() {
     return Array.from(this.account.agent.spaces.entries()).map(([id, space]) => ({ id, space }));
@@ -25,18 +28,29 @@ export class W3uploadComponent implements OnInit {
 
   private client: Client;
 
+  constructor(
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
+  ) {}
+
   async ngOnInit() {
     this.client = await create();
+    this.spacesDropdown.valueChanges.subscribe((id: `did:key:${string}`) => {
+      this.selectSpace(id);
+    });
+
+    // dev
+    this.account = await this.client.login('robin2go_no1@yahoo.de');
+    this.isAccountReady = true;
   }
 
-  async onAuthenticateClick() {
+  async login(email: `${string}@${string}`) {
     try {
-      this.error = null;
       this.isAuthenticating = true;
-      this.account = await this.client.login(this.email);
+      this.account = await this.client.login(email);
 
       if (!(await this.account.plan.get()).ok) {
-        this.error = 'Please select a payment plan.';
+        this.snackBar.open('Please select a payment plan.', null, { duration: 5000 });
       }
 
       while (true) {
@@ -50,39 +64,43 @@ export class W3uploadComponent implements OnInit {
 
       this.isAccountReady = true;
     } catch (err) {
-      this.error = err;
+      this.snackBar.open(err, null, { duration: 5000 });
     } finally {
       this.isAuthenticating = false;
     }
   }
 
-  async onSpaceCreateClick() {
+  async createSpace(name: string) {
     try {
-      this.error = null;
       this.isCreatingSpace = true;
-      const space = await this.account.agent.createSpace(this.spaceName);
+
+      const space = await this.account.agent.createSpace(name);
       console.log('Created space:', space);
+
       await this.account.provision(space.did());
       console.log('Provisioned space:', space);
+
       await space.createRecovery(this.account.did());
       console.log('Created recovery for space:', space);
+
       await space.save();
       console.log('Saved space:', space);
+
+      this.snackBar.open(`Space created: ${space.name}`, null, { duration: 5000 });
     } catch (err) {
-      this.error = err;
+      this.snackBar.open(err, null, { duration: 5000 });
     } finally {
       this.isCreatingSpace = false;
     }
   }
 
-  async onSelectSpaceClick() {
+  async selectSpace(id: `did:key:${string}`) {
     try {
-      console.log('Selecting space:', this.selectedSpaceId);
-      this.error = null;
-      await this.account.agent.setCurrentSpace(this.selectedSpaceId);
+      console.log('Selecting space:', id);
+      await this.account.agent.setCurrentSpace(id);
       this.currentSpace = this.account.agent.currentSpaceWithMeta();
     } catch (err) {
-      this.error = err;
+      this.snackBar.open(err, null, { duration: 5000 });
     }
   }
 
@@ -92,5 +110,15 @@ export class W3uploadComponent implements OnInit {
 
   async onUploadClick() {
     console.log(this.files);
+  }
+
+  openCreationDialog() {
+    this.dialog
+      .open(W3spaceCreateComponent, { width: '400px' })
+      .afterClosed()
+      .pipe(filter(name => !!name))
+      .subscribe((name: string) => {
+        this.createSpace(name);
+      });
   }
 }
