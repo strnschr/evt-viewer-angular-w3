@@ -138,7 +138,7 @@ export class OsdComponent implements AfterViewInit, OnDestroy {
       minZoomLevel: 0.5,
       defaultZoomLevel: 1,
       sequenceMode: true,
-      prefixUrl: 'assets%5Cosd%5Cimages%5C',
+      prefixUrl: 'assets/osd/images/',
       id: this.div.nativeElement.id,
       navigatorBackground: '#606060',
       showNavigator: false,
@@ -146,7 +146,7 @@ export class OsdComponent implements AfterViewInit, OnDestroy {
         clickToZoom: false,
         dblClickToZoom: true
       },
-      placeholderFillStyle: 'assets%5Cimages%5Cempty-image.jpg'
+      placeholderFillStyle: 'assets/images/empty-image.jpg'
     };
 
     this.subscriptions.push(

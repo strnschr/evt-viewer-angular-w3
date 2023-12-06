@@ -1,4 +1,3 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
@@ -20,13 +19,15 @@ $evt-viewer-angular-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$evt-viewer-angular-theme: mat.define-light-theme((
-  color: (
-    primary: $evt-viewer-angular-primary,
-    accent: $evt-viewer-angular-accent,
-    warn: $evt-viewer-angular-warn,
+$evt-viewer-angular-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $evt-viewer-angular-primary,
+      accent: $evt-viewer-angular-accent,
+      warn: $evt-viewer-angular-warn
+    )
   )
-));
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -42,28 +43,28 @@ $evt-viewer-angular-theme: mat.define-light-theme((
 
 @font-face {
   font-family: 'Junicode';
-  src: url('/assets%5Cfonts%5CJunicode.woff') format('woff');
+  src: url('/assets/fonts/Junicode.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Junicode';
-  src: url('/assets%5Cfonts%5CJunicode-Bold.woff') format('woff');
+  src: url('/assets/fonts/Junicode-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Junicode';
-  src: url('/assets%5Cfonts%5CJunicode-Italic.woff') format('woff');
+  src: url('/assets/fonts/Junicode-Italic.woff') format('woff');
   font-weight: normal;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'Junicode';
-  src: url('/assets%5Cfonts%5CJunicode-BoldItalic.woff') format('woff');
+  src: url('/assets/fonts/Junicode-BoldItalic.woff') format('woff');
   font-weight: bold;
   font-style: italic;
 }
@@ -217,5 +218,11 @@ body {
   font-size: 0.9rem;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
