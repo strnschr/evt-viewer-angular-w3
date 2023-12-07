@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Account, Client, create } from '@web3-storage/w3up-client';
 import { W3spaceCreateComponent } from '../w3space-create/w3space-create.component';
 import { filter } from 'rxjs';
+import { UploadListItem } from '@web3-storage/w3up-client/dist/src/types';
 
 @Component({
   selector: 'evt-w3upload',
@@ -13,10 +14,14 @@ import { filter } from 'rxjs';
 })
 export class W3uploadComponent implements OnInit {
   isAuthenticating = false;
-  account: Account.Account;
   isAccountReady = false;
   isCreatingSpace = false;
+  isDeletingDirectory = false;
+
+  account: Account.Account;
   currentSpace;
+  /** CIDs of the uploaded directories within the current space */
+  directoriedOfSpace: UploadListItem[] = [];
 
   readonly spacesDropdown = new FormControl('');
   @ViewChild('fileInput') fileInput?: ElementRef<HTMLInputElement>;
@@ -82,8 +87,8 @@ export class W3uploadComponent implements OnInit {
       await space.createRecovery(this.account.did());
       console.log('Created recovery for space:', space);
 
-      await space.save();
-      console.log('Saved space:', space);
+      const saveResult = await space.save();
+      console.log('Saved space:', space, saveResult);
 
       this.snackBar.open(`Space created: ${space.name}`, null, { duration: 5000 });
     } catch (err) {
@@ -95,11 +100,13 @@ export class W3uploadComponent implements OnInit {
 
   async selectSpace(id: `did:key:${string}`) {
     try {
+      this.directoriedOfSpace = [];
       console.log('Selecting space:', id);
       await this.account.agent.setCurrentSpace(id);
       this.currentSpace = this.account.agent.currentSpaceWithMeta();
+      this.directoriedOfSpace = await this.getDirectoryCIDs();
     } catch (err) {
-      this.snackBar.open(err, null, { duration: 5000 });
+      this.toast(err);
     }
   }
 
@@ -107,14 +114,26 @@ export class W3uploadComponent implements OnInit {
     this.fileInput?.nativeElement.click();
   }
 
-  onFilesSelected(files: FileList | null) {
+  async onFilesSelected(files: FileList | null) {
     if (!files.length) {
       return;
     }
 
-    const filesArray = Array.from(Array(files.length)).map((_, index) => files.item(index));
+    const filesArray = Array.from(Array(files.length), (_, index) => files.item(index));
 
     console.log(filesArray);
+    const dirCID = await this.client.uploadDirectory(filesArray);
+    this.toast(`Uploaded files successfully!`);
+    console.log('uploaded directory:', dirCID.toString());
+    this.directoriedOfSpace = await this.getDirectoryCIDs();
+  }
+
+  async deleteDirectory(item: UploadListItem) {
+    this.isDeletingDirectory = true;
+    await this.client.capability.upload.remove(item.root);
+    this.directoriedOfSpace = await this.getDirectoryCIDs();
+    this.toast(`Deleted directory!`);
+    this.isDeletingDirectory = false;
   }
 
   openCreationDialog() {
@@ -125,5 +144,17 @@ export class W3uploadComponent implements OnInit {
       .subscribe((name: string) => {
         this.createSpace(name);
       });
+  }
+
+  buildGatewayURL(cid: string) {
+    return `https://${cid}.ipfs.w3s.link`;
+  }
+
+  private toast(message: string) {
+    this.snackBar.open(message, null, { duration: 5000 });
+  }
+
+  private async getDirectoryCIDs() {
+    return (await this.client.capability.upload.list()).results;
   }
 }

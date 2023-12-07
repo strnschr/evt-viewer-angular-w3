@@ -10,10 +10,6 @@
   <evt-w3login [isLoading]="isAuthenticating" (login)="login($event)"></evt-w3login>
 }
 
-@if (isAuthenticating) {
-  <ng-container *ngTemplateOutlet="loadingSpinner; context: { text: 'w3.upload.pleaseCheckEmailLink' }"></ng-container>
-}
-
 @if (isAccountReady) {
   @if (!isCreatingSpace) {
     <div class="space-selection">
@@ -36,18 +32,51 @@
 }
 
 @if (currentSpace) {
-  <span>{{ 'w3.upload.uploadFilesToSpace' | translate }} "{{ currentSpace.meta.name }}</span>
+  <div class="current-space">
+    @if (directoriedOfSpace.length) {
+      <div class="dir-list">
+        <span>{{ 'w3.upload.directories' | translate }}</span>
 
-  <input
-    type="file"
-    accept="application/json,application/xml"
-    style="display: none"
-    #fileInput
-    (change)="onFilesSelected(fileInput.files)"
-    multiple
-  />
+        @for (directory of directoriedOfSpace; track directory.root.toString()) {
+          <div class="dir-item">
+            <mat-icon class="dir-icon">folder</mat-icon>
 
-  <button mat-flat-button color="primary" (click)="openFilePicker()">{{ 'w3.upload.upload' | translate }}</button>
+            <div class="dir-item-content">
+              <a class="dir-item-title" [href]="buildGatewayURL(directory.root.toString())" target="_blank">{{
+                directory.root.toString()
+              }}</a>
+
+              <span class="dir-item-subtitle">
+                {{ 'w3.upload.created' | translate }} {{ directory.insertedAt | date }} --
+                {{ 'w3.upload.updated' | translate }} {{ directory.updatedAt | date }}
+              </span>
+            </div>
+
+            <button
+              mat-icon-button
+              aria-label="delete"
+              class="dir-delete"
+              [disabled]="isDeletingDirectory"
+              (click)="deleteDirectory(directory)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        }
+      </div>
+    }
+
+    <input
+      type="file"
+      accept="application/json,application/xml"
+      style="display: none"
+      #fileInput
+      (change)="onFilesSelected(fileInput.files)"
+      multiple
+    />
+
+    <button mat-flat-button color="primary" (click)="openFilePicker()">{{ 'w3.upload.upload' | translate }}</button>
+  </div>
 }
 
 <ng-template #loadingSpinner let-text="text">

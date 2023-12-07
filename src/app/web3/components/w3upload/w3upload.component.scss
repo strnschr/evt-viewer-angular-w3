@@ -34,3 +34,40 @@
 .create-space-button {
   height: 56px;
 }
+
+.current-space {
+  display: grid;
+  gap: 16px;
+}
+
+.dir {
+  &-list {
+    display: grid;
+    gap: 16px;
+  }
+
+  &-icon,
+  &-item-title {
+    padding-top: 4px;
+  }
+
+  &-item {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 8px;
+  }
+
+  &-item-content {
+    display: grid;
+    gap: 4px;
+  }
+
+  &-item-subtitle {
+    font-size: 14px;
+    opacity: 0.8;
+  }
+
+  &-delete {
+    justify-self: flex-end;
+  }
+}

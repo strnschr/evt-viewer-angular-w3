@@ -190,7 +190,10 @@
       "currentSpace": "Current space",
       "uploadFilesToSpace": "Upload Files to space",
       "upload": "Upload",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "directories": "Directories",
+      "created": "Created",
+      "updated": "Updated"
     }
   }
 }
