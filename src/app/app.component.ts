@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostBinding, HostListener, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostBinding, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -14,7 +14,7 @@ import { EvtIconInfo } from './ui-components/icon/icon.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('mainSpinner') mainSpinner: ElementRef;
   private subscriptions: Subscription[] = [];
   public hasNavBar = AppConfig.evtSettings.ui.enableNavBar;
@@ -23,6 +23,13 @@ export class AppComponent implements OnDestroy {
   public navbarTogglerIcon$: Observable<EvtIconInfo> = this.navbarOpened$.pipe(
     map((opened: boolean) => (opened ? { icon: 'caret-down', iconSet: 'fas' } : { icon: 'caret-up', iconSet: 'fas' }))
   );
+
+  private readonly fonts: FontFace[] = [
+    new FontFace('Junicode', 'url(/assets/fonts/Junicode.woff)', { weight: 'normal', style: 'normal' }),
+    new FontFace('Junicode', 'url(/assets/fonts/Junicode-Bold.woff)', { weight: 'bold', style: 'normal' }),
+    new FontFace('Junicode', 'url(/assets/fonts/Junicode-Italic.woff)', { weight: 'normal', style: 'italic' }),
+    new FontFace('Junicode', 'url(/assets/fonts/Junicode-BoldItalic.woff)', { weight: 'bold', style: 'italic' })
+  ];
 
   constructor(
     private router: Router,
@@ -48,6 +55,10 @@ export class AppComponent implements OnDestroy {
     this.titleService.setTitle(AppConfig.evtSettings.edition.editionTitle || 'EVT');
   }
 
+  ngOnInit() {
+    this.loadFonts();
+  }
+
   @HostBinding('attr.data-theme') get dataTheme() {
     return this.themes.getCurrentTheme().value;
   }
@@ -64,5 +75,13 @@ export class AppComponent implements OnDestroy {
   @HostListener('window:keyup', ['$event'])
   keyEvent(e: KeyboardEvent) {
     this.shortcutsService.handleKeyboardEvent(e);
+  }
+
+  loadFonts() {
+    this.fonts.forEach(font => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (document.fonts as any).add(font);
+      font.load();
+    });
   }
 }

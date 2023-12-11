@@ -41,6 +41,8 @@ $evt-viewer-angular-theme: mat.define-light-theme(
 @import './assets/scss/mixins';
 @import './assets/scss/bootstrapOverrides';
 
+/* Moved font loading to app.component.ts to support loading dynamic base url
+
 @font-face {
   font-family: 'Junicode';
   src: url('/assets/fonts/Junicode.woff') format('woff');
@@ -68,6 +70,7 @@ $evt-viewer-angular-theme: mat.define-light-theme(
   font-weight: bold;
   font-style: italic;
 }
+*/
 
 html,
 body {
