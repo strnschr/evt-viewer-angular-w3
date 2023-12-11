@@ -6,6 +6,7 @@ import { map, switchMap } from 'rxjs/operators';
 import { EntitiesSelectItemGroup } from './components/entities-select/entities-select.component';
 import { ViewMode, ViewModeId } from './models/evt-models';
 import { Attributes, EditorialConventionLayout } from './models/evt-models';
+import { buildGatewayURL } from './web3/helpers/url.helpers';
 
 @Injectable()
 export class AppConfig {
@@ -20,17 +21,32 @@ export class AppConfig {
     private http: HttpClient
   ) {}
 
-  load(fileConfigUrl?: string) {
+  load(configDirectoryCID?: string) {
+    // directory url for testing: bafybeibmqeht2teyshmz4jxzpmfownzq4fgqedsxk2mied2yl3oydlpcue
+    // TODO remove comment
+
     return new Promise<void>(resolve => {
       this.http
-        .get<FileConfig>(fileConfigUrl ?? this.fileConfigUrl)
+        .get<FileConfig>(
+          configDirectoryCID ? buildGatewayURL(configDirectoryCID, 'file_config.json') : this.fileConfigUrl
+        )
         .pipe(
           switchMap((files: FileConfig) =>
             forkJoin([
-              this.http.get<UiConfig>(files.configurationUrls?.ui ?? this.uiConfigUrl),
-              this.http.get<EditionConfig>(files.configurationUrls?.edition ?? this.editionConfigUrl),
+              this.http.get<UiConfig>(
+                configDirectoryCID
+                  ? buildGatewayURL(configDirectoryCID, files.configurationUrls.ui)
+                  : files.configurationUrls?.ui ?? this.uiConfigUrl
+              ),
+              this.http.get<EditionConfig>(
+                configDirectoryCID
+                  ? buildGatewayURL(configDirectoryCID, files.configurationUrls.edition)
+                  : files.configurationUrls?.edition ?? this.editionConfigUrl
+              ),
               this.http.get<EditorialConventionsConfig>(
-                files.configurationUrls?.editorialConventions ?? this.editorialConventionsConfigUrl
+                configDirectoryCID
+                  ? buildGatewayURL(configDirectoryCID, files.configurationUrls.editorialConventions)
+                  : files.configurationUrls?.editorialConventions ?? this.editorialConventionsConfigUrl
               )
             ]).pipe(
               map(([ui, edition, editorialConventions]) => {

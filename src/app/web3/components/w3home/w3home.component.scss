@@ -1,0 +1,13 @@
+:host {
+  display: grid;
+  max-width: 800px;
+  height: 100%;
+  align-content: flex-start;
+  margin: auto;
+  padding: 10px 20px;
+  gap: 32px;
+}
+
+.config-select {
+  display: grid;
+}

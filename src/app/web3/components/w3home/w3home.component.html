@@ -1,0 +1,14 @@
+<div class="config-select">
+  <h4>{{ 'w3.config.setConfigDirectory' | translate }}</h4>
+
+  <mat-form-field>
+    <mat-label>{{ 'w3.config.directoryCID' | translate }}</mat-label>
+    <input matInput type="text" [formControl]="configDirectoryForm" />
+  </mat-form-field>
+
+  <button mat-flat-button [disabled]="!configDirectoryForm.value" color="primary" (click)="loadConfig()">
+    {{ 'w3.config.select' | translate }}
+  </button>
+</div>
+
+<evt-w3upload></evt-w3upload>
