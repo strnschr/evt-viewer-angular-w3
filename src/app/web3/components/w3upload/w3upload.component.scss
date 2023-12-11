@@ -38,6 +38,30 @@
 .current-space {
   display: grid;
   gap: 16px;
+
+  &-upload {
+    display: grid;
+    gap: 8px;
+
+    .file {
+      &-list {
+        display: grid;
+        gap: 4px;
+      }
+
+      &-item {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+      }
+    }
+
+    .upload-actions {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 4px;
+    }
+  }
 }
 
 .dir {

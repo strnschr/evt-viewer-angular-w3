@@ -25,6 +25,7 @@ export class W3uploadComponent implements OnInit {
 
   readonly spacesDropdown = new FormControl('');
   @ViewChild('fileInput') fileInput?: ElementRef<HTMLInputElement>;
+  filesToUpload: File[] = [];
 
   get spaces() {
     return Array.from(this.account.agent.spaces.entries()).map(([id, space]) => ({ id, space }));
@@ -119,10 +120,18 @@ export class W3uploadComponent implements OnInit {
       return;
     }
 
-    const filesArray = Array.from(Array(files.length), (_, index) => files.item(index));
+    for (let i = 0; i < files.length; i++) {
+      this.filesToUpload.push(files.item(i));
+    }
+  }
 
-    console.log(filesArray);
-    const dirCID = await this.client.uploadDirectory(filesArray);
+  unselectFile(index: number) {
+    this.filesToUpload.splice(index, 1);
+  }
+
+  async uploadFiles() {
+    const dirCID = await this.client.uploadDirectory(this.filesToUpload);
+    this.filesToUpload = [];
     this.toast(`Uploaded files successfully!`);
     console.log('uploaded directory:', dirCID.toString());
     this.directoriedOfSpace = await this.getDirectoryCIDs();

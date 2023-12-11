@@ -35,7 +35,7 @@
   <div class="current-space">
     @if (directoriedOfSpace.length) {
       <div class="dir-list">
-        <span>{{ 'w3.upload.directories' | translate }}</span>
+        <h4>{{ 'w3.upload.directories' | translate }}</h4>
 
         @for (directory of directoriedOfSpace; track directory.root.toString()) {
           <div class="dir-item">
@@ -66,16 +66,40 @@
       </div>
     }
 
-    <input
-      type="file"
-      accept="application/json,application/xml"
-      style="display: none"
-      #fileInput
-      (change)="onFilesSelected(fileInput.files)"
-      multiple
-    />
+    <div class="current-space-upload">
+      <h4>{{ 'w3.upload.uploadToSpace' | translate }}</h4>
 
-    <button mat-flat-button color="primary" (click)="openFilePicker()">{{ 'w3.upload.upload' | translate }}</button>
+      <div class="file-list">
+        @for (file of filesToUpload; track $index) {
+          <div class="file-item">
+            <span>{{ file.name }}</span>
+
+            <button mat-icon-button (click)="unselectFile($index)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        }
+      </div>
+
+      <input
+        type="file"
+        accept="application/json,application/xml"
+        style="display: none"
+        #fileInput
+        (change)="onFilesSelected(fileInput.files)"
+        multiple
+      />
+
+      <div class="upload-actions">
+        <button mat-flat-button color="primary" (click)="openFilePicker()">
+          {{ 'w3.upload.selectFiles' | translate }}
+        </button>
+
+        <button mat-flat-button color="primary" [disabled]="filesToUpload.length === 0" (click)="uploadFiles()">
+          {{ 'w3.upload.upload' | translate }}
+        </button>
+      </div>
+    </div>
   </div>
 }
 

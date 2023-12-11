@@ -20,10 +20,10 @@ export class AppConfig {
     private http: HttpClient
   ) {}
 
-  load() {
+  load(fileConfigUrl?: string) {
     return new Promise<void>(resolve => {
       this.http
-        .get<FileConfig>(this.fileConfigUrl)
+        .get<FileConfig>(fileConfigUrl ?? this.fileConfigUrl)
         .pipe(
           switchMap((files: FileConfig) =>
             forkJoin([
