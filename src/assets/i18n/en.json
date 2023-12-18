@@ -183,6 +183,7 @@
     },
     "upload": {
       "title": "Upload files to Web3.Storage",
+      "description": "Here you can upload files to IPFS via Web3.Storage. By logging in, you create an account on Web3.Storage and can manage your uploaded files. It is free of charge for up to 5GB of storage.",
       "loggedInAs": "Logged in as",
       "email": "Email address",
       "authenticate": "Authenticate",

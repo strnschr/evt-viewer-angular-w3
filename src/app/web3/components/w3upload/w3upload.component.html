@@ -1,3 +1,5 @@
+<span>{{ 'w3.upload.description' | translate }}</span>
+
 @if (isAccountReady) {
   <div class="account">
     <span>{{ 'w3.upload.loggedInAs' | translate }}: {{ account.toEmail() }}</span>
@@ -67,17 +69,19 @@
     <div class="current-space-upload">
       <h4>{{ 'w3.upload.uploadToSpace' | translate }}</h4>
 
-      <div class="file-list">
-        @for (file of filesToUpload; track $index) {
-          <div class="file-item">
-            <span>{{ file.name }}</span>
+      @if (filesToUpload.length) {
+        <div class="file-list">
+          @for (file of filesToUpload; track $index) {
+            <div class="file-item">
+              <span>{{ file.name }}</span>
 
-            <button mat-icon-button (click)="unselectFile($index)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-        }
-      </div>
+              <button mat-icon-button (click)="unselectFile($index)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          }
+        </div>
+      }
 
       @if (isUploading) {
         <ng-container *ngTemplateOutlet="loadingSpinner; context: { text: 'w3.upload.uploading' }"></ng-container>
