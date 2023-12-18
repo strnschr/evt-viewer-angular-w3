@@ -1,14 +1,45 @@
-<div class="config-select">
-  <h4>{{ 'w3.config.setConfigDirectory' | translate }}</h4>
+<mat-accordion multi>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ 'w3.config.setConfigDirectory' | translate }}</mat-panel-title>
+    </mat-expansion-panel-header>
 
-  <mat-form-field>
-    <mat-label>{{ 'w3.config.directoryCID' | translate }}</mat-label>
-    <input matInput type="text" [formControl]="configDirectoryForm" />
-  </mat-form-field>
+    <div class="config-select">
+      <p>{{ 'w3.config.description1' | translate }}</p>
+      <ul>
+        <li>file_config.json</li>
+        <li>edition.xml</li>
+        <li>edition_config.json</li>
+        <li>ui_config.json</li>
+        <li>editorial_conventions_config.json</li>
+      </ul>
+      <p>{{ 'w3.config.description2' | translate }}</p>
 
-  <button mat-flat-button [disabled]="!configDirectoryForm.value" color="primary" (click)="loadConfig()">
-    {{ 'w3.config.select' | translate }}
-  </button>
-</div>
+      <mat-form-field>
+        <mat-label>{{ 'w3.config.directoryCID' | translate }}</mat-label>
+        <input matInput type="text" [formControl]="configDirectoryForm" />
+      </mat-form-field>
 
-<evt-w3upload></evt-w3upload>
+      <button
+        mat-flat-button
+        [disabled]="!configDirectoryForm.value || isLoadingConfig"
+        color="primary"
+        (click)="loadConfig()"
+      >
+        @if (isLoadingConfig) {
+          <mat-progress-spinner></mat-progress-spinner>
+        } @else {
+          {{ 'w3.config.select' | translate }}
+        }
+      </button>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ 'w3.upload.title' | translate }}</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <evt-w3upload></evt-w3upload>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -14,6 +14,8 @@ import { W3loginComponent } from './components/w3login/w3login.component';
 import { W3spaceCreateComponent } from './components/w3space-create/w3space-create.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { W3homeComponent } from './components/w3home/w3home.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [W3uploadComponent, W3loginComponent, W3spaceCreateComponent, W3homeComponent],
@@ -29,7 +31,9 @@ import { W3homeComponent } from './components/w3home/w3home.component';
     MatButtonModule,
     MatSnackBarModule,
     MatSelectModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule,
+    MatProgressSpinnerModule
   ]
 })
 export class Web3Module {}

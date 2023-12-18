@@ -177,7 +177,9 @@
     "config": {
       "setConfigDirectory": "Set EVT Config Directory",
       "directoryCID": "Directory CID",
-      "select": "Select"
+      "select": "Select",
+      "description1": "You can load your own configuration for this EVT viewer by providing the CID of a directory that contains (at least) the following files: ",
+      "description2": "For optimal compatibility, make sure all files are one the same hierarchical level and the configurationUrls within file_config.json contain just the filenames."
     },
     "upload": {
       "title": "Upload files to Web3.Storage",
