@@ -4,8 +4,8 @@ import { EditorialConventionLayoutData } from '../../directives/editorial-conven
 import { Addition, HighlightData } from '../../models/evt-models';
 import { register } from '../../services/component-register.service';
 import { EditorialConventionDefaults } from '../../services/editorial-conventions.service';
-import { EditionlevelSusceptible, Highlightable } from '../components-mixins';
-import { EditionLevelType } from 'src/app/app.config';
+import { EditionlevelSusceptible, Highlightable, TextFlowSusceptible } from '../components-mixins';
+import { EditionLevelType, TextFlow } from 'src/app/app.config';
 import { EntitiesSelectItem } from '../entities-select/entities-select.component';
 
 @register(Addition)
@@ -14,7 +14,8 @@ import { EntitiesSelectItem } from '../entities-select/entities-select.component
   templateUrl: './addition.component.html',
   styleUrls: ['./addition.component.scss']
 })
-export class AdditionComponent implements EditionlevelSusceptible, Highlightable {
+export class AdditionComponent implements EditionlevelSusceptible, Highlightable, TextFlowSusceptible {
+  @Input() textFlow: TextFlow;
   @Input() editionLevel: EditionLevelType;
   @Input() highlightData: HighlightData;
   @Input() itemsToHighlight: EntitiesSelectItem[];

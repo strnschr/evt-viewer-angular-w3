@@ -1,8 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs/operators';
-import { Gap } from 'src/app/models/evt-models';
+import { Gap, HighlightData } from 'src/app/models/evt-models';
 import { register } from 'src/app/services/component-register.service';
+import { EditionlevelSusceptible, Highlightable, TextFlowSusceptible } from '../components-mixins';
+import { EntitiesSelectItem } from '../entities-select/entities-select.component';
+import { EditionLevelType } from 'src/app/app.config';
+import { TextFlow } from 'src/app/app.config';
 
 @Component({
   selector: 'evt-gap',
@@ -10,7 +14,11 @@ import { register } from 'src/app/services/component-register.service';
   styleUrls: ['./gap.component.scss']
 })
 @register(Gap)
-export class GapComponent {
+export class GapComponent implements Highlightable, EditionlevelSusceptible, TextFlowSusceptible {
+  @Input() highlightData: HighlightData;
+  @Input() itemsToHighlight: EntitiesSelectItem[];
+  @Input() editionLevel: EditionLevelType;
+  @Input() textFlow: TextFlow;
   @Input() data: Gap;
 
   get content() {
