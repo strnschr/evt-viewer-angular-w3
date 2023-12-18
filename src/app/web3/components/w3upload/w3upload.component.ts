@@ -17,6 +17,7 @@ export class W3uploadComponent implements OnInit {
   isAccountReady = false;
   isCreatingSpace = false;
   isDeletingDirectory = false;
+  isUploading = false;
 
   account: Account.Account;
   currentSpace;
@@ -130,7 +131,9 @@ export class W3uploadComponent implements OnInit {
   }
 
   async uploadFiles() {
+    this.isUploading = true;
     const dirCID = await this.client.uploadDirectory(this.filesToUpload);
+    this.isUploading = false;
     this.filesToUpload = [];
     this.toast(`Uploaded files successfully!`);
     console.log('uploaded directory:', dirCID.toString());

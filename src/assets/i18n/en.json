@@ -196,6 +196,7 @@
       "select": "Select",
       "currentSpace": "Current space",
       "uploadToSpace": "Upload files to selected space",
+      "uploading": "Uploading...",
       "selectFiles": "Select Files",
       "upload": "Upload",
       "cancel": "Cancel",
