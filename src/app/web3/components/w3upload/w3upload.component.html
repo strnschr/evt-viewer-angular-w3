@@ -1,8 +1,8 @@
-<div class="title">
-  @if (isAccountReady) {
+@if (isAccountReady) {
+  <div class="account">
     <span>{{ 'w3.upload.loggedInAs' | translate }}: {{ account.toEmail() }}</span>
-  }
-</div>
+  </div>
+}
 
 @if (!isAccountReady) {
   <evt-w3login [isLoading]="isAuthenticating" (login)="login($event)"></evt-w3login>
