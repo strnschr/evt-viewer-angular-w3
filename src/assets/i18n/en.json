@@ -175,6 +175,12 @@
   "xml": "XML",
   "w3": {
     "title": "Web3 Showcase",
+    "edition": {
+      "title": "Load an edition from IPFS",
+      "description": "Here you can load a digital edition from IPFS. Note that loading just the edition without any configuration may produce mixed results.",
+      "editionCID": "Edition CID",
+      "select": "Select"
+    },
     "config": {
       "setConfigDirectory": "Set EVT Config Directory",
       "directoryCID": "Directory CID",
@@ -183,7 +189,7 @@
       "description2": "For optimal compatibility, make sure all files are one the same hierarchical level and the configurationUrls within file_config.json contain just the filenames."
     },
     "upload": {
-      "title": "Upload files to Web3.Storage",
+      "title": "Upload files to Web3.Storage / IPFS",
       "description": "Here you can upload files to IPFS via Web3.Storage. By logging in, you create an account on Web3.Storage and can manage your uploaded files. It is free of charge for up to 5GB of storage.",
       "loggedInAs": "Logged in as",
       "email": "Email address",

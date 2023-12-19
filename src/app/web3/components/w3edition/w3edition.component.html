@@ -1,0 +1,14 @@
+<p>{{ 'w3.edition.description' | translate }}</p>
+
+<mat-form-field>
+  <mat-label>{{ 'w3.edition.editionCID' | translate }}</mat-label>
+  <input matInput type="text" [formControl]="editionCIDForm" />
+</mat-form-field>
+
+<button mat-flat-button [disabled]="!editionCIDForm.value || isLoadingEdition" color="primary" (click)="loadEdition()">
+  @if (isLoadingEdition) {
+    <mat-progress-spinner></mat-progress-spinner>
+  } @else {
+    {{ 'w3.edition.select' | translate }}
+  }
+</button>

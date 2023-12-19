@@ -3,11 +3,12 @@ import { Title } from '@angular/platform-browser';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { AppConfig } from './app.config';
 import { ThemesService } from './services/themes.service';
 import { ShortcutsService } from './shortcuts/shortcuts.service';
 import { EvtIconInfo } from './ui-components/icon/icon.component';
+import { EditionDataService } from './services/edition-data.service';
 
 @Component({
   selector: 'evt-root',
@@ -36,7 +37,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private spinner: NgxSpinnerService,
     private shortcutsService: ShortcutsService,
     private themes: ThemesService,
-    private titleService: Title
+    private titleService: Title,
+    private editionData: EditionDataService
   ) {
     this.router.events.subscribe(event => {
       switch (true) {
@@ -53,6 +55,8 @@ export class AppComponent implements OnInit, OnDestroy {
       }
     });
     this.titleService.setTitle(AppConfig.evtSettings.edition.editionTitle || 'EVT');
+
+    this.editionData.loadAndParseEditionData(AppConfig.evtSettings.files.editionUrls[0]).pipe(take(1)).subscribe();
   }
 
   ngOnInit() {

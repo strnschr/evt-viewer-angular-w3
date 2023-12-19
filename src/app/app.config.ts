@@ -7,6 +7,7 @@ import { EntitiesSelectItemGroup } from './components/entities-select/entities-s
 import { ViewMode, ViewModeId } from './models/evt-models';
 import { Attributes, EditorialConventionLayout } from './models/evt-models';
 import { buildGatewayURL } from './web3/helpers/url.helpers';
+import { EditionDataService } from './services/edition-data.service';
 
 @Injectable()
 export class AppConfig {
@@ -18,7 +19,8 @@ export class AppConfig {
 
   constructor(
     public translate: TranslateService,
-    private http: HttpClient
+    private http: HttpClient,
+    private editionData: EditionDataService
   ) {}
 
   load(configDirectoryCID?: string) {
@@ -71,7 +73,14 @@ export class AppConfig {
         .subscribe(evtConfig => {
           AppConfig.evtSettings = evtConfig;
           console.log('evtConfig', evtConfig);
-          resolve();
+
+          if (configDirectoryCID) {
+            this.editionData
+              .loadAndParseEditionData(buildGatewayURL(configDirectoryCID, evtConfig.files.editionUrls[0]))
+              .subscribe(() => resolve());
+          } else {
+            resolve();
+          }
         });
     });
   }

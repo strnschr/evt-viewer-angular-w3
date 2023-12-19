@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { forkJoin, Observable, of } from 'rxjs';
-import { catchError, map, mergeMap, publishReplay, refCount, tap } from 'rxjs/operators';
+import { forkJoin, of, ReplaySubject } from 'rxjs';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { AppConfig } from '../app.config';
 import { OriginalEncodingNodeType } from '../models/evt-models';
 import { parseXml } from '../utils/xml-utils';
@@ -10,21 +10,24 @@ import { parseXml } from '../utils/xml-utils';
   providedIn: 'root'
 })
 export class EditionDataService {
-  private editionUrls = AppConfig.evtSettings.files.editionUrls || [];
-  public parsedEditionSource$: Observable<OriginalEncodingNodeType> = this.loadAndParseEditionData();
+  private parsedEditionSourceChanged$ = new ReplaySubject<OriginalEncodingNodeType>();
+  public parsedEditionSource$ = this.parsedEditionSourceChanged$.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  private loadAndParseEditionData() {
-    const editionUrl = this.editionUrls[0];
+  private getEditionUrls() {
+    return AppConfig.evtSettings.files.editionUrls || [];
+  }
+
+  loadAndParseEditionData(url?: string) {
+    const editionUrl = url || this.getEditionUrls()[0];
 
     return this.http.get(editionUrl, { responseType: 'text' }).pipe(
       map(source => parseXml(source)),
       mergeMap(editionData =>
         this.loadXIinclude(editionData, editionUrl.substring(0, editionUrl.lastIndexOf('/') + 1))
       ),
-      publishReplay(1),
-      refCount(),
+      tap(editionData => this.parsedEditionSourceChanged$.next(editionData)),
       catchError(() => this.handleLoadingError())
     );
   }
@@ -71,7 +74,7 @@ export class EditionDataService {
   private handleLoadingError() {
     // TODO: TEMP
     const errorEl: HTMLElement = document.createElement('div');
-    if (!this.editionUrls || this.editionUrls.length === 0) {
+    if (!this.getEditionUrls() || this.getEditionUrls().length === 0) {
       errorEl.textContent = 'Missing configuration for edition files. Data cannot be loaded.';
     } else {
       errorEl.textContent = 'There was an error in loading edition files.';

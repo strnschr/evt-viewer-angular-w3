@@ -17,9 +17,18 @@ import { W3homeComponent } from './components/w3home/w3home.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { W3configComponent } from './components/w3config/w3config.component';
+import { W3editionComponent } from './components/w3edition/w3edition.component';
+import { DialogModule } from '@angular/cdk/dialog';
 
 @NgModule({
-  declarations: [W3uploadComponent, W3loginComponent, W3spaceCreateComponent, W3homeComponent, W3configComponent],
+  declarations: [
+    W3uploadComponent,
+    W3loginComponent,
+    W3spaceCreateComponent,
+    W3homeComponent,
+    W3configComponent,
+    W3editionComponent
+  ],
   imports: [
     CommonModule,
     Web3RoutingModule,
@@ -32,6 +41,7 @@ import { W3configComponent } from './components/w3config/w3config.component';
     MatButtonModule,
     MatSnackBarModule,
     MatSelectModule,
+    DialogModule,
     MatDialogModule,
     MatExpansionModule,
     MatProgressSpinnerModule
