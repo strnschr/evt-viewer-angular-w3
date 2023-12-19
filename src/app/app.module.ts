@@ -119,6 +119,7 @@ import { TextTextComponent } from './view-modes/text-text/text-text.component';
 import { TextVersionsComponent } from './view-modes/text-versions/text-versions.component';
 import { HandleImgErrorDirective } from './directives/handle-img-error.directive';
 import { Web3Module } from './web3/web3.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [];
 
@@ -244,6 +245,7 @@ const DynamicComponents = [
     RouterModule.forRoot(routes, { useHash: true }),
     ScrollingModule,
     UiComponentsModule,
+    MatDialogModule,
     Web3Module
   ],
   providers: [

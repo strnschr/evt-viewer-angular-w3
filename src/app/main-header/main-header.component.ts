@@ -8,6 +8,8 @@ import { EVTStatusService } from '../services/evt-status.service';
 import { ThemesService } from '../services/themes.service';
 import { EVTBtnClickEvent } from '../ui-components/button/button.component';
 import { normalizeUrl } from '../utils/js-utils';
+import { MatDialog } from '@angular/material/dialog';
+import { W3homeComponent } from '../web3/components/w3home/w3home.component';
 
 @Component({
   selector: 'evt-main-header',
@@ -34,7 +36,8 @@ export class MainHeaderComponent {
   constructor(
     public themes: ThemesService,
     private evtModelService: EVTModelService,
-    private evtStatusService: EVTStatusService
+    private evtStatusService: EVTStatusService,
+    private dialog: MatDialog
   ) {}
 
   selectViewMode(viewMode: ViewMode) {
@@ -61,5 +64,9 @@ export class MainHeaderComponent {
     if (this.editionHome) {
       window.open(this.editionHome, '_blank');
     }
+  }
+
+  openWeb3Modal() {
+    this.dialog.open(W3homeComponent);
   }
 }

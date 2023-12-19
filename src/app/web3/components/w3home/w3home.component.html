@@ -1,4 +1,10 @@
-<mat-accordion multi>
+<section class="header">
+  <h4>{{ 'w3.title' | translate }}</h4>
+
+  <button mat-icon-button (click)="closeDialog()"><mat-icon>close</mat-icon></button>
+</section>
+
+<mat-accordion>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>{{ 'w3.config.setConfigDirectory' | translate }}</mat-panel-title>

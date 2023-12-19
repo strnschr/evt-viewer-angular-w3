@@ -1,3 +1,4 @@
+import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,7 +16,8 @@ export class W3homeComponent {
 
   constructor(
     private appConfig: AppConfig,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private dialog: DialogRef
   ) {}
 
   async loadConfig() {
@@ -31,5 +33,9 @@ export class W3homeComponent {
     } finally {
       this.isLoadingConfig = false;
     }
+  }
+
+  closeDialog() {
+    this.dialog.close();
   }
 }

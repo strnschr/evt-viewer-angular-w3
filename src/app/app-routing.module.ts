@@ -13,8 +13,7 @@ const appRoutes: Routes = [
   { path: 'textText', component: TextTextComponent },
   { path: 'collation', component: CollationComponent },
   { path: 'textSources', component: TextSourcesComponent },
-  { path: 'textVersions', component: TextVersionsComponent },
-  { path: 'w3up', loadChildren: () => import('./web3/web3.module').then(m => m.Web3Module) }
+  { path: 'textVersions', component: TextVersionsComponent }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes, {})],
