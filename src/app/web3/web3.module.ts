@@ -16,9 +16,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { W3homeComponent } from './components/w3home/w3home.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { W3configComponent } from './components/w3config/w3config.component';
 
 @NgModule({
-  declarations: [W3uploadComponent, W3loginComponent, W3spaceCreateComponent, W3homeComponent],
+  declarations: [W3uploadComponent, W3loginComponent, W3spaceCreateComponent, W3homeComponent, W3configComponent],
   imports: [
     CommonModule,
     Web3RoutingModule,
