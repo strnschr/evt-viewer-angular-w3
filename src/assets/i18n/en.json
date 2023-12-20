@@ -179,7 +179,8 @@
       "title": "Load an edition from IPFS",
       "description": "Here you can load a digital edition from IPFS. Note that loading just the edition without any configuration may produce mixed results.",
       "editionCID": "Edition CID",
-      "select": "Select"
+      "select": "Select",
+      "examples": "Examples"
     },
     "config": {
       "setConfigDirectory": "Set EVT Config Directory",
