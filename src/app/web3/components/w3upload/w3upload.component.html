@@ -8,8 +8,10 @@
     <span>{{ 'w3.upload.loggedInAs' | translate }}: {{ account.toEmail() }}</span>
   </div>
 
-  <div>
-    <h4>{{ 'w3.convert.title' | translate }}</h4>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ 'w3.convert.title' | translate }}</mat-panel-title>
+    </mat-expansion-panel-header>
 
     <p>{{ 'w3.convert.description' | translate }}</p>
 
@@ -34,9 +36,7 @@
         }
       </button>
     </div>
-  </div>
-
-  <h4>{{ 'w3.upload.uploads' | translate }}</h4>
+  </mat-expansion-panel>
 
   @if (!isCreatingSpace) {
     <div class="space-selection">
