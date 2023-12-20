@@ -6,6 +6,10 @@ import { Account, Client, create } from '@web3-storage/w3up-client';
 import { W3spaceCreateComponent } from '../w3space-create/w3space-create.component';
 import { filter } from 'rxjs';
 import { UploadListItem } from '@web3-storage/w3up-client/dist/src/types';
+import { parseXml } from 'src/app/utils/xml-utils';
+import { XMLElement } from 'src/app/models/evt-models';
+import { buildGatewayURL } from '../../helpers/url.helpers';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'evt-w3upload',
@@ -18,6 +22,7 @@ export class W3uploadComponent implements OnInit {
   isCreatingSpace = false;
   isDeletingDirectory = false;
   isUploading = false;
+  isConverting = false;
 
   account: Account.Account;
   currentSpace;
@@ -28,9 +33,14 @@ export class W3uploadComponent implements OnInit {
   @ViewChild('fileInput') fileInput?: ElementRef<HTMLInputElement>;
   filesToUpload: File[] = [];
 
+  @ViewChild('editionInput') editionInput?: ElementRef<HTMLInputElement>;
+  editionToConvert: File | null = null;
+
   get spaces() {
     return Array.from(this.account.agent.spaces.entries()).map(([id, space]) => ({ id, space }));
   }
+
+  buildGatewayURL = buildGatewayURL;
 
   private client: Client;
 
@@ -116,7 +126,19 @@ export class W3uploadComponent implements OnInit {
     this.fileInput?.nativeElement.click();
   }
 
-  async onFilesSelected(files: FileList | null) {
+  openEditionPicker() {
+    this.editionInput?.nativeElement.click();
+  }
+
+  onEditionSelected(files: FileList | null) {
+    if (!files.length) {
+      return;
+    }
+
+    this.editionToConvert = files.item(0);
+  }
+
+  onFilesSelected(files: FileList | null) {
     if (!files.length) {
       return;
     }
@@ -148,6 +170,50 @@ export class W3uploadComponent implements OnInit {
     this.isDeletingDirectory = false;
   }
 
+  async convertEdition() {
+    this.isConverting = true;
+
+    const text = await this.editionToConvert.text();
+    const parsedXml = parseXml(text);
+    const graphics = Array.from(parsedXml.querySelectorAll<XMLElement>('graphic'));
+
+    const mappedGraphics: Record<string, string> = {};
+
+    for (const graphic of graphics) {
+      const url = graphic.getAttribute('url');
+
+      if (!url.startsWith('http')) {
+        return;
+      }
+
+      const res = await fetch(url);
+      const blob = await res.blob();
+
+      const fileName = url.substring(url.lastIndexOf('/') + 1);
+      const file = new File([blob], fileName, { type: 'image/jpeg' });
+
+      const cid = await this.client.uploadFile(file);
+      this.toast(`Uploaded image: ${fileName}`);
+      console.log('uploaded image', fileName, cid.toString());
+      mappedGraphics[url] = cid.toString();
+    }
+
+    parsedXml.querySelectorAll<XMLElement>('graphic').forEach(graphic => {
+      const url = graphic.getAttribute('url');
+      const urlToSet = mappedGraphics[url];
+      const fileName = url.substring(url.lastIndexOf('/') + 1);
+      graphic.setAttribute('url', buildGatewayURL(urlToSet) + `?filename=${fileName}`);
+    });
+
+    const fileToSave = new Blob([new XMLSerializer().serializeToString(parsedXml)], { type: 'text/xml' });
+    const convertedName = this.editionToConvert.name.replace('.xml', '_converted.xml');
+    saveAs(fileToSave, convertedName);
+
+    this.toast(`Converted edition!`);
+    this.isConverting = false;
+    this.editionToConvert = null;
+  }
+
   openCreationDialog() {
     this.dialog
       .open(W3spaceCreateComponent, { width: '400px' })
@@ -156,10 +222,6 @@ export class W3uploadComponent implements OnInit {
       .subscribe((name: string) => {
         this.createSpace(name);
       });
-  }
-
-  buildGatewayURL(cid: string) {
-    return `https://${cid}.ipfs.w3s.link`;
   }
 
   private toast(message: string) {

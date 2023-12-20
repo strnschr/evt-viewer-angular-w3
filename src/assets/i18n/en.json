@@ -176,7 +176,7 @@
   "w3": {
     "title": "Web3 Showcase",
     "edition": {
-      "title": "Load an edition from IPFS",
+      "title": "Load an Edition from IPFS",
       "description": "Here you can load a digital edition from IPFS. Note that loading just the edition without any configuration may produce mixed results.",
       "editionCID": "Edition CID",
       "select": "Select",
@@ -211,7 +211,14 @@
       "cancel": "Cancel",
       "directories": "Directories",
       "created": "Created",
-      "updated": "Updated"
+      "updated": "Updated",
+      "uploads": "Uploads"
+    },
+    "convert": {
+      "title": "Convert Digital Edition",
+      "description": "You can select a digital edition from your local file system. Any images within the edition referenced by absolute URLs will be uploaded to IPFS and the URLs will be updated accordingly. The resulting edition can then be uploaded to IPFS via Web3.Storage.",
+      "selectFile": "Select File",
+      "convert": "Convert"
     }
   }
 }

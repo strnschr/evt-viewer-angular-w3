@@ -43,6 +43,7 @@
     "angular-gridster2": "^17.0.0",
     "bootstrap": "^5.3.2",
     "dexie": "^3.2.1",
+    "file-saver": "^2.0.5",
     "jquery": "^3.7.1",
     "ng-dynamic-component": "^10.7.0",
     "ngx-spinner": "^16.0.2",

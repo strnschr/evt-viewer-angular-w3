@@ -49,13 +49,13 @@
         align-items: center;
       }
     }
-
-    .upload-actions {
-      display: grid;
-      grid-template-columns: auto auto;
-      gap: 4px;
-    }
   }
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 8px;
 }
 
 .dir {

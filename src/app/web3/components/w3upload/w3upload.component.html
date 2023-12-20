@@ -1,16 +1,43 @@
-<span>{{ 'w3.upload.description' | translate }}</span>
+@if (!isAccountReady) {
+  <span>{{ 'w3.upload.description' | translate }}</span>
+  <evt-w3login [isLoading]="isAuthenticating" (login)="login($event)"></evt-w3login>
+}
 
 @if (isAccountReady) {
   <div class="account">
     <span>{{ 'w3.upload.loggedInAs' | translate }}: {{ account.toEmail() }}</span>
   </div>
-}
 
-@if (!isAccountReady) {
-  <evt-w3login [isLoading]="isAuthenticating" (login)="login($event)"></evt-w3login>
-}
+  <div>
+    <h4>{{ 'w3.convert.title' | translate }}</h4>
 
-@if (isAccountReady) {
+    <p>{{ 'w3.convert.description' | translate }}</p>
+
+    <input
+      type="file"
+      accept="application/xml"
+      style="display: none"
+      #editionInput
+      (change)="onEditionSelected(editionInput.files)"
+    />
+
+    <div class="actions">
+      <button mat-flat-button color="primary" (click)="openEditionPicker()" [disabled]="isConverting">
+        {{ 'w3.convert.selectFile' | translate }}
+      </button>
+
+      <button mat-flat-button color="primary" [disabled]="!editionToConvert || isConverting" (click)="convertEdition()">
+        @if (isConverting) {
+          <mat-progress-spinner></mat-progress-spinner>
+        } @else {
+          {{ 'w3.convert.convert' | translate }}
+        }
+      </button>
+    </div>
+  </div>
+
+  <h4>{{ 'w3.upload.uploads' | translate }}</h4>
+
   @if (!isCreatingSpace) {
     <div class="space-selection">
       <mat-form-field>
@@ -96,7 +123,7 @@
         multiple
       />
 
-      <div class="upload-actions">
+      <div class="actions">
         <button mat-flat-button color="primary" (click)="openFilePicker()" [disabled]="isUploading">
           {{ 'w3.upload.selectFiles' | translate }}
         </button>
