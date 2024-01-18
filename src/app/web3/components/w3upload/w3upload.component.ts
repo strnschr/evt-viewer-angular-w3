@@ -54,10 +54,6 @@ export class W3uploadComponent implements OnInit {
     this.spacesDropdown.valueChanges.subscribe((id: `did:key:${string}`) => {
       this.selectSpace(id);
     });
-
-    // dev
-    this.account = await this.client.login('robin2go_no1@yahoo.de');
-    this.isAccountReady = true;
   }
 
   async login(email: `${string}@${string}`) {

@@ -12,10 +12,10 @@ import { EditionDataService } from './services/edition-data.service';
 @Injectable()
 export class AppConfig {
   static evtSettings: EVTConfig;
-  private readonly uiConfigUrl = 'assets/config/ui_config.json';
-  private readonly fileConfigUrl = 'assets/config/file_config.json';
-  private readonly editionConfigUrl = 'assets/config/edition_config.json';
-  private readonly editorialConventionsConfigUrl = 'assets/config/editorial_conventions_config.json';
+  private readonly uiConfigUrl = 'assets%5Cconfig%5Cui_config.json';
+  private readonly fileConfigUrl = 'assets%5Cconfig%5Cfile_config.json';
+  private readonly editionConfigUrl = 'assets%5Cconfig%5Cedition_config.json';
+  private readonly editorialConventionsConfigUrl = 'assets%5Cconfig%5Ceditorial_conventions_config.json';
 
   constructor(
     public translate: TranslateService,
@@ -24,7 +24,7 @@ export class AppConfig {
   ) {}
 
   load(configDirectoryCID?: string) {
-    // directory url for testing: bafybeibmqeht2teyshmz4jxzpmfownzq4fgqedsxk2mied2yl3oydlpcue
+    // example directory url for testing: bafybeibmqeht2teyshmz4jxzpmfownzq4fgqedsxk2mied2yl3oydlpcue
     // TODO remove comment
 
     return new Promise<void>(resolve => {

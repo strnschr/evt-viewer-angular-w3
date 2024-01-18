@@ -30,7 +30,7 @@ export class MainHeaderComponent {
   }
 
   get logoUrl() {
-    return AppConfig?.evtSettings?.files?.logoUrl ?? '/assets/images/logo_white.png';
+    return AppConfig?.evtSettings?.files?.logoUrl ?? '/assets%5Cimages%5Clogo_white.png';
   }
 
   constructor(

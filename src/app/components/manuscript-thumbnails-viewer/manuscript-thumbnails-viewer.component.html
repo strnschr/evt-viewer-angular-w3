@@ -12,7 +12,7 @@
             src="{{ item.url }}"
             alt="page"
             [ngClass]="{ 'clicked-item': (currentItem$ | async) === item }"
-            [placeholder]="'assets/images/empty-image.jpg'"
+            [placeholder]="'assets%5Cimages%5Cempty-image.jpg'"
           />
           <p class="item-page-index" [ngClass]="{ 'clicked-item-par': item.active }">
             {{ item.name }}

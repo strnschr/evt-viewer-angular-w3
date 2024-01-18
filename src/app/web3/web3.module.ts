@@ -41,8 +41,8 @@ import { DialogModule } from '@angular/cdk/dialog';
     MatButtonModule,
     MatSnackBarModule,
     MatSelectModule,
-    DialogModule,
     MatDialogModule,
+    DialogModule,
     MatExpansionModule,
     MatProgressSpinnerModule
   ]

@@ -1,4 +1,4 @@
-import { DialogRef } from '@angular/cdk/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './w3home.component.scss'
 })
 export class W3homeComponent {
-  constructor(private dialog: DialogRef) {}
+  constructor(private dialog: MatDialogRef<W3homeComponent>) {}
 
   closeDialog() {
     this.dialog.close();

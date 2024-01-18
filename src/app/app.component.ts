@@ -26,10 +26,10 @@ export class AppComponent implements OnInit, OnDestroy {
   );
 
   private readonly fonts: FontFace[] = [
-    new FontFace('Junicode', 'url(/assets/fonts/Junicode.woff)', { weight: 'normal', style: 'normal' }),
-    new FontFace('Junicode', 'url(/assets/fonts/Junicode-Bold.woff)', { weight: 'bold', style: 'normal' }),
-    new FontFace('Junicode', 'url(/assets/fonts/Junicode-Italic.woff)', { weight: 'normal', style: 'italic' }),
-    new FontFace('Junicode', 'url(/assets/fonts/Junicode-BoldItalic.woff)', { weight: 'bold', style: 'italic' })
+    new FontFace('Junicode', 'url(/assets%5Cfonts%5CJunicode.woff)', { weight: 'normal', style: 'normal' }),
+    new FontFace('Junicode', 'url(/assets%5Cfonts%5CJunicode-Bold.woff)', { weight: 'bold', style: 'normal' }),
+    new FontFace('Junicode', 'url(/assets%5Cfonts%5CJunicode-Italic.woff)', { weight: 'normal', style: 'italic' }),
+    new FontFace('Junicode', 'url(/assets%5Cfonts%5CJunicode-BoldItalic.woff)', { weight: 'bold', style: 'italic' })
   ];
 
   constructor(
