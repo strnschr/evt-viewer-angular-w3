@@ -24,9 +24,6 @@ export class AppConfig {
   ) {}
 
   load(configDirectoryCID?: string) {
-    // example directory url for testing: bafybeibmqeht2teyshmz4jxzpmfownzq4fgqedsxk2mied2yl3oydlpcue
-    // TODO remove comment
-
     return new Promise<void>(resolve => {
       this.http
         .get<FileConfig>(
