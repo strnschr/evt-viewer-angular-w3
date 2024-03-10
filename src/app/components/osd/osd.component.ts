@@ -8,6 +8,7 @@ import { distinctUntilChanged } from 'rxjs/operators';
 import { ViewerDataType } from '../../models/evt-models';
 import { OsdTileSource, ViewerDataInput, ViewerSource } from '../../models/evt-polymorphic-models';
 import { uuid } from '../../utils/js-utils';
+import { environment } from 'src/environments/environment';
 
 // eslint-disable-next-line no-var
 declare var OpenSeadragon;
@@ -138,7 +139,7 @@ export class OsdComponent implements AfterViewInit, OnDestroy {
       minZoomLevel: 0.5,
       defaultZoomLevel: 1,
       sequenceMode: true,
-      prefixUrl: 'assets%5Cosd%5Cimages%5C',
+      prefixUrl: environment.assetPathPrefix('osd/images'),
       id: this.div.nativeElement.id,
       navigatorBackground: '#606060',
       showNavigator: false,
@@ -146,7 +147,7 @@ export class OsdComponent implements AfterViewInit, OnDestroy {
         clickToZoom: false,
         dblClickToZoom: true
       },
-      placeholderFillStyle: 'assets%5Cimages%5Cempty-image.jpg'
+      placeholderFillStyle: environment.assetPathPrefix('images') + 'empty-image.jpg'
     };
 
     this.subscriptions.push(

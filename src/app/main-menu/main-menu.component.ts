@@ -14,6 +14,7 @@ import { ShortcutsComponent } from '../shortcuts/shortcuts.component';
 import { EvtIconInfo } from '../ui-components/icon/icon.component';
 import { ModalComponent } from '../ui-components/modal/modal.component';
 import { ModalService } from '../ui-components/modal/modal.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'evt-main-menu',
@@ -26,6 +27,7 @@ export class MainMenuComponent {
   public uiConfig = AppConfig.evtSettings.ui;
   public fileConfig = AppConfig.evtSettings.files;
   public editionConfig = AppConfig.evtSettings.edition;
+  public imagesPath = environment.assetPathPrefix('images');
 
   private isOpened = true;
   private availableLangs = AppConfig.evtSettings.ui.availableLanguages.filter(l => l.enable);

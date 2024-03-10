@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { map } from 'rxjs/operators';
 import { GridItem, Page } from '../../models/evt-models';
 import { EVTStatusService } from '../../services/evt-status.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'evt-manuscript-thumbnails',
@@ -18,6 +19,7 @@ export class ManuscriptThumbnailsViewerComponent implements OnInit, OnChanges {
   public indexPage = 0;
   private items: GridItem[];
   public grid: GridItem[][][] = [];
+  imagesPath = environment.assetPathPrefix('images');
 
   public currentItem$ = this.evtStatusService.currentPage$.pipe(map(p => this.items.find(i => i.id === p.id)));
 

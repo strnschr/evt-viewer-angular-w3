@@ -9,6 +9,7 @@ import { ThemesService } from './services/themes.service';
 import { ShortcutsService } from './shortcuts/shortcuts.service';
 import { EvtIconInfo } from './ui-components/icon/icon.component';
 import { EditionDataService } from './services/edition-data.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'evt-root',
@@ -26,10 +27,27 @@ export class AppComponent implements OnInit, OnDestroy {
   );
 
   private readonly fonts: FontFace[] = [
-    new FontFace('Junicode', 'url(/assets%5Cfonts%5CJunicode.woff)', { weight: 'normal', style: 'normal' }),
-    new FontFace('Junicode', 'url(/assets%5Cfonts%5CJunicode-Bold.woff)', { weight: 'bold', style: 'normal' }),
-    new FontFace('Junicode', 'url(/assets%5Cfonts%5CJunicode-Italic.woff)', { weight: 'normal', style: 'italic' }),
-    new FontFace('Junicode', 'url(/assets%5Cfonts%5CJunicode-BoldItalic.woff)', { weight: 'bold', style: 'italic' })
+    new FontFace('Junicode', `url(${environment.assetPathPrefix('fonts')}Junicode.woff)`, {
+      weight: 'normal',
+      style: 'normal'
+    }),
+    new FontFace('Junicode', `url(${environment.assetPathPrefix('fonts')}Junicode-Bold.woff)`, {
+      weight: 'bold',
+      style: 'normal'
+    }),
+    new FontFace('Junicode', `url(${environment.assetPathPrefix('fonts')}Junicode-Italic.woff)`, {
+      weight: 'normal',
+      style: 'italic'
+    }),
+    new FontFace('Junicode', `url(${environment.assetPathPrefix('fonts')}Junicode-BoldItalic.woff)`, {
+      weight: 'bold',
+      style: 'italic'
+    }),
+    new FontFace('evt-icons', `url(${environment.assetPathPrefix('fonts')}evt-icons.woff?yo01vg)`, {
+      weight: 'normal',
+      style: 'normal',
+      display: 'block'
+    })
   ];
 
   constructor(

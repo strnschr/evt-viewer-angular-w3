@@ -68,6 +68,8 @@ Unfortunately, the dynamic base URL is not respected for relative paths defined 
 
 `web3.storage` uses Filecoin and IPFS to store uploaded files. In IPFS, addressing files in sub-paths of directories works with backward slashes. So instead of `./path/to/file.js` it uses `./path\to\file.js`. Since modern browser such as Firefox and Chrome automatically replace backward slashes with forward slashes, we use the URL-encoded version, i.e. `./path%5Cto%5Cfile.js`.
 
+**Update**: Due to observed provisioning issues for assets, or generally files in subdirectories, we refactored the application's build process to output a flat directory, without nesting. Furthermore, a function inside `environment.ts` was introduced to compute asset paths dynamically, so that the project's folder structure is not impacted.
+
 ### AppConfig Adjustments
 
 `app.config.ts` has been adjusted to support loading app configuration from decentralized Web3 storage. This works by allowing a Content Identifier of a directory containing all configuration files as a parameter. The CID will be converted to a gateway URL, from which all related files can be retrieved.

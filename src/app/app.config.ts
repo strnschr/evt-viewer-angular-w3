@@ -8,14 +8,17 @@ import { ViewMode, ViewModeId } from './models/evt-models';
 import { Attributes, EditorialConventionLayout } from './models/evt-models';
 import { buildGatewayURL } from './web3/helpers/url.helpers';
 import { EditionDataService } from './services/edition-data.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AppConfig {
   static evtSettings: EVTConfig;
-  private readonly uiConfigUrl = 'assets%5Cconfig%5Cui_config.json';
-  private readonly fileConfigUrl = 'assets%5Cconfig%5Cfile_config.json';
-  private readonly editionConfigUrl = 'assets%5Cconfig%5Cedition_config.json';
-  private readonly editorialConventionsConfigUrl = 'assets%5Cconfig%5Ceditorial_conventions_config.json';
+  private readonly uiConfigUrl = `${environment.assetPathPrefix('config')}ui_config.json`;
+  private readonly fileConfigUrl = `${environment.assetPathPrefix('config')}file_config.json`;
+  private readonly editionConfigUrl = `${environment.assetPathPrefix('config')}edition_config.json`;
+  private readonly editorialConventionsConfigUrl = `${environment.assetPathPrefix(
+    'config'
+  )}editorial_conventions_config.json`;
 
   constructor(
     public translate: TranslateService,

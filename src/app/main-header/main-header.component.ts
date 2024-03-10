@@ -10,6 +10,7 @@ import { EVTBtnClickEvent } from '../ui-components/button/button.component';
 import { normalizeUrl } from '../utils/js-utils';
 import { MatDialog } from '@angular/material/dialog';
 import { W3homeComponent } from '../web3/components/w3home/w3home.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'evt-main-header',
@@ -30,7 +31,7 @@ export class MainHeaderComponent {
   }
 
   get logoUrl() {
-    return AppConfig?.evtSettings?.files?.logoUrl ?? '/assets%5Cimages%5Clogo_white.png';
+    return AppConfig?.evtSettings?.files?.logoUrl ?? environment.assetPathPrefix('images') + 'logo_white.png';
   }
 
   constructor(

@@ -68,11 +68,55 @@
                   "maximumWarning": "10kb",
                   "maximumError": "15kb"
                 }
+              ],
+              "assets": [
+                "src/favicon.ico",
+                {
+                  "input": "src/assets/config",
+                  "glob": "*",
+                  "output": "/",
+                  "ignore": ["file_config.json"]
+                },
+                {
+                  "input": "src/assets/config_w3",
+                  "glob": "file_config.json",
+                  "output": "/"
+                },
+                {
+                  "input": "src/assets/data",
+                  "glob": "*",
+                  "output": "/"
+                },
+                {
+                  "input": "src/assets/fonts",
+                  "glob": "*",
+                  "output": "/"
+                },
+                {
+                  "input": "src/assets/i18n",
+                  "glob": "*",
+                  "output": "/"
+                },
+                {
+                  "input": "src/assets/images",
+                  "glob": "*",
+                  "output": "/"
+                },
+                {
+                  "input": "src/assets/osd/images",
+                  "glob": "*",
+                  "output": "/"
+                },
+                {
+                  "input": "src/assets/scss",
+                  "glob": "*",
+                  "output": "/"
+                }
               ]
             },
             "release": {
               "outputPath": "release/core",
-              "deployUrl": "core/",
+              "baseHref": "core/",
               "index": {
                 "input": "src/index.html",
                 "output": "./../index.html"
