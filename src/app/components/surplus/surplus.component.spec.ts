@@ -8,8 +8,9 @@ describe('SurplusComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [SurplusComponent]
-    }).compileComponents();
+      declarations: [ SurplusComponent ],
+    })
+    .compileComponents();
   }));
 
   beforeEach(() => {

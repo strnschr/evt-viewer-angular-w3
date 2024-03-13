@@ -6,8 +6,9 @@ import { EVTModelService } from '../../../services/evt-model.service';
   selector: 'evt-apparatus-entry-detail',
   templateUrl: './apparatus-entry-detail.component.html',
   styleUrls: ['./apparatus-entry-detail.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
 @register(ApparatusEntryDetailComponent)
 export class ApparatusEntryDetailComponent implements OnInit {
   @Input() data: ApparatusEntry;
@@ -15,11 +16,11 @@ export class ApparatusEntryDetailComponent implements OnInit {
   rdgHasCounter = false;
 
   get significantRdg(): Reading[] {
-    return this.data.readings.filter(rdg => rdg.significant);
+    return this.data.readings.filter((rdg) => rdg.significant);
   }
 
   get notSignificantRdg(): Reading[] {
-    return this.data.readings.filter(rdg => !rdg.significant);
+    return this.data.readings.filter((rdg) => !rdg.significant);
   }
 
   get readings(): Reading[] {
@@ -27,18 +28,17 @@ export class ApparatusEntryDetailComponent implements OnInit {
   }
 
   get rdgMetadata() {
-    return Object.keys(this.data.attributes)
-      .filter(key => key !== 'id')
-      .reduce(
-        (obj, key) => ({
-          ...obj,
-          [key]: this.data.attributes[key]
-        }),
-        {}
-      );
+    return Object.keys(this.data.attributes).filter((key) => key !== 'id')
+      .reduce((obj, key) => ({
+        ...obj,
+        [key]: this.data.attributes[key],
+      }),     {});
   }
 
-  constructor(public evtModelService: EVTModelService) {}
+  constructor(
+    public evtModelService: EVTModelService,
+  ) {
+  }
 
   ngOnInit() {
     if (this.data.nestedAppsIDs.length > 0) {
@@ -61,10 +61,10 @@ export class ApparatusEntryDetailComponent implements OnInit {
   }
 
   getNestedAppLemma(appId: string): Reading {
-    return this.nestedApps.find(c => c.id === appId).lemma;
+    return this.nestedApps.find((c) => c.id === appId).lemma;
   }
 
   getNestedAppPos(appId: string): number {
-    return this.nestedApps.findIndex(nesApp => nesApp.id === appId);
+    return this.nestedApps.findIndex((nesApp) => nesApp.id === appId);
   }
 }

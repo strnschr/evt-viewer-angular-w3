@@ -8,8 +8,9 @@ describe('PublicationStmtComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PublicationStmtComponent]
-    }).compileComponents();
+      declarations: [ PublicationStmtComponent ],
+    })
+    .compileComponents();
   });
 
   beforeEach(() => {

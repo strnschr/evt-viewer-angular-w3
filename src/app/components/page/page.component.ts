@@ -7,7 +7,7 @@ import { EntitiesSelectItem } from '../entities-select/entities-select.component
 @Component({
   selector: 'evt-page',
   templateUrl: './page.component.html',
-  styleUrls: ['./page.component.scss']
+  styleUrls: ['./page.component.scss'],
 })
 export class PageComponent {
   @Input() itemsToHighlight: EntitiesSelectItem[];
@@ -19,9 +19,7 @@ export class PageComponent {
     this.d = v;
     this.pageDataChange.next(this.d);
   }
-  get data() {
-    return this.d;
-  }
+  get data() { return this.d; }
   pageDataChange = new BehaviorSubject<Page>(undefined);
 
   busy = of<boolean>(false); // TODO: manage loading

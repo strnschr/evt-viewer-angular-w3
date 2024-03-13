@@ -11,7 +11,7 @@ export interface EditorialConventionLayoutData {
 }
 
 @Directive({
-  selector: '[evtEditorialConventionLayout]'
+  selector: '[evtEditorialConventionLayout]',
 })
 export class EditorialConventionLayoutDirective implements OnInit, OnChanges {
   @Input('evtEditorialConventionLayout') data: EditorialConventionLayoutData;
@@ -26,8 +26,9 @@ export class EditorialConventionLayoutDirective implements OnInit, OnChanges {
   constructor(
     private editorialConventionsService: EditorialConventionsService,
     private el: ElementRef,
-    private renderer: Renderer2
-  ) {}
+    private renderer: Renderer2,
+  ) {
+  }
 
   ngOnInit() {
     this._setLayout();
@@ -40,11 +41,7 @@ export class EditorialConventionLayoutDirective implements OnInit, OnChanges {
   }
 
   private _setLayout() {
-    const layouts = this.editorialConventionsService.getLayouts(
-      this.data.name,
-      this.data.attributes,
-      this.data.defaultsKey
-    );
+    const layouts = this.editorialConventionsService.getLayouts(this.data.name, this.data.attributes, this.data.defaultsKey);
     this._cleanPreviousLayout();
     if (layouts && this.data.editionLevel) {
       const editionLayout = layouts[this.data.editionLevel];
@@ -64,9 +61,7 @@ export class EditorialConventionLayoutDirective implements OnInit, OnChanges {
         }
 
         if (editionLayout.style) {
-          Object.keys(editionLayout.style).forEach(key =>
-            this.renderer.setStyle(this.el.nativeElement, key, editionLayout.style[key])
-          );
+          Object.keys(editionLayout.style).forEach((key) => this.renderer.setStyle(this.el.nativeElement, key, editionLayout.style[key]));
           this._oldStyle = editionLayout.style;
         }
       }
@@ -75,17 +70,13 @@ export class EditorialConventionLayoutDirective implements OnInit, OnChanges {
 
   private _cleanPreviousLayout() {
     const preEl = this.el.nativeElement.querySelector('.pre');
-    if (preEl) {
-      preEl.remove();
-    }
+    if (preEl) { preEl.remove(); }
 
     const postEl = this.el.nativeElement.querySelector('.post');
-    if (postEl) {
-      postEl.remove();
-    }
+    if (postEl) { postEl.remove(); }
 
     if (this._oldStyle) {
-      Object.keys(this._oldStyle).forEach(key => this.renderer.setStyle(this.el.nativeElement, key, ''));
+      Object.keys(this._oldStyle).forEach((key) => this.renderer.setStyle(this.el.nativeElement, key, ''));
       this._oldStyle = undefined;
     }
   }

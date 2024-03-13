@@ -5,7 +5,7 @@ import { register } from '../../services/component-register.service';
 @Component({
   selector: 'evt-project-desc',
   templateUrl: './project-desc.component.html',
-  styleUrls: ['./project-desc.component.scss']
+  styleUrls: ['./project-desc.component.scss'],
 })
 @register(ProjectDesc)
 export class ProjectDescComponent {

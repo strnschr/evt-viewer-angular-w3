@@ -11,7 +11,7 @@ import { EvtIconInfo } from '../../ui-components/icon/icon.component';
 @Component({
   selector: 'evt-text-panel',
   templateUrl: './text-panel.component.html',
-  styleUrls: ['./text-panel.component.scss']
+  styleUrls: ['./text-panel.component.scss'],
 })
 export class TextPanelComponent {
   // tslint:disable-next-line: variable-name
@@ -49,7 +49,7 @@ export class TextPanelComponent {
             pbId = pbs[pbCount].getAttribute('data-id');
             const pbElem = mainContentEl.querySelector<HTMLElement>(`evt-page[data-id="${pbId}"]`);
             const pbRect = pbElem.getBoundingClientRect();
-            if (pbRect.top && pbRect.top <= docViewBottom && pbRect.top >= docViewTop) {
+            if (pbRect.top && (pbRect.top <= docViewBottom) && (pbRect.top >= docViewTop)) {
               pbVisible = true;
             } else {
               pbCount++;
@@ -57,19 +57,23 @@ export class TextPanelComponent {
           }
           if (pbVisible && currentPage?.id !== pbId) {
             this.updatingPageFromScroll = true;
-            currentPage = pages.find(p => p.id === pbId);
+            currentPage = pages.find((p) => p.id === pbId);
           }
         }
 
         return currentPage;
-      })
+      }),
     ),
-    this.updatePage$
-  ).pipe(distinctUntilChanged((x, y) => x?.id === y?.id));
-  public currentPageId$ = this.currentPage$.pipe(map(p => p?.id));
+    this.updatePage$,
+  ).pipe(
+    distinctUntilChanged((x, y) => x?.id === y?.id),
+  );
+  public currentPageId$ = this.currentPage$.pipe(
+    map((p) => p?.id),
+  );
   @Output() pageChange: Observable<Page> = this.currentPage$.pipe(
-    filter(p => !!p),
-    tap(page => this._scrollToPage(page?.id))
+    filter((p) => !!p),
+    tap((page) => this._scrollToPage(page?.id)),
   );
 
   // tslint:disable-next-line: variable-name
@@ -85,31 +89,25 @@ export class TextPanelComponent {
   }
 
   public currentEdLevel$ = new BehaviorSubject<EditionLevel>(undefined);
-  public currentEdLevelId$ = this.currentEdLevel$.pipe(map(e => e?.id));
+  public currentEdLevelId$ = this.currentEdLevel$.pipe(
+    map((e) => e?.id),
+  );
   @Output() editionLevelChange: Observable<EditionLevel> = this.currentEdLevel$.pipe(
-    filter(e => !!e),
-    distinctUntilChanged()
+    filter((e) => !!e),
+    distinctUntilChanged(),
   );
 
   public currentStatus$ = combineLatest([
     this.evtModelService.pages$,
     this.currentPage$,
     this.currentEdLevel$,
-    this.evtStatus.currentViewMode$
+    this.evtStatus.currentViewMode$,
   ]).pipe(
     delay(0),
-    filter(
-      ([pages, currentPage, editionLevel, currentViewMode]) =>
-        !!pages && !!currentPage && !!editionLevel && !!currentViewMode
-    ),
-    map(([pages, currentPage, editionLevel, currentViewMode]) => ({
-      pages,
-      currentPage,
-      editionLevel,
-      currentViewMode
-    })),
+    filter(([pages, currentPage, editionLevel, currentViewMode]) => !!pages && !!currentPage && !!editionLevel && !!currentViewMode),
+    map(([pages, currentPage, editionLevel, currentViewMode]) => ({ pages, currentPage, editionLevel, currentViewMode })),
     distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b)),
-    shareReplay(1)
+    shareReplay(1),
   );
 
   public itemsToHighlight$ = new Subject<EntitiesSelectItem[]>();
@@ -137,20 +135,22 @@ export class TextPanelComponent {
   }
 
   public get proseVersesTogglerIcon(): EvtIconInfo {
+
     return { icon: this.textFlow === 'prose' ? 'align-left' : 'align-justify', iconSet: 'fas' };
   }
 
   public isMultiplePageFlow$ = this.currentStatus$.pipe(
-    map(x => x.editionLevel.id === 'critical' && x.currentViewMode.id !== 'imageText'),
-    shareReplay(1)
+    map((x) => x.editionLevel.id === 'critical' && x.currentViewMode.id !== 'imageText'),
+    shareReplay(1),
   );
 
   private updatingPageFromScroll = false;
 
   constructor(
     public evtModelService: EVTModelService,
-    public evtStatus: EVTStatusService
-  ) {}
+    public evtStatus: EVTStatusService,
+  ) {
+  }
 
   getSecondaryContent(): string {
     return this.secondaryContent;
@@ -164,7 +164,8 @@ export class TextPanelComponent {
     if (this.secondaryContent !== newContent) {
       this.showSecondaryContent = true;
       this.secondaryContent = newContent;
-    } else {
+    }
+    else {
       this.showSecondaryContent = false;
       this.secondaryContent = '';
     }

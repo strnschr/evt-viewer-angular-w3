@@ -8,8 +8,9 @@ describe('VersionPanelComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [VersionPanelComponent]
-    }).compileComponents();
+      declarations: [ VersionPanelComponent ],
+    })
+    .compileComponents();
   }));
 
   beforeEach(() => {

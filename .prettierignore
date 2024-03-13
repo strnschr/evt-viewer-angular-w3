@@ -1,7 +1,0 @@
-package.json
-package-lock.json
-dist
-coverage
-reports
-test.ts
-polyfills.ts

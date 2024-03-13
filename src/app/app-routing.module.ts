@@ -13,10 +13,11 @@ const appRoutes: Routes = [
   { path: 'textText', component: TextTextComponent },
   { path: 'collation', component: CollationComponent },
   { path: 'textSources', component: TextSourcesComponent },
-  { path: 'textVersions', component: TextVersionsComponent }
+  { path: 'textVersions', component: TextVersionsComponent },
 ];
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes, {})],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' })],
+  exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

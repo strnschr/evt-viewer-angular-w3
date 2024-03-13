@@ -1,28 +1,22 @@
 # Changelog
-
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
 ### Added
-
--
+- 
 
 ### Changed
-
 -
 
 ## [1.0.0-alpha] - 2022-12-07
 
 ### Dependency Updates
-
 - Updated to Angular 13
 
 ### Added
-
 - Text/images connection in page change
 - Support for styleDefDecl as default style of renditional information
 - Apparatus entry inline visualization
@@ -95,7 +89,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - OpenSeadragon component with support for manifest file
 
 ### Changed
-
 - Routing params keys
 - Parse logic
 - Start using "changelog"

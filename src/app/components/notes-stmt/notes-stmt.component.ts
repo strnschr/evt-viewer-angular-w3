@@ -5,9 +5,10 @@ import { register } from '../../services/component-register.service';
 @Component({
   selector: 'evt-notes-stmt',
   templateUrl: './notes-stmt.component.html',
-  styleUrls: ['./notes-stmt.component.scss']
+  styleUrls: ['./notes-stmt.component.scss'],
 })
 @register(NotesStmt)
 export class NotesStmtComponent {
   @Input() data: NotesStmt;
+
 }

@@ -10,7 +10,7 @@ import { snakeToCamelCased } from '../../utils/js-utils';
 @Component({
   selector: 'evt-rendition',
   templateUrl: './rendition.component.html',
-  styleUrls: ['./rendition.component.scss']
+  styleUrls: ['./rendition.component.scss'],
 })
 @register(Rendition)
 export class RenditionComponent {
@@ -20,9 +20,9 @@ export class RenditionComponent {
     if (this.data.scope) {
       const descKey = snakeToCamelCased(`rendition-${this.data.scope}-desc`);
 
-      return this.translateService
-        .get(descKey)
-        .pipe(map(translation => (translation === descKey ? '' : `(${translation})`)));
+      return this.translateService.get(descKey).pipe(
+        map((translation) => translation === descKey ? '' : `(${translation})`),
+      );
     }
 
     return of('');
@@ -33,7 +33,7 @@ export class RenditionComponent {
       return of(this.data.scheme);
     }
 
-    return this.evtModelService.styleDefaults$.pipe(map(styleDefaults => styleDefaults?.scheme ?? ''));
+    return this.evtModelService.styleDefaults$.pipe((map((styleDefaults) => styleDefaults?.scheme ?? '')));
   }
 
   get schemeVersion$() {
@@ -41,15 +41,15 @@ export class RenditionComponent {
       return of(this.data.schemeVersion);
     }
 
-    return this.evtModelService.styleDefaults$.pipe(map(styleDefaults => styleDefaults?.schemeVersion ?? ''));
+    return this.evtModelService.styleDefaults$.pipe((map((styleDefaults) => styleDefaults?.schemeVersion ?? '')));
   }
 
   get noDetails$() {
-    return this.scheme$.pipe(map(scheme => !scheme && !this.data?.scope && !this.data?.selector && this.data?.id));
+    return this.scheme$.pipe((map((scheme) => !scheme && !this.data?.scope && !this.data?.selector && this.data?.id)));
   }
 
   constructor(
     private translateService: TranslateService,
-    private evtModelService: EVTModelService
-  ) {}
+    private evtModelService: EVTModelService,
+  ) { }
 }

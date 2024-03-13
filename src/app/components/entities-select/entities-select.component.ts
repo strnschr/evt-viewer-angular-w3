@@ -17,28 +17,25 @@ export interface EntitiesSelectItem {
 @Component({
   selector: 'evt-entities-select',
   templateUrl: './entities-select.component.html',
-  styleUrls: ['./entities-select.component.scss']
+  styleUrls: ['./entities-select.component.scss'],
 })
 export class EntitiesSelectComponent {
   @Output() selectionChange: EventEmitter<EntitiesSelectItem[]> = new EventEmitter();
 
-  entitiesTypes: Array<EntitiesSelectItem & { group: string }> = (
-    AppConfig.evtSettings.edition.entitiesSelectItems || []
-  )
-    .filter(g => g.enable)
-    .reduce((x, y) => [...x, ...y.items.filter(i => i.enable).map(i => ({ ...i, group: y.label }))], []);
+  entitiesTypes: Array<EntitiesSelectItem & { group: string }> = (AppConfig.evtSettings.edition.entitiesSelectItems || [])
+    .filter((g) => g.enable)
+    .reduce((x, y) => [...x, ...y.items.filter((i) => i.enable).map((i) => ({ ...i, group: y.label }))], []);
 
   iconColor: EvtIconInfo = {
     icon: 'circle',
     iconSet: 'fas',
-    additionalClasses: 'ms-2 me-1'
+    additionalClasses: 'ms-2 me-1',
   };
 
   public selectedTypes: EntitiesSelectItem[] = [];
 
   updateSelectedTypes(entitiesTypes: EntitiesSelectItem[]) {
-    if (Array.isArray(entitiesTypes)) {
-      // BUGFIX: There is a bug in ng-select change event and second time the parameter is an event
+    if (Array.isArray(entitiesTypes)) { // BUGFIX: There is a bug in ng-select change event and second time the parameter is an event
       this.selectionChange.emit(entitiesTypes);
     }
   }

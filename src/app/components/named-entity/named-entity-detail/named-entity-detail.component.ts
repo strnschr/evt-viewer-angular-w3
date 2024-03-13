@@ -5,7 +5,7 @@ import { register } from '../../../services/component-register.service';
 @Component({
   selector: 'evt-named-entity-detail',
   templateUrl: './named-entity-detail.component.html',
-  styleUrls: ['./named-entity-detail.component.scss']
+  styleUrls: ['./named-entity-detail.component.scss'],
 })
 @register(NamedEntityInfo)
 export class NamedEntityDetailComponent {
@@ -30,7 +30,7 @@ export class NamedEntityDetailComponent {
     relations: { icon: 'share-alt' },
     residence: { icon: 'home' },
     settlement: { icon: 'location-arrow' },
-    sex: { icon: 'venus-mars' }
+    sex: { icon: 'venus-mars' },
   };
 
   defaultIcon = { icon: 'info-circle' };

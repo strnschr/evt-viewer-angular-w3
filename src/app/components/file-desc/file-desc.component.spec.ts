@@ -8,8 +8,9 @@ describe('FileDescComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FileDescComponent]
-    }).compileComponents();
+      declarations: [ FileDescComponent ],
+    })
+    .compileComponents();
   });
 
   beforeEach(() => {

@@ -9,7 +9,7 @@ import { EVTModelService } from '../../services/evt-model.service';
 @Component({
   selector: 'evt-named-entity-relation',
   templateUrl: './named-entity-relation.component.html',
-  styleUrls: ['./named-entity-relation.component.scss']
+  styleUrls: ['./named-entity-relation.component.scss'],
 })
 export class NamedEntityRelationComponent {
   @Input() data: Relation;
@@ -21,7 +21,10 @@ export class NamedEntityRelationComponent {
   mutualParts$ = this.getEntities('mutualParts');
   passiveParts$ = this.getEntities('passiveParts');
 
-  constructor(private evtModelService: EVTModelService) {}
+  constructor(
+    private evtModelService: EVTModelService,
+  ) {
+  }
 
   toggleEntity(entity: NamedEntity) {
     // TODO: if inEntity, then open entity in list
@@ -34,24 +37,21 @@ export class NamedEntityRelationComponent {
     }
   }
 
-  private getEntities(
-    partIdsGroup: 'activeParts' | 'mutualParts' | 'passiveParts'
-  ): Observable<Array<{ id: string; entity: NamedEntity; label: string }>> {
+  private getEntities(partIdsGroup: 'activeParts' | 'mutualParts' | 'passiveParts'):
+    Observable<Array<{ id: string; entity: NamedEntity; label: string }>> {
     return this.evtModelService.namedEntities$.pipe(
-      map(ne =>
-        this.data[partIdsGroup].map(entityId => {
-          const entity = ne.all.entities.find(e => e.id === entityId);
+      map((ne) => this.data[partIdsGroup].map((entityId) => {
+        const entity = ne.all.entities.find((e) => e.id === entityId);
 
-          return {
-            id: entityId,
-            entity,
-            get label() {
-              return entity ? entity.label : entityId;
-            }
-          };
-        })
-      ),
-      map(nes => nes.filter(e => !!e))
+        return {
+          id: entityId,
+          entity,
+          get label() {
+            return (entity ? entity.label : entityId);
+          },
+        };
+      })),
+      map((nes) => nes.filter((e) => !!e)),
     );
   }
 }

@@ -1,3 +1,4 @@
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { ScrollingModule as ExperimentalScrollingModule } from '@angular/cdk-experimental/scrolling';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { HttpClientModule } from '@angular/common/http';
@@ -18,6 +19,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppTranslationModule } from './app-translation.module';
 import { AppComponent } from './app.component';
 
+import { Ng2HandySyntaxHighlighterModule } from 'ng2-handy-syntax-highlighter';
 import { AppConfig } from './app.config';
 
 import { AdditionComponent } from './components/addition/addition.component';
@@ -118,11 +120,9 @@ import { TextSourcesComponent } from './view-modes/text-sources/text-sources.com
 import { TextTextComponent } from './view-modes/text-text/text-text.component';
 import { TextVersionsComponent } from './view-modes/text-versions/text-versions.component';
 import { HandleImgErrorDirective } from './directives/handle-img-error.directive';
-import { Web3Module } from './web3/web3.module';
-import { MatDialogModule } from '@angular/material/dialog';
-import { DialogModule } from '@angular/cdk/dialog';
 
-const routes: Routes = [];
+const routes: Routes = [
+];
 
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
@@ -180,7 +180,7 @@ const DynamicComponents = [
   TitleStmtComponent,
   VerseComponent,
   VersesGroupComponent,
-  WordComponent
+  WordComponent,
 ];
 
 @NgModule({
@@ -227,7 +227,7 @@ const DynamicComponents = [
     VersionPanelComponent,
     WitnessPanelComponent,
     XmlBeautifyPipe,
-    ...DynamicComponents
+    ...DynamicComponents,
   ],
   imports: [
     AppRoutingModule,
@@ -240,15 +240,14 @@ const DynamicComponents = [
     FormsModule,
     GridsterModule,
     HttpClientModule,
+    Ng2HandySyntaxHighlighterModule,
     NgbModule,
     NgbPopoverModule,
+    NgxSliderModule,
     NgxSpinnerModule,
-    RouterModule.forRoot(routes, { useHash: true }),
+    RouterModule.forRoot(routes, { useHash: true, relativeLinkResolution: 'legacy' }),
     ScrollingModule,
     UiComponentsModule,
-    DialogModule,
-    MatDialogModule,
-    Web3Module
   ],
   providers: [
     AnnotatorService,
@@ -256,23 +255,27 @@ const DynamicComponents = [
     {
       provide: APP_INITIALIZER,
       useFactory: initializeApp,
-      deps: [AppConfig],
-      multi: true
+      deps: [AppConfig], multi: true,
     },
     AppConfig,
     GenericParserService,
     IdbService,
     ThemesService,
-    XMLParsers
+    XMLParsers,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent,
+  ],
 })
 export class AppModule implements DoBootstrap {
-  constructor(library: FaIconLibrary) {
+  constructor(
+    library: FaIconLibrary,
+  ) {
     library.addIconPacks(fas);
+
   }
 
   ngDoBootstrap(appRef: ApplicationRef): void {
-    DynamicComponents.forEach(c => appRef.bootstrap(c));
+    DynamicComponents.forEach((c) => appRef.bootstrap(c));
   }
 }

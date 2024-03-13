@@ -8,8 +8,9 @@ describe('AdditionComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [AdditionComponent]
-    }).compileComponents();
+      declarations: [ AdditionComponent ],
+    })
+    .compileComponents();
   }));
 
   beforeEach(() => {

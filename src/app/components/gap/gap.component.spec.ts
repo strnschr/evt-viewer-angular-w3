@@ -8,8 +8,9 @@ describe('GapComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [GapComponent]
-    }).compileComponents();
+      declarations: [ GapComponent ],
+    })
+    .compileComponents();
   }));
 
   beforeEach(() => {

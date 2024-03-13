@@ -1,17 +1,17 @@
 .project-info-container {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 .project-info-tabs,
 .project-info-content {
-  overflow: auto;
+    overflow: auto;
 }
 
 .section-item {
-  cursor: pointer;
-
-  &:not(.active):hover {
     cursor: pointer;
-    background: rgba(0, 0, 0, 0.1);
-  }
+
+    &:not(.active):hover {
+        cursor: pointer;
+        background: rgba(0, 0, 0, 0.1);
+    }
 }

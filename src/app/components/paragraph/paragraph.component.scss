@@ -1,8 +1,8 @@
-@import '../../../assets/scss/themes';
+@import "../../../assets/scss/themes";
 
 .p-num {
-  font-size: 0.8em;
-  padding-right: 0.3rem;
+  font-size: .8em;
+  padding-right: .3rem;
 
   @include themify($themes) {
     color: themed('secondaryColorDark');

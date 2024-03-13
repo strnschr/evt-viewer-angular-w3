@@ -8,8 +8,9 @@ describe('PinnerComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [PinnerComponent]
-    }).compileComponents();
+      declarations: [ PinnerComponent ],
+    })
+    .compileComponents();
   }));
 
   beforeEach(() => {

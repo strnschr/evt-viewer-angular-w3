@@ -5,9 +5,11 @@ import { register } from '../../services/component-register.service';
 @Component({
   selector: 'evt-history',
   templateUrl: './history.component.html',
-  styleUrls: ['./history.component.scss']
+  styleUrls: ['./history.component.scss'],
 })
+
 @register(History)
 export class HistoryComponent {
   @Input() data: History;
+
 }

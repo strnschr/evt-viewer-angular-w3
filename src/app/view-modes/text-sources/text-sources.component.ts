@@ -8,21 +8,26 @@ import { EditionLevel } from '../../app.config';
 @Component({
   selector: 'evt-text-sources',
   templateUrl: './text-sources.component.html',
-  styleUrls: ['./text-sources.component.scss']
+  styleUrls: ['./text-sources.component.scss'],
 })
 export class TextSourcesComponent implements OnInit {
   public options: GridsterConfig = {};
   public textPanelItem: GridsterItem = { cols: 1, rows: 1, y: 0, x: 0 };
   public sourcesPanelItem: GridsterItem = { cols: 1, rows: 1, y: 0, x: 1 };
 
-  public currentPageID$ = this.evtStatusService.currentStatus$.pipe(map(({ page }) => page.id));
+  public currentPageID$ = this.evtStatusService.currentStatus$.pipe(
+    map(({ page }) => page.id),
+  );
 
   public currentEditionLevel$ = this.evtStatusService.currentStatus$.pipe(
     map(({ editionLevels }) => editionLevels[0]),
-    shareReplay(1)
+    shareReplay(1),
   );
 
-  constructor(private evtStatusService: EVTStatusService) {}
+  constructor(
+    private evtStatusService: EVTStatusService,
+  ) {
+  }
 
   ngOnInit() {
     this.initGridster();
@@ -46,11 +51,11 @@ export class TextSourcesComponent implements OnInit {
       draggable: {
         enabled: true,
         ignoreContent: true,
-        dragHandleClass: 'panel-header'
+        dragHandleClass: 'panel-header',
       },
       resizable: {
-        enabled: false
-      }
+        enabled: false,
+      },
     };
   }
 }

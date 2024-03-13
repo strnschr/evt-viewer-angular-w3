@@ -17,32 +17,32 @@
   margin-bottom: 0.7rem;
 }
 
-@media (min-width: 505px) {
+@media (min-width: 505px) { 
   .flex-item-label {
-    flex-basis: 20%;
-  }
-
+      flex-basis: 20%;
+    }
+    
   .flex-item-information {
-    flex-basis: 80%;
+      flex-basis: 80%;
   }
 }
 
 @media (min-width: 639px) {
   .flex-item-label {
-    flex-basis: 100%;
+      flex-basis: 100%;
   }
 
   .flex-item-information {
-    flex-basis: 100%;
+      flex-basis:100%
   }
 }
 
-@media (min-width: 1050px) {
+@media (min-width: 1050px) { 
   .flex-item-label {
-    flex-basis: 20%;
-  }
-
+      flex-basis: 20%;
+    }
+    
   .flex-item-information {
-    flex-basis: 80%;
+      flex-basis: 80%;
   }
 }

@@ -2,16 +2,16 @@ import { Injectable } from '@angular/core';
 import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ModalService {
   private openedModals: { [modalId: string]: NgbModalRef } = {};
-  constructor(private ngbModal: NgbModal) {}
+  constructor(private ngbModal: NgbModal) { }
 
   open(componentToOpen, options?: ModalOptions): NgbModalRef {
     options = {
-      ...(options || {}),
-      keyboard: false
+      ...options || {},
+      keyboard: false,
     };
     const modalRef = this.ngbModal.open(componentToOpen, options);
     if (options && options.id) {

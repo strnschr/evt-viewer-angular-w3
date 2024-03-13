@@ -7,8 +7,9 @@ describe('RenditionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [RenditionComponent]
-    }).compileComponents();
+      declarations: [RenditionComponent],
+    })
+      .compileComponents();
   });
 
   beforeEach(() => {

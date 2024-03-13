@@ -6,7 +6,7 @@ import { EVTModelService } from 'src/app/services/evt-model.service';
 @Component({
   selector: 'evt-ms-desc-selector',
   templateUrl: './ms-desc-selector.component.html',
-  styleUrls: ['./ms-desc-selector.component.scss']
+  styleUrls: ['./ms-desc-selector.component.scss'],
 })
 export class MsDescSelectorComponent {
   public msDesc$ = this.evtModelService.msDesc$;
@@ -21,11 +21,12 @@ export class MsDescSelectorComponent {
     this._msDescID = p;
   }
 
-  get msDescID() {
-    return this._msDescID;
-  }
+  get msDescID() { return this._msDescID; }
 
-  constructor(public evtModelService: EVTModelService) {}
+  constructor(
+    public evtModelService: EVTModelService,
+  ) {
+  }
 
   openMsDescContent() {
     this.selectionChange.emit(this.msDescID);

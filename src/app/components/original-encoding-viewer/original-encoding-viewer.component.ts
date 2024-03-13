@@ -4,7 +4,7 @@ import { OriginalEncodingNodeType } from '../../models/evt-models';
 @Component({
   selector: 'evt-original-encoding-viewer',
   templateUrl: './original-encoding-viewer.component.html',
-  styleUrls: ['./original-encoding-viewer.component.scss']
+  styleUrls: ['./original-encoding-viewer.component.scss'],
 })
 export class OriginalEncodingViewerComponent implements OnInit {
   @Input() originalEncoding: OriginalEncodingNodeType;
@@ -16,4 +16,5 @@ export class OriginalEncodingViewerComponent implements OnInit {
       this.encodingType = 'xml';
     }
   }
+
 }

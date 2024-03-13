@@ -5,7 +5,7 @@ import { register } from '../../services/component-register.service';
 @Component({
   selector: 'evt-editorial-decl',
   templateUrl: './editorial-decl.component.html',
-  styleUrls: ['./editorial-decl.component.scss']
+  styleUrls: ['./editorial-decl.component.scss'],
 })
 @register(EditorialDecl)
 export class EditorialDeclComponent {

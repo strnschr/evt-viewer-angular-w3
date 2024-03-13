@@ -1,24 +1,16 @@
 import { Component, Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs/operators';
-import { Gap, HighlightData } from 'src/app/models/evt-models';
+import { Gap } from 'src/app/models/evt-models';
 import { register } from 'src/app/services/component-register.service';
-import { EditionlevelSusceptible, Highlightable, TextFlowSusceptible } from '../components-mixins';
-import { EntitiesSelectItem } from '../entities-select/entities-select.component';
-import { EditionLevelType } from 'src/app/app.config';
-import { TextFlow } from 'src/app/app.config';
 
 @Component({
   selector: 'evt-gap',
   templateUrl: './gap.component.html',
-  styleUrls: ['./gap.component.scss']
+  styleUrls: ['./gap.component.scss'],
 })
 @register(Gap)
-export class GapComponent implements Highlightable, EditionlevelSusceptible, TextFlowSusceptible {
-  @Input() highlightData: HighlightData;
-  @Input() itemsToHighlight: EntitiesSelectItem[];
-  @Input() editionLevel: EditionLevelType;
-  @Input() textFlow: TextFlow;
+export class GapComponent {
   @Input() data: Gap;
 
   get content() {
@@ -41,10 +33,9 @@ export class GapComponent implements Highlightable, EditionlevelSusceptible, Tex
   }
 
   get gapDescription$() {
-    return this.translateService
-      .get([this.data.unit, `${this.data.unit}s`, 'missingS', 'missingP', this.data.extent, this.data.reason])
+    return this.translateService.get([this.data.unit, `${this.data.unit}s`, 'missingS', 'missingP', this.data.extent, this.data.reason])
       .pipe(
-        map(translations => {
+        map((translations) => {
           let desc = '';
           if (!!this.data.unit || !!this.data.quantity) {
             const unit = this.data.quantity > 1 ? translations[`${this.data.unit}s`] : translations[this.data.unit];
@@ -56,9 +47,12 @@ export class GapComponent implements Highlightable, EditionlevelSusceptible, Tex
           desc += (this.data.reason ? ` (${translations[this.data.reason]})` : '').trim();
 
           return translations[this.data.extent] === desc ? '' : desc;
-        })
+        }),
       );
   }
 
-  constructor(private translateService: TranslateService) {}
+  constructor(
+    private translateService: TranslateService,
+  ) {
+  }
 }

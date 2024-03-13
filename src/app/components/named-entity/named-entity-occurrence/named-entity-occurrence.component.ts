@@ -6,13 +6,16 @@ import { EVTStatusService } from '../../../services/evt-status.service';
 @Component({
   selector: 'evt-named-entity-occurrence',
   templateUrl: './named-entity-occurrence.component.html',
-  styleUrls: ['./named-entity-occurrence.component.scss']
+  styleUrls: ['./named-entity-occurrence.component.scss'],
 })
 export class NamedEntityOccurrenceComponent {
   @Input() occurrence: NamedEntityOccurrence;
   @Input() entityId: string;
 
-  constructor(private evtStatusService: EVTStatusService) {}
+  constructor(
+    private evtStatusService: EVTStatusService,
+  ) {
+  }
 
   goToOccurrenceRef(ref: NamedEntityOccurrenceRef) {
     this.evtStatusService.updateDocument$.next(ref.docId);

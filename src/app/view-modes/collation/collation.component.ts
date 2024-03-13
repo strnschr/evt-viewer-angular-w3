@@ -8,7 +8,7 @@ import { EvtIconInfo } from 'src/app/ui-components/icon/icon.component';
 @Component({
   selector: 'evt-collation',
   templateUrl: './collation.component.html',
-  styleUrls: ['./collation.component.scss']
+  styleUrls: ['./collation.component.scss'],
 })
 export class CollationComponent {
   @ViewChild('collationPanel', { static: true }) collationPanel: ElementRef;
@@ -22,11 +22,11 @@ export class CollationComponent {
     maxCols: 2,
     maxRows: 1,
     draggable: {
-      enabled: false
+      enabled: false,
     },
     resizable: {
-      enabled: false
-    }
+      enabled: false,
+    },
   };
   public textPanelItem: GridsterItem = { cols: 1, rows: 1, y: 0, x: 0 };
   public collationPanelItem: GridsterItem = { cols: 1, rows: 1, y: 0, x: 1 };
@@ -40,28 +40,33 @@ export class CollationComponent {
     draggable: {
       enabled: true,
       ignoreContent: true,
-      dragHandleClass: 'panel-header'
+      dragHandleClass: 'panel-header',
     },
     resizable: {
-      enabled: false
+      enabled: false,
     },
     mobileBreakpoint: 0,
     itemResizeCallback: this.updateFixedColWidth.bind(this),
-    itemChangeCallback: this.itemChange.bind(this)
+    itemChangeCallback: this.itemChange.bind(this),
   };
 
-  public currentPageID$ = this.evtStatusService.currentStatus$.pipe(map(({ page }) => page.id));
+  public currentPageID$ = this.evtStatusService.currentStatus$.pipe(
+    map(({ page }) => page.id),
+  );
 
-  public get witnessBtn(): { label: string; additionalClasses: string; title: string; icon: EvtIconInfo } {
+  public get witnessBtn(): { label: string, additionalClasses: string, title: string, icon: EvtIconInfo } {
     return {
       label: this.witnesses.length > 0 ? '' : 'addWitness',
       title: this.witnesses.length > 0 ? 'addWitness' : '',
       additionalClasses: `btn-floating ${this.witnesses.length > 0 ? 'rounded-circle' : ''}`,
-      icon: { iconSet: 'fas', icon: 'plus' }
+      icon: { iconSet: 'fas', icon: 'plus' },
     };
   }
 
-  constructor(private evtStatusService: EVTStatusService) {}
+  constructor(
+    private evtStatusService: EVTStatusService,
+  ) {
+  }
 
   changePage(selectedPage: Page) {
     this.evtStatusService.updatePage$.next(selectedPage);
@@ -75,7 +80,7 @@ export class CollationComponent {
     const id = (this.witnesses.length + 1).toString(); // TODO: TEMP
     const newWit = {
       label: id,
-      itemConfig: { cols: 1, rows: 1, y: 0, x: this.witnesses.length + 1, id }
+      itemConfig: { cols: 1, rows: 1, y: 0, x: this.witnesses.length + 1, id },
     };
 
     this.witnesses.push(newWit); // TODO: TEMP
@@ -123,6 +128,7 @@ export class CollationComponent {
     this.collationOptions.fixedColWidth = this.witnesses.length > 2 ? fixedColWidth : undefined;
     this.changedOptions();
   }
+
 }
 
 interface WitnessItem {

@@ -1,22 +1,19 @@
 import { Component, Input } from '@angular/core';
 
 import { EditorialConventionLayoutData } from '../../directives/editorial-convention-layout.directive';
-import { Damage, HighlightData } from '../../models/evt-models';
+import { Damage } from '../../models/evt-models';
 import { register } from '../../services/component-register.service';
 import { EditionlevelSusceptible, Highlightable } from '../components-mixins';
-import { EditionLevelType } from 'src/app/app.config';
-import { EntitiesSelectItem } from '../entities-select/entities-select.component';
+
+export interface DamageComponent extends EditionlevelSusceptible, Highlightable { }
 
 @Component({
   selector: 'evt-damage',
   templateUrl: './damage.component.html',
-  styleUrls: ['./damage.component.scss']
+  styleUrls: ['./damage.component.scss'],
 })
 @register(Damage)
-export class DamageComponent implements EditionlevelSusceptible, Highlightable {
-  @Input() editionLevel: EditionLevelType;
-  @Input() highlightData: HighlightData;
-  @Input() itemsToHighlight: EntitiesSelectItem[];
+export class DamageComponent {
   @Input() data: Damage;
 
   get editorialConventionData(): EditorialConventionLayoutData {
@@ -24,7 +21,7 @@ export class DamageComponent implements EditionlevelSusceptible, Highlightable {
       name: 'damage',
       attributes: this.data?.attributes || {},
       editionLevel: this.editionLevel,
-      defaultsKey: 'damage'
+      defaultsKey: 'damage',
     };
   }
 }

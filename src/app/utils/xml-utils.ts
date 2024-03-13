@@ -6,10 +6,12 @@ declare var window: any;
 
 export function parseXml(xmlStr: string): XMLElement {
   if (typeof window.DOMParser !== 'undefined') {
-    return new window.DOMParser().parseFromString(xmlStr, 'text/xml');
+
+    return (new window.DOMParser()).parseFromString(xmlStr, 'text/xml');
   }
 
-  if (typeof window.ActiveXObject !== 'undefined' && new window.ActiveXObject('Microsoft.XMLDOM')) {
+  if (typeof window.ActiveXObject !== 'undefined' &&
+    new window.ActiveXObject('Microsoft.XMLDOM')) {
     const xmlDoc = new window.ActiveXObject('Microsoft.XMLDOM');
     xmlDoc.async = 'false';
     xmlDoc.loadXML(xmlStr);
@@ -28,7 +30,7 @@ export function replaceNewLines(textContent: string) {
 }
 
 export function replaceNotWordChar(textContent: string) {
-  return textContent && textContent.replace(/[\W_]/, ' ');
+  return textContent && textContent.replace(/[\W_]/, ' ') ;
 }
 
 export function removeSpaces(textContent: string) {

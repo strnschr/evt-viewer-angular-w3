@@ -1,21 +1,21 @@
 .list-item,
 .sub-list-item {
-  &:not(.active):hover {
-    cursor: pointer;
-    background: rgba(0, 0, 0, 0.1);
-  }
+    &:not(.active):hover {
+        cursor: pointer;
+        background: rgba(0, 0, 0, .1);
+    }
 
-  .badge {
-    position: absolute;
-    right: 0.5rem;
-    margin-top: 0.3rem;
-  }
+    .badge {
+        position: absolute;
+        right: 0.5rem;
+        margin-top: 0.3rem;
+    }
 }
 
 .toggler {
-  cursor: pointer;
+    cursor: pointer;
 
-  &:hover {
-    opacity: 0.8;
-  }
+    &:hover {
+        opacity: .8;
+    }
 }

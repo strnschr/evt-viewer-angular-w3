@@ -14,7 +14,7 @@ let totIdsGenerated = 0;
  *
  * @returns Whether the given element is nested in a node with given TagName or not
  */
-export function isNestedInElem(element, parentTagName: string, attributes?: Array<{ key: string; value }>): boolean {
+export function isNestedInElem(element, parentTagName: string, attributes?: Array<{ key: string, value }>): boolean {
   return !!element && isNodeNestedInElem(element, parentTagName, false, attributes);
 }
 /**
@@ -25,11 +25,7 @@ export function isNestedInElem(element, parentTagName: string, attributes?: Arra
  *
  * @returns Whether the given element is nested in a node with given TagName or not
  */
-export function isDirectlyNestedInElem(
-  element,
-  parentTagName: string,
-  attributes?: Array<{ key: string; value }>
-): boolean {
+export function isDirectlyNestedInElem(element, parentTagName: string, attributes?: Array<{ key: string, value }>): boolean {
   return isNodeNestedInElem(element, parentTagName, true, attributes);
 }
 
@@ -46,17 +42,13 @@ export function isNodeNestedInElem(
   element,
   parentTagName: string,
   directCheck: boolean,
-  attributes?: Array<{ key: string; value }>
+  attributes?: Array<{ key: string, value }>,
 ): boolean {
   if (element.parentNode !== null) {
     if (element.parentNode.tagName === 'text') {
       return false;
     }
-    if (
-      parentTagName === '' ||
-      element.parentNode.tagName === parentTagName ||
-      element.parentNode.nodeName === parentTagName
-    ) {
+    if (parentTagName === '' || element.parentNode.tagName === parentTagName || element.parentNode.nodeName === parentTagName) {
       if (!attributes || attributes.length === 0) {
         return true;
       }
@@ -64,8 +56,9 @@ export function isNodeNestedInElem(
         return false;
       }
       let matchingAttr = 0;
-      attributes.forEach(attr => {
-        if (element.parentNode.attributes[attr.key] && element.parentNode.attributes[attr.key].value === attr.value) {
+      attributes.forEach((attr) => {
+        if (element.parentNode.attributes[attr.key] &&
+          element.parentNode.attributes[attr.key].value === attr.value) {
           matchingAttr++;
         }
       });
@@ -95,14 +88,12 @@ export function xpath(el: any): string {
       // document.evaluate(xpathExpression, contextNode, namespaceResolver, resultType, result );
       return document.evaluate(el, document, undefined, 0, undefined).stringValue;
     }
-    if (!el || el.nodeType !== 1) {
-      return '';
-    }
+    if (!el || el.nodeType !== 1) { return ''; }
     let sames = [];
     if (el.parentNode) {
-      sames = [].filter.call(el.parentNode.children, x => x.tagName === el.tagName);
+      sames = [].filter.call(el.parentNode.children, (x) => x.tagName === el.tagName);
     }
-    let countIndex = sames.length > 1 ? [].indexOf.call(sames, el) + 1 : 1;
+    let countIndex = sames.length > 1 ? ([].indexOf.call(sames, el) + 1) : 1;
     countIndex = `[${countIndex}]`;
     const tagName = el.tagName !== 'tei' ? '-' + el.tagName : '';
 
@@ -150,24 +141,20 @@ export function balanceXHTML(XHTMLstring: string): string {
     const stack = [];
     const tagToOpen = [];
     for (const tag in tags) {
-      if (tag.search('/') === 1) {
-        // </tagName>
+      if (tag.search('/') === 1) { // </tagName>
         // end tag -- pop off of the stack
         // If the last element of the stack is the corresponding of opening tag
-        const tagName = tag.replace(/[<\/>]/gi, '');
+        const tagName = tag.replace(/[<\/>]/ig, '');
         const openTag = stack[stack.length - 1];
         if (openTag && (openTag.search('<' + tagName + ' ') >= 0 || openTag.search('<' + tagName + '>') >= 0)) {
           stack.pop();
-        } else {
-          // Tag non aperto
+        } else { // Tag non aperto
           tagToOpen.push(tagName);
         }
-      } else if (tag.search('/>') <= 0) {
-        // <tagName>
+      } else if (tag.search('/>') <= 0) { // <tagName>
         // start tag -- push onto the stack
         stack.push(tag);
-      } else {
-        // <tagName />
+      } else { // <tagName />
         // self-closing tag -- do nothing
       }
     }
@@ -189,7 +176,7 @@ export function balanceXHTML(XHTMLstring: string): string {
   }
 
   // Return the well-balanced XHTML string
-  return XHTMLstring ? XHTMLstring : '';
+  return (XHTMLstring ? XHTMLstring : '');
 }
 
 /**
@@ -208,7 +195,7 @@ export function getElementsBetweenTreeNode(start: any, end: any): XMLElement[] {
   const commonAncestorChild = Array.from((range.commonAncestorContainer as XMLElement).children);
   const startIdx = commonAncestorChild.indexOf(start);
   const endIdx = commonAncestorChild.indexOf(end);
-  const rangeNodes = commonAncestorChild.slice(startIdx, endIdx).filter(c => c !== start);
+  const rangeNodes = commonAncestorChild.slice(startIdx, endIdx).filter((c) => c !== start);
   rangeNodes.forEach((c: XMLElement) => c.setAttribute('xpath', xpath(c).replace(/-/g, '/')));
   const fragment = range.cloneContents();
   const nodes = Array.from(fragment.childNodes);
@@ -240,5 +227,5 @@ export function getCommonAncestor(node1, node2) {
 }
 
 export function createNsResolver(doc: Document) {
-  return (prefix: string) => (prefix === 'ns' ? doc.documentElement.namespaceURI : undefined);
+  return (prefix: string) => prefix === 'ns' ? doc.documentElement.namespaceURI : undefined;
 }

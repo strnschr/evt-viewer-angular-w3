@@ -5,7 +5,7 @@ import { register } from '../../services/component-register.service';
 @Component({
   selector: 'evt-encoding-desc',
   templateUrl: './encoding-desc.component.html',
-  styleUrls: ['./encoding-desc.component.scss']
+  styleUrls: ['./encoding-desc.component.scss'],
 })
 @register(EncodingDesc)
 export class EncodingDescComponent {

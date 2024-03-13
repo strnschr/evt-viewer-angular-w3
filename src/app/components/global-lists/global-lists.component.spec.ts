@@ -8,8 +8,9 @@ describe('GlobalListsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [GlobalListsComponent]
-    }).compileComponents();
+      declarations: [ GlobalListsComponent ],
+    })
+    .compileComponents();
   }));
 
   beforeEach(() => {

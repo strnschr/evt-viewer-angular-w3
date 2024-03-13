@@ -5,25 +5,22 @@ import { CharParser, GlyphParser } from './character-declarations-parser';
 import { createParser } from './parser-models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CharacterDeclarationsParserService {
+
   private charParser = createParser(CharParser, parse);
   private glyphParser = createParser(GlyphParser, parse);
 
   parseChars(xml: XMLElement): Char[] {
-    if (!xml) {
-      return [];
-    }
+    if (!xml) { return []; }
 
-    return Array.from(xml.querySelectorAll<XMLElement>('char')).map(c => this.charParser.parse(c));
+    return Array.from(xml.querySelectorAll<XMLElement>('char')).map((c) => this.charParser.parse(c));
   }
 
   parseGlyphs(xml: XMLElement): Char[] {
-    if (!xml) {
-      return [];
-    }
+    if (!xml) { return []; }
 
-    return Array.from(xml.querySelectorAll<XMLElement>('glyph')).map(g => this.glyphParser.parse(g));
+    return Array.from(xml.querySelectorAll<XMLElement>('glyph')).map((g) => this.glyphParser.parse(g));
   }
 }

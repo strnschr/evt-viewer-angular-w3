@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'evt-version-panel',
   templateUrl: './version-panel.component.html',
-  styleUrls: ['./version-panel.component.scss']
+  styleUrls: ['./version-panel.component.scss'],
 })
 export class VersionPanelComponent {
   @Input() version: string;
@@ -12,4 +12,5 @@ export class VersionPanelComponent {
   emitHide() {
     this.hide.emit(true);
   }
+
 }

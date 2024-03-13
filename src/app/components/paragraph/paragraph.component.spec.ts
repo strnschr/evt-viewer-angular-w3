@@ -8,8 +8,9 @@ describe('ParagraphComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ParagraphComponent]
-    }).compileComponents();
+      declarations: [ ParagraphComponent ],
+    })
+    .compileComponents();
   }));
 
   beforeEach(() => {

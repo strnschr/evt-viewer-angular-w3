@@ -8,8 +8,9 @@ describe('OriginalEncodingViewerComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [OriginalEncodingViewerComponent]
-    }).compileComponents();
+      declarations: [ OriginalEncodingViewerComponent ],
+    })
+    .compileComponents();
   }));
 
   beforeEach(() => {

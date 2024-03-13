@@ -27,7 +27,7 @@ $thumbnail-padding: 8px;
 // Bootstrap Variables Overrides
 
 :root {
-  --thumbnail-height: #{$thumbnail-height};
-  --thumbnail-width: #{$thumbnail-width};
-  --thumbnail-padding: #{$thumbnail-padding};
+    --thumbnail-height: #{$thumbnail-height};
+    --thumbnail-width: #{$thumbnail-width};
+    --thumbnail-padding: #{$thumbnail-padding};
 }

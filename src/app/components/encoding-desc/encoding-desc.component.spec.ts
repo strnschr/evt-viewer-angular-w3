@@ -7,8 +7,9 @@ describe('EncodingDescComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EncodingDescComponent]
-    }).compileComponents();
+      declarations: [ EncodingDescComponent ],
+    })
+    .compileComponents();
   });
 
   beforeEach(() => {

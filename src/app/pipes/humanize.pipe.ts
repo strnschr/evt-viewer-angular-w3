@@ -3,6 +3,7 @@ import { Injectable, Pipe, PipeTransform } from '@angular/core';
 @Pipe({ name: 'humanize' })
 @Injectable()
 export class HumanizePipe implements PipeTransform {
+
   transform(value: string) {
     if (value === '') {
       return value;

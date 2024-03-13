@@ -10,25 +10,18 @@ import { EVTModelService } from '../../services/evt-model.service';
 @Component({
   selector: 'evt-named-entity',
   templateUrl: './named-entity.component.html',
-  styleUrls: ['./named-entity.component.scss']
+  styleUrls: ['./named-entity.component.scss'],
 })
 export class NamedEntityComponent implements OnInit {
   @Input() data: NamedEntity;
   @Input() inList: boolean;
   occurrences$ = this.evtModelService.entitiesOccurrences$.pipe(
-    map(occ => occ[this.data.id] || []),
-    shareReplay(1)
+    map((occ) => occ[this.data.id] || []),
+    shareReplay(1),
   );
   relations$ = this.evtModelService.relations$.pipe(
-    map(el =>
-      el.filter(
-        rel =>
-          rel.activeParts.indexOf(this.data.id) >= 0 ||
-          rel.passiveParts.indexOf(this.data.id) >= 0 ||
-          rel.mutualParts.indexOf(this.data.id) >= 0
-      )
-    )
-  );
+    map((el) => el.filter((rel) => rel.activeParts.indexOf(this.data.id) >= 0 ||
+      rel.passiveParts.indexOf(this.data.id) >= 0 || rel.mutualParts.indexOf(this.data.id) >= 0)));
 
   @ViewChild('entityDetails') entityDetails: NgbNav;
 
@@ -42,7 +35,10 @@ export class NamedEntityComponent implements OnInit {
     return '';
   }
 
-  constructor(private evtModelService: EVTModelService) {}
+  constructor(
+    private evtModelService: EVTModelService,
+  ) {
+  }
 
   ngOnInit() {
     if (this.inList) {
@@ -59,4 +55,5 @@ export class NamedEntityComponent implements OnInit {
   tabSelected(event: MouseEvent) {
     event.stopPropagation();
   }
+
 }

@@ -9,7 +9,7 @@ import { EvtIconInfo } from 'src/app/ui-components/icon/icon.component';
 @Component({
   selector: 'evt-text-versions',
   templateUrl: './text-versions.component.html',
-  styleUrls: ['./text-versions.component.scss']
+  styleUrls: ['./text-versions.component.scss'],
 })
 export class TextVersionsComponent {
   @ViewChild('versionsPanel', { static: true }) versionsPanel: ElementRef;
@@ -25,11 +25,11 @@ export class TextVersionsComponent {
       enabled: false,
       ignoreContent: false,
       ignoreContentClass: 'panel-content',
-      dragHandleClass: 'panel-header'
+      dragHandleClass: 'panel-header',
     },
     resizable: {
-      enabled: false
-    }
+      enabled: false,
+    },
   };
   public textPanelItem: GridsterItem = { cols: 1, rows: 1, y: 0, x: 0 };
   public versionsPanelItem: GridsterItem = { cols: 1, rows: 1, y: 0, x: 1 };
@@ -43,33 +43,38 @@ export class TextVersionsComponent {
     draggable: {
       enabled: true,
       ignoreContent: true,
-      dragHandleClass: 'panel-header'
+      dragHandleClass: 'panel-header',
     },
     resizable: {
-      enabled: false
+      enabled: false,
     },
     mobileBreakpoint: 0,
     itemResizeCallback: this.updateFixedColWidth.bind(this),
-    itemChangeCallback: this.itemChange.bind(this)
+    itemChangeCallback: this.itemChange.bind(this),
   };
 
-  public currentPageID$ = this.evtStatusService.currentStatus$.pipe(map(({ page }) => page.id));
+  public currentPageID$ = this.evtStatusService.currentStatus$.pipe(
+    map(({ page }) => page.id),
+  );
 
   public currentEditionLevel$ = this.evtStatusService.currentStatus$.pipe(
     map(({ editionLevels }) => editionLevels[0]),
-    shareReplay(1)
+    shareReplay(1),
   );
 
-  public get versionBtn(): { label: string; additionalClasses: string; title: string; icon?: EvtIconInfo } {
+  public get versionBtn(): { label: string, additionalClasses: string, title: string, icon?: EvtIconInfo } {
     return {
       label: this.versions.length > 0 ? '' : 'addVersion',
       title: this.versions.length > 0 ? 'addVersion' : '',
       additionalClasses: `btn-floating ${this.versions.length > 0 ? 'rounded-circle' : ''}`,
-      icon: { iconSet: 'fas', icon: 'plus' }
+      icon: { iconSet: 'fas', icon: 'plus' },
     };
   }
 
-  constructor(private evtStatusService: EVTStatusService) {}
+  constructor(
+    private evtStatusService: EVTStatusService,
+  ) {
+  }
 
   changePage(selectedPage: Page) {
     this.evtStatusService.updatePage$.next(selectedPage);
@@ -86,7 +91,7 @@ export class TextVersionsComponent {
   addVersion() {
     const newVersion = {
       label: (this.versions.length + 1).toString(), // TODO: TEMP
-      itemConfig: { cols: 1, rows: 1, y: 0, x: this.versions.length + 1 }
+      itemConfig: { cols: 1, rows: 1, y: 0, x: this.versions.length + 1 },
     };
     this.versions.push(newVersion); // TODO: TEMP
     this.updateGridsterOptions();

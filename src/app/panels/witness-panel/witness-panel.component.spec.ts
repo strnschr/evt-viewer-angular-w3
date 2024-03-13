@@ -8,8 +8,9 @@ describe('WitnessPanelComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [WitnessPanelComponent]
-    }).compileComponents();
+      declarations: [ WitnessPanelComponent ],
+    })
+    .compileComponents();
   }));
 
   beforeEach(() => {

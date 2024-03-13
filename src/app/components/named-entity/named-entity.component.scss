@@ -1,6 +1,6 @@
-@import '../../../assets/scss/colors';
-@import '../../../assets/scss/themes';
-@import '../../../assets/scss/mixins';
+@import "../../../assets/scss/colors";
+@import "../../../assets/scss/themes";
+@import "../../../assets/scss/mixins";
 
 @mixin namedEntityColors($color-base, $color-middle, $color-darker) {
   border-color: $color-middle;
@@ -11,7 +11,7 @@
 
   .ne-header,
   .ne-content {
-    background: $color-middle;
+    background: $color-middle,
   }
 
   .ne-header {
@@ -41,7 +41,7 @@
     }
 
     &:hover:not(.active):not(.disabled) {
-      background: rgba($color-darker, 0.5);
+      background: rgba($color-darker, .5);
     }
 
     &.disabled {
@@ -59,7 +59,7 @@
     padding: 4px 6px;
     background: rgba(255, 255, 255, 0.5);
     margin-right: 3px;
-    font-size: 0.7rem;
+    font-size: .7rem;
     margin-bottom: 3px;
     display: inline-block !important;
     cursor: pointer;
@@ -79,6 +79,7 @@
         border: 1px solid #ccc;
       }
     }
+
   }
 }
 
@@ -141,6 +142,7 @@
 }
 
 :host ::ng-deep .ne-content {
+
   // Override default styles
   .entity-details .nav-link {
     padding: 5px;

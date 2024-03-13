@@ -8,7 +8,9 @@ export class HandleImgErrorDirective {
 
   placeholderSet = false;
 
-  constructor(private elRef: ElementRef) {
+  constructor(
+    private elRef: ElementRef,
+  ) {
     this.elRef.nativeElement.addEventListener('error', (e: ErrorEvent) => {
       if (this.placeholder) {
         if (!this.placeholderSet) {
@@ -19,4 +21,5 @@ export class HandleImgErrorDirective {
       }
     });
   }
+
 }

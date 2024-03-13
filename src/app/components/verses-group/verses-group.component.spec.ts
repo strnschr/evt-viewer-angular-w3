@@ -8,8 +8,9 @@ describe('VersesGroupComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [VersesGroupComponent]
-    }).compileComponents();
+      declarations: [ VersesGroupComponent ],
+    })
+    .compileComponents();
   }));
 
   beforeEach(() => {

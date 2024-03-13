@@ -3,24 +3,24 @@
 $gapHoverBackground: get-color(highlightColor);
 
 .gap {
-  &:hover {
-    background: $gapHoverBackground;
-  }
+    &:hover {
+        background: $gapHoverBackground;
+    }
 }
 ::ng-deep .gap {
-  &:hover .line-gap {
-    background: $gapHoverBackground;
-  }
-  .line-gap {
-    display: block;
-    position: relative;
-    &:before {
-      content: '[';
+    &:hover .line-gap {
+        background: $gapHoverBackground;
     }
-    &:after {
-      content: ']';
-      position: absolute;
-      right: 0;
+    .line-gap {
+        display: block;
+        position: relative;
+        &:before {
+            content: "[";
+        }
+        &:after {
+            content: "]";
+            position: absolute;
+            right: 0;
+        }
     }
-  }
 }
