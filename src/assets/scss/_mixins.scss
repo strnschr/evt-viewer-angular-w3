@@ -3,7 +3,7 @@
 // ////////////////// //
 
 // Set calculated property
-@mixin calc($property, $expression, $important:"") {
+@mixin calc($property, $expression, $important: '') {
   #{$property}: -moz-calc(#{$expression}) #{$important};
   #{$property}: -o-calc(#{$expression}) #{$important};
   #{$property}: -webkit-calc(#{$expression}) #{$important};
@@ -25,13 +25,13 @@
   $length: length($keys);
   $value: map-get($map, $key);
   @if ($length > 1) {
-      $rest: ();
-      @for $i from 2 through $length {
-          $rest: append($rest, nth($keys, $i));
-      }
-      @return map-fetch($value, $rest);
+    $rest: ();
+    @for $i from 2 through $length {
+      $rest: append($rest, nth($keys, $i));
+    }
+    @return map-fetch($value, $rest);
   } @else {
-      @return $value;
+    @return $value;
   }
 }
 

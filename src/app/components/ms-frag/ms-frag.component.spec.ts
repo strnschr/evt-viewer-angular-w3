@@ -8,9 +8,8 @@ describe('MsFragComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MsFragComponent ],
-    })
-    .compileComponents();
+      declarations: [MsFragComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -8,9 +8,8 @@ describe('ApparatusEntryComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ApparatusEntryComponent ],
-    })
-    .compileComponents();
+      declarations: [ApparatusEntryComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

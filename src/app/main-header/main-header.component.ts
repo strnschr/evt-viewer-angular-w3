@@ -8,36 +8,38 @@ import { EVTStatusService } from '../services/evt-status.service';
 import { ThemesService } from '../services/themes.service';
 import { EVTBtnClickEvent } from '../ui-components/button/button.component';
 import { normalizeUrl } from '../utils/js-utils';
+import { MatDialog } from '@angular/material/dialog';
+import { W3homeComponent } from '../web3/components/w3home/w3home.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'evt-main-header',
   templateUrl: './main-header.component.html',
-  styleUrls: ['./main-header.component.scss'],
+  styleUrls: ['./main-header.component.scss']
 })
 export class MainHeaderComponent {
-  public title$ = combineLatest([
-    of(AppConfig?.evtSettings?.edition?.editionTitle),
-    this.evtModelService.title$,
-  ]).pipe(
-    map(([configTitle, editionTitle]) => configTitle ?? editionTitle ?? 'defaultTitle'),
+  public title$ = combineLatest([of(AppConfig?.evtSettings?.edition?.editionTitle), this.evtModelService.title$]).pipe(
+    map(([configTitle, editionTitle]) => configTitle ?? editionTitle ?? 'defaultTitle')
   );
 
-  public viewModes: ViewMode[] = AppConfig.evtSettings.ui.availableViewModes?.filter(((e) => e.enable)) ?? [];
+  public viewModes: ViewMode[] = AppConfig.evtSettings.ui.availableViewModes?.filter(e => e.enable) ?? [];
   public currentViewMode$ = this.evtStatusService.currentViewMode$;
   public mainMenuOpened = false;
   public editionConfig: EditionConfig = AppConfig.evtSettings.edition;
-  get editionHome() { return normalizeUrl(this.editionConfig.editionHome); }
+  get editionHome() {
+    return normalizeUrl(this.editionConfig.editionHome);
+  }
 
   get logoUrl() {
-    return AppConfig?.evtSettings?.files?.logoUrl ?? '/assets/images/logo_white.png';
+    return AppConfig?.evtSettings?.files?.logoUrl ?? environment.assetPathPrefix('images') + 'logo_white.png';
   }
 
   constructor(
     public themes: ThemesService,
     private evtModelService: EVTModelService,
     private evtStatusService: EVTStatusService,
-  ) {
-  }
+    private dialog: MatDialog
+  ) {}
 
   selectViewMode(viewMode: ViewMode) {
     this.evtStatusService.updateViewMode$.next(viewMode);
@@ -50,7 +52,7 @@ export class MainHeaderComponent {
 
   handleItemClicked(itemClicked: string) {
     if (itemClicked) {
-      this.mainMenuOpened = (itemClicked === 'theme' || itemClicked === 'language');
+      this.mainMenuOpened = itemClicked === 'theme' || itemClicked === 'language';
     }
   }
 
@@ -65,4 +67,7 @@ export class MainHeaderComponent {
     }
   }
 
+  openWeb3Modal() {
+    this.dialog.open(W3homeComponent);
+  }
 }

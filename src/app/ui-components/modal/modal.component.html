@@ -1,19 +1,31 @@
-<div class="modal fade show" [class.fixed-height]="fixedHeight" tabindex="-1" role="dialog" aria-hidden="true"
-  (escape)="handleEscape()">
+<div
+  class="modal fade show"
+  [class.fixed-height]="fixedHeight"
+  tabindex="-1"
+  role="dialog"
+  aria-hidden="true"
+  (escape)="handleEscape()"
+>
   <div class="modal-dialog modal-dialog-centered" role="document" #modalDialog [class.wider]="wider">
     <div class="modal-content">
       <div class="modal-header">
         <evt-icon *ngIf="headerIcon" [iconInfo]="headerIcon"></evt-icon>
         <span class="modal-title">
-          {{title | translate}}
+          {{ title | translate }}
           <ng-content select="[title]"></ng-content>
         </span>
-        <evt-button [type]="'button'" data-dismiss="modal" aria-label="Close" [toggler]="true"
-          (btnClick)="closeDialog()" additionalClasses="rounded-circle btn-close p-0" 
-          [iconLeft]="{icon: 'times'}"></evt-button>
+        <evt-button
+          [type]="'button'"
+          data-dismiss="modal"
+          aria-label="Close"
+          [toggler]="true"
+          (btnClick)="closeDialog()"
+          additionalClasses="rounded-circle btn-close p-0"
+          [iconLeft]="{ icon: 'times' }"
+        ></evt-button>
       </div>
       <div class="modal-body p-0" [class.no-scroll]="scrollDisabled">
-        <div class="{{bodyContentClass}}">
+        <div class="{{ bodyContentClass }}">
           <ng-content select="[body]"></ng-content>
           <div [innerHtml]="bodyHTML" *ngIf="bodyHTML"></div>
           <ndc-dynamic [ndcDynamicComponent]="bodyComponent" *ngIf="bodyComponent"></ndc-dynamic>

@@ -5,7 +5,7 @@ import { register } from 'src/app/services/component-register.service';
 @Component({
   selector: 'evt-file-desc',
   templateUrl: './file-desc.component.html',
-  styleUrls: ['./file-desc.component.scss'],
+  styleUrls: ['./file-desc.component.scss']
 })
 @register(FileDesc)
 export class FileDescComponent {

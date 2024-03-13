@@ -3,7 +3,7 @@ import { getEventKeyCode } from '../../utils/js-utils';
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: '[escape]',
+  selector: '[escape]'
 })
 export class EscapeDirective {
   @Output() escape = new EventEmitter<void>();

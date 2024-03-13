@@ -8,7 +8,7 @@ import { Page } from '../../models/evt-models';
 @Component({
   selector: 'evt-reading-text',
   templateUrl: './reading-text.component.html',
-  styleUrls: ['./reading-text.component.scss'],
+  styleUrls: ['./reading-text.component.scss']
 })
 export class ReadingTextComponent {
   public layoutOptions: GridsterConfig = {
@@ -19,20 +19,18 @@ export class ReadingTextComponent {
     maxCols: 3,
     maxRows: 1,
     draggable: {
-      enabled: false,
+      enabled: false
     },
     resizable: {
-      enabled: false,
-    },
+      enabled: false
+    }
   };
   public textPanelItem: GridsterItem = { cols: 1, rows: 1, y: 0, x: 0 };
-  public currentPageID$ = this.evtStatusService.currentStatus$.pipe(
-    map(({ page }) => page.id),
-  );
+  public currentPageID$ = this.evtStatusService.currentStatus$.pipe(map(({ page }) => page.id));
 
   public currentEditionLevel$ = this.evtStatusService.currentStatus$.pipe(
     map(({ editionLevels }) => editionLevels[0]),
-    shareReplay(1),
+    shareReplay(1)
   );
   public options: GridsterConfig = {};
 
@@ -42,10 +40,7 @@ export class ReadingTextComponent {
   public pinnedBoardOpened = false;
   public pinnedBoardItem: GridsterItem = { cols: 1, rows: 1, y: 0, x: 1 };
 
-  constructor(
-    private evtStatusService: EVTStatusService,
-  ) {
-  }
+  constructor(private evtStatusService: EVTStatusService) {}
 
   changePage(selectedPage: Page) {
     this.evtStatusService.updatePage$.next(selectedPage);
@@ -72,9 +67,8 @@ export class ReadingTextComponent {
   }
 
   private updateGridsterConfig() {
-    this.pinnedBoardItem.x = this.apparatusesOpened ? 2 : (this.textPanelItem.x !== 0 ? 0 : 1);
-    this.apparatusesItem.x = this.pinnedBoardOpened ? 2 : (this.textPanelItem.x !== 0 ? 0 : 1);
+    this.pinnedBoardItem.x = this.apparatusesOpened ? 2 : this.textPanelItem.x !== 0 ? 0 : 1;
+    this.apparatusesItem.x = this.pinnedBoardOpened ? 2 : this.textPanelItem.x !== 0 ? 0 : 1;
     this.changedOptions();
   }
-
 }

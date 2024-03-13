@@ -10,7 +10,7 @@ import { EditionLevel } from '../../app.config';
 @Component({
   selector: 'evt-text-text',
   templateUrl: './text-text.component.html',
-  styleUrls: ['./text-text.component.scss'],
+  styleUrls: ['./text-text.component.scss']
 })
 export class TextTextComponent implements OnInit, OnDestroy {
   public options: GridsterConfig = {
@@ -22,22 +22,20 @@ export class TextTextComponent implements OnInit, OnDestroy {
     draggable: {
       enabled: true,
       ignoreContent: true,
-      dragHandleClass: 'panel-header',
+      dragHandleClass: 'panel-header'
     },
     resizable: {
-      enabled: false,
-    },
+      enabled: false
+    }
   };
   public textPanel1Item: GridsterItem = { cols: 1, rows: 1, y: 0, x: 0 };
   public textPanel2Item: GridsterItem = { cols: 1, rows: 1, y: 0, x: 1 };
 
-  public currentPageID$ = this.evtStatusService.currentStatus$.pipe(
-    map(({ page }) => page.id),
-  );
+  public currentPageID$ = this.evtStatusService.currentStatus$.pipe(map(({ page }) => page.id));
 
   public currentEditionLevels$ = this.evtStatusService.currentStatus$.pipe(
     map(({ editionLevels }) => editionLevels),
-    shareReplay(1),
+    shareReplay(1)
   );
 
   private editionLevelPanel1Change$: BehaviorSubject<EditionLevel> = new BehaviorSubject(undefined);
@@ -47,24 +45,23 @@ export class TextTextComponent implements OnInit, OnDestroy {
   public editionLevelChange$ = combineLatest([
     this.editionLevelPanel1Change$,
     this.editionLevelPanel2Change$,
-    this.lastPanelChanged$,
+    this.lastPanelChanged$
   ]);
 
   private subscriptions: Subscription[] = [];
 
-  constructor(
-    private evtStatusService: EVTStatusService,
-  ) {
-  }
+  constructor(private evtStatusService: EVTStatusService) {}
 
   ngOnInit() {
     this.editionLevelChange$.subscribe(([edLvl1, edLvl2, changedPanel]) => {
-      if (!edLvl1 || !edLvl2) { return; }
+      if (!edLvl1 || !edLvl2) {
+        return;
+      }
       if (edLvl1 === edLvl2) {
         if (changedPanel === 1) {
-          edLvl2 = this.evtStatusService.availableEditionLevels.filter((e) => e.id !== edLvl1.id)[0];
+          edLvl2 = this.evtStatusService.availableEditionLevels.filter(e => e.id !== edLvl1.id)[0];
         } else if (changedPanel === 2) {
-          edLvl1 = this.evtStatusService.availableEditionLevels.filter((e) => e.id !== edLvl2.id)[0];
+          edLvl1 = this.evtStatusService.availableEditionLevels.filter(e => e.id !== edLvl2.id)[0];
         }
       }
       this.evtStatusService.updateEditionLevels$.next([edLvl1?.id, edLvl2?.id]);
@@ -85,6 +82,6 @@ export class TextTextComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach((s) => s.unsubscribe());
+    this.subscriptions.forEach(s => s.unsubscribe());
   }
 }

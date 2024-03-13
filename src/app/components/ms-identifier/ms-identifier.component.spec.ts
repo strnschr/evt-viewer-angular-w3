@@ -8,9 +8,8 @@ describe('MsIdentifierComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MsIdentifierComponent ],
-    })
-    .compileComponents();
+      declarations: [MsIdentifierComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

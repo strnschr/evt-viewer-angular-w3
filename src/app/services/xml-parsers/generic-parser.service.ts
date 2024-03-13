@@ -4,5 +4,7 @@ import { XMLElement } from '../../models/evt-models';
 
 @Injectable()
 export class GenericParserService {
-  parse(xml: XMLElement) { return parse(xml); }
+  parse(xml: XMLElement) {
+    return parse(xml);
+  }
 }

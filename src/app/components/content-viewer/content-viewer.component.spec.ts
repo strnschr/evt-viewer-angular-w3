@@ -8,9 +8,8 @@ describe('ContentViewerComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ContentViewerComponent ],
-    })
-    .compileComponents();
+      declarations: [ContentViewerComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

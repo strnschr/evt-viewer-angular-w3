@@ -6,14 +6,14 @@ interface AnnotationID {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class IdbService extends Dexie {
   public db: Dexie.Table<AnnotationID, number>;
   constructor() {
     super('EVT-Annotator');
     this.version(1).stores({
-      Annotations: '++id',
+      Annotations: '++id'
     });
     this.db = this.table('Annotations');
   }

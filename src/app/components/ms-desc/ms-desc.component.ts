@@ -5,9 +5,8 @@ import { register } from '../../services/component-register.service';
 @Component({
   selector: 'evt-ms-desc',
   templateUrl: './ms-desc.component.html',
-  styleUrls: ['./ms-desc.component.scss'],
+  styleUrls: ['./ms-desc.component.scss']
 })
-
 @register(MsDesc)
 export class MsDescComponent {
   @Input() data: MsDesc;

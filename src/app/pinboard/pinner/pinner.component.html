@@ -1,3 +1,10 @@
-<evt-button [iconLeft]="{icon: 'thumbtack'}" [title]="'PinItem' | translate" class="evt-pinner"
-    [ngStyle]="additionalStyle" [toggler]="true" [transparent]="true" [active]="isItemPinned()"
-    (btnClick)="togglePin($event)"></evt-button>
+<evt-button
+  [iconLeft]="{ icon: 'thumbtack' }"
+  [title]="'PinItem' | translate"
+  class="evt-pinner"
+  [ngStyle]="additionalStyle"
+  [toggler]="true"
+  [transparent]="true"
+  [active]="isItemPinned()"
+  (btnClick)="togglePin($event)"
+></evt-button>

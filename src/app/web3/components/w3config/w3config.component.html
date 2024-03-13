@@ -1,0 +1,29 @@
+<p>{{ 'w3.config.description1' | translate }}</p>
+
+<ul>
+  <li>file_config.json</li>
+  <li>edition.xml</li>
+  <li>edition_config.json</li>
+  <li>ui_config.json</li>
+  <li>editorial_conventions_config.json</li>
+</ul>
+
+<p>{{ 'w3.config.description2' | translate }}</p>
+
+<mat-form-field>
+  <mat-label>{{ 'w3.config.directoryCID' | translate }}</mat-label>
+  <input matInput type="text" [formControl]="configDirectoryForm" />
+</mat-form-field>
+
+<button
+  mat-flat-button
+  [disabled]="!configDirectoryForm.value || isLoadingConfig"
+  color="primary"
+  (click)="loadConfig()"
+>
+  @if (isLoadingConfig) {
+    <mat-progress-spinner></mat-progress-spinner>
+  } @else {
+    {{ 'w3.config.select' | translate }}
+  }
+</button>

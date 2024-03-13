@@ -8,9 +8,8 @@ describe('ManuscriptThumbnailsViewerComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ManuscriptThumbnailsViewerComponent ],
-    })
-    .compileComponents();
+      declarations: [ManuscriptThumbnailsViewerComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

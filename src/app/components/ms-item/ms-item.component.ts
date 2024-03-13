@@ -5,9 +5,8 @@ import { register } from '../../services/component-register.service';
 @Component({
   selector: 'evt-ms-item',
   templateUrl: './ms-item.component.html',
-  styleUrls: ['./ms-item.component.scss'],
+  styleUrls: ['./ms-item.component.scss']
 })
-
 @register(MsItem)
 export class MsItemComponent {
   @Input() data: MsItem;

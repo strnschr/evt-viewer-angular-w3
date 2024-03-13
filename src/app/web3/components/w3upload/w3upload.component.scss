@@ -1,0 +1,93 @@
+:host {
+  display: grid;
+  gap: 8px;
+
+  > div {
+    display: grid;
+  }
+}
+
+.account {
+  margin: 10px 0;
+
+  span {
+    font-size: 14px;
+  }
+}
+
+.loading {
+  display: grid;
+  justify-items: center;
+}
+
+.space-selection {
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+.create-space-button {
+  height: 56px;
+}
+
+.current-space {
+  display: grid;
+  gap: 16px;
+
+  &-upload {
+    display: grid;
+    gap: 8px;
+
+    .file {
+      &-list {
+        display: grid;
+        gap: 4px;
+      }
+
+      &-item {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+      }
+    }
+  }
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 8px;
+}
+
+.dir {
+  &-list {
+    display: grid;
+    gap: 16px;
+    max-height: 240px;
+    overflow: auto;
+  }
+
+  &-icon,
+  &-item-title {
+    padding-top: 4px;
+  }
+
+  &-item {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 8px;
+  }
+
+  &-item-content {
+    display: grid;
+    gap: 4px;
+  }
+
+  &-item-subtitle {
+    font-size: 14px;
+    opacity: 0.8;
+  }
+
+  &-delete {
+    justify-self: flex-end;
+  }
+}
