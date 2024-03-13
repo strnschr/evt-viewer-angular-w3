@@ -1,0 +1,151 @@
+@if (!isAccountReady) {
+  <span>{{ 'w3.upload.description' | translate }}</span>
+  <evt-w3login [isLoading]="isAuthenticating" (login)="login($event)"></evt-w3login>
+}
+
+@if (isAccountReady) {
+  <div class="account">
+    <span>{{ 'w3.upload.loggedInAs' | translate }}: {{ account.toEmail() }}</span>
+  </div>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ 'w3.convert.title' | translate }}</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <p>{{ 'w3.convert.description' | translate }}</p>
+
+    <input
+      type="file"
+      accept="application/xml"
+      style="display: none"
+      #editionInput
+      (change)="onEditionSelected(editionInput.files)"
+    />
+
+    <div class="actions">
+      <button mat-flat-button color="primary" (click)="openEditionPicker()" [disabled]="isConverting">
+        {{ 'w3.convert.selectFile' | translate }}
+      </button>
+
+      <button mat-flat-button color="primary" [disabled]="!editionToConvert || isConverting" (click)="convertEdition()">
+        @if (isConverting) {
+          <mat-progress-spinner></mat-progress-spinner>
+        } @else {
+          {{ 'w3.convert.convert' | translate }}
+        }
+      </button>
+    </div>
+  </mat-expansion-panel>
+
+  @if (!isCreatingSpace) {
+    <div class="space-selection">
+      <mat-form-field>
+        <mat-label>{{ 'w3.upload.selectSpace' | translate }}</mat-label>
+        <mat-select [formControl]="spacesDropdown">
+          @for (space of spaces; track space.id) {
+            <mat-option [value]="space.id">{{ space.space.name }} [{{ space.id }}]</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" class="create-space-button" (click)="openCreationDialog()">
+        {{ 'w3.upload.create' | translate }}
+      </button>
+    </div>
+  } @else {
+    <ng-container *ngTemplateOutlet="loadingSpinner; context: { text: 'w3.upload.creatingSpace' }"></ng-container>
+  }
+}
+
+@if (currentSpace) {
+  <div class="current-space">
+    @if (directoriedOfSpace.length) {
+      <div class="dir-list">
+        <h4>{{ 'w3.upload.directories' | translate }}</h4>
+
+        @for (directory of directoriedOfSpace; track directory.root.toString()) {
+          <div class="dir-item">
+            <mat-icon class="dir-icon">folder</mat-icon>
+
+            <div class="dir-item-content">
+              <a class="dir-item-title" [href]="buildGatewayURL(directory.root.toString())" target="_blank">{{
+                directory.root.toString()
+              }}</a>
+
+              <span class="dir-item-subtitle">
+                {{ 'w3.upload.created' | translate }} {{ directory.insertedAt | date }} --
+                {{ 'w3.upload.updated' | translate }} {{ directory.updatedAt | date }}
+              </span>
+            </div>
+
+            <button
+              mat-icon-button
+              aria-label="delete"
+              class="dir-delete"
+              [disabled]="isDeletingDirectory"
+              (click)="deleteDirectory(directory)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        }
+      </div>
+    }
+
+    <div class="current-space-upload">
+      <h4>{{ 'w3.upload.uploadToSpace' | translate }}</h4>
+
+      @if (filesToUpload.length) {
+        <div class="file-list">
+          @for (file of filesToUpload; track $index) {
+            <div class="file-item">
+              <span>{{ file.name }}</span>
+
+              <button mat-icon-button (click)="unselectFile($index)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          }
+        </div>
+      }
+
+      @if (isUploading) {
+        <ng-container *ngTemplateOutlet="loadingSpinner; context: { text: 'w3.upload.uploading' }"></ng-container>
+      }
+
+      <input
+        type="file"
+        accept="application/json,application/xml"
+        style="display: none"
+        #fileInput
+        (change)="onFilesSelected(fileInput.files)"
+        multiple
+      />
+
+      <div class="actions">
+        <button mat-flat-button color="primary" (click)="openFilePicker()" [disabled]="isUploading">
+          {{ 'w3.upload.selectFiles' | translate }}
+        </button>
+
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="filesToUpload.length === 0 || isUploading"
+          (click)="uploadFiles()"
+        >
+          {{ 'w3.upload.upload' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+<ng-template #loadingSpinner let-text="text">
+  <div class="loading">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <span>{{ text | translate }}</span>
+  </div>
+</ng-template>

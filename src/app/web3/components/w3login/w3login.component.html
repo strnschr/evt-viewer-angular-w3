@@ -1,0 +1,17 @@
+<ng-container *ngIf="!isLoading">
+  <mat-form-field>
+    <mat-label>{{ 'w3.upload.email' | translate }}</mat-label>
+    <input matInput type="email" [formControl]="emailForm" />
+  </mat-form-field>
+
+  <button mat-flat-button [disabled]="!emailForm.valid" color="primary" (click)="login.emit(emailForm.value)">
+    {{ 'w3.upload.authenticate' | translate }}
+  </button>
+</ng-container>
+
+<div *ngIf="isLoading" class="loading">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <span>{{ 'w3.upload.pleaseCheckEmailLink' | translate }}</span>
+</div>

@@ -1,38 +1,36 @@
 .section {
+  .section-label {
+    font-variant: small-caps;
+    color: #666;
+  }
+  &.has-inline-label {
+    &.has-nested-element {
+      display: block;
+    }
+    display: flex;
     .section-label {
-        font-variant: small-caps;
-        color: #666;
+      margin-right: 0.3rem;
+      line-height: 1.3;
     }
-    &.has-inline-label {
-        &.has-nested-element {
-            display: block;
-        }
-        display: flex;
-        .section-label {
-            margin-right: 0.3rem;
-            line-height: 1.3;
-        }
+  }
+  &:not(.has-inline-label) {
+    .section-label {
+      display: block;
+      margin-top: 1rem;
     }
-    &:not(.has-inline-label){
-        .section-label {
-            display: block;
-            margin-top: 1rem;  
-        }
-        &.underline-dotted {
-            border-bottom: 0.07rem dotted #666;
-            margin-bottom: 0.3rem;
-            font-size: 1.125rem;
-           
-        }
-        &:not(.underline-dotted){
-            font-size: 1.37rem;
-        }
+    &.underline-dotted {
+      border-bottom: 0.07rem dotted #666;
+      margin-bottom: 0.3rem;
+      font-size: 1.125rem;
     }
-    ::ng-deep p {
-        margin-bottom: 0;
+    &:not(.underline-dotted) {
+      font-size: 1.37rem;
     }
+  }
+  ::ng-deep p {
+    margin-bottom: 0;
+  }
 }
 .itemElement {
-    margin-left: 1rem;
+  margin-left: 1rem;
 }
-

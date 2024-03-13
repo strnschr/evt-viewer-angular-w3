@@ -5,13 +5,13 @@ import { Deletion } from '../../models/evt-models';
 import { register } from '../../services/component-register.service';
 import { EditionlevelSusceptible, Highlightable } from '../components-mixins';
 
-export interface DeletionComponent extends EditionlevelSusceptible, Highlightable { }
+export interface DeletionComponent extends EditionlevelSusceptible, Highlightable {}
 
 @register(Deletion)
 @Component({
   selector: 'evt-deletion',
   templateUrl: './deletion.component.html',
-  styleUrls: ['./deletion.component.scss'],
+  styleUrls: ['./deletion.component.scss']
 })
 export class DeletionComponent {
   @Input() data: Deletion;
@@ -21,7 +21,7 @@ export class DeletionComponent {
       name: 'del',
       attributes: this.data.attributes,
       editionLevel: this.editionLevel,
-      defaultsKey: 'deletion',
+      defaultsKey: 'deletion'
     };
   }
 }

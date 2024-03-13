@@ -8,9 +8,8 @@ describe('TextPanelComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ TextPanelComponent ],
-    })
-    .compileComponents();
+      declarations: [TextPanelComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

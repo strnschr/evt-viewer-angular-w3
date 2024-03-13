@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { getEventKeyCode } from '../utils/js-utils';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ShortcutsService {
   handleKeyboardEvent(e: KeyboardEvent) {
     const eKeyCode = getEventKeyCode(e);
-    if (e.altKey) { // ALT pressed
+    if (e.altKey) {
+      // ALT pressed
       switch (eKeyCode) {
         // TODO: MODE VIEW
         case 49: // alt+1
@@ -30,28 +31,32 @@ export class ShortcutsService {
           // Open Lists
           break;
         case 69: // alt + e
-          if (e.shiftKey) { // alt + shift + e
+          if (e.shiftKey) {
+            // alt + shift + e
             // Open EVT Info
           }
           break;
         case 66:
           // Open bookmark
           break;
-        case 83: { // alt + s
-          if (e.shiftKey) { // alt + shift + s
+        case 83: {
+          // alt + s
+          if (e.shiftKey) {
+            // alt + shift + s
             // Open shortcuts
           }
           break;
         }
       }
     } else {
-      if ((e.ctrlKey) && (eKeyCode === 32)) { // GM: CTRL+space
+      if (e.ctrlKey && eKeyCode === 32) {
+        // GM: CTRL+space
         // TODO: toggle bottom navbar
-      } else if ((eKeyCode === 102 || eKeyCode === 70) &&
-        (e.ctrlKey || e.metaKey) && e.altKey && e.shiftKey) { // CTRL+ALT+SHIF+f - CMD+ALT+SHIF+f
+      } else if ((eKeyCode === 102 || eKeyCode === 70) && (e.ctrlKey || e.metaKey) && e.altKey && e.shiftKey) {
+        // CTRL+ALT+SHIF+f - CMD+ALT+SHIF+f
         // TODO: go fullscreen
-      } else if ((eKeyCode === 102 || eKeyCode === 70) &&
-        (e.ctrlKey || e.metaKey) && e.altKey) { // CTRL+f - CMD+f
+      } else if ((eKeyCode === 102 || eKeyCode === 70) && (e.ctrlKey || e.metaKey) && e.altKey) {
+        // CTRL+f - CMD+f
         // TODO: Toggle search
       } else {
         switch (eKeyCode) {
@@ -67,7 +72,7 @@ export class ShortcutsService {
           case 40: // down
             // TODO: Nav to following document
             break;
-          case 27:  // escape
+          case 27: // escape
             break;
           case 13: // input
             break;

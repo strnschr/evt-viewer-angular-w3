@@ -13,26 +13,26 @@ interface GlobalList extends NamedEntitiesList {
 @Component({
   selector: 'evt-global-lists',
   templateUrl: './global-lists.component.html',
-  styleUrls: ['./global-lists.component.scss'],
+  styleUrls: ['./global-lists.component.scss']
 })
 export class GlobalListsComponent {
   lists$: Observable<GlobalList[]> = this.evtModelService.namedEntities$.pipe(
-    map((ne) => (ne.persons.lists.concat(ne.places.lists, ne.organizations.lists, ne.events.lists))),
-    map((lists) => (lists.map((list) => ({
-      ...list,
-      icon: this.listsIcons[list.namedEntityType] || 'list',
-    })))),
-    tap((lists) => {
+    map(ne => ne.persons.lists.concat(ne.places.lists, ne.organizations.lists, ne.events.lists)),
+    map(lists =>
+      lists.map(list => ({
+        ...list,
+        icon: this.listsIcons[list.namedEntityType] || 'list'
+      }))
+    ),
+    tap(lists => {
       if (!this.selectedList && lists[0]) {
         this.openList(undefined, lists[0]);
       }
-    }),
+    })
   );
   selectedList: NamedEntitiesList;
 
-  relations$: Observable<Relation[]> = this.evtModelService.namedEntities$.pipe(
-    map((ne) => ne.relations),
-  );
+  relations$: Observable<Relation[]> = this.evtModelService.namedEntities$.pipe(map(ne => ne.relations));
 
   showRelations = false;
 
@@ -40,13 +40,10 @@ export class GlobalListsComponent {
     person: 'user',
     place: 'map-marker',
     org: 'users',
-    event: 'calendar',
+    event: 'calendar'
   };
 
-  constructor(
-    private evtModelService: EVTModelService,
-  ) {
-  }
+  constructor(private evtModelService: EVTModelService) {}
 
   openList(event: MouseEvent, list: NamedEntitiesList) {
     if (event) {

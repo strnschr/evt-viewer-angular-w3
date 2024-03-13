@@ -3,11 +3,11 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'evt-shortcuts',
   templateUrl: './shortcuts.component.html',
-  styleUrls: ['./shortcuts.component.scss'],
+  styleUrls: ['./shortcuts.component.scss']
 })
 export class ShortcutsComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public shortcuts: Array<{ label: string, instructions: any[] }> = []; // TODO: get rid of instructions
+  public shortcuts: Array<{ label: string; instructions: any[] }> = []; // TODO: get rid of instructions
 
   constructor() {
     this.initShortcuts();
@@ -16,24 +16,15 @@ export class ShortcutsComponent {
   private initShortcuts() {
     this.shortcuts.push({
       label: 'OpenProjectInfo',
-      instructions: [
-        { type: 'key', text: 'ALT' },
-        { text: '+' },
-        { type: 'key', text: 'I' }],
+      instructions: [{ type: 'key', text: 'ALT' }, { text: '+' }, { type: 'key', text: 'I' }]
     });
     this.shortcuts.push({
       label: 'OpenLists',
-      instructions: [
-        { type: 'key', text: 'ALT' },
-        { text: '+' },
-        { type: 'key', text: 'L' }],
+      instructions: [{ type: 'key', text: 'ALT' }, { text: '+' }, { type: 'key', text: 'L' }]
     });
     this.shortcuts.push({
       label: 'OpenCurrentBookmark',
-      instructions: [
-        { type: 'key', text: 'ALT' },
-        { text: '+' },
-        { type: 'key', text: 'B' }],
+      instructions: [{ type: 'key', text: 'ALT' }, { text: '+' }, { type: 'key', text: 'B' }]
     });
     this.shortcuts.push({
       label: 'OpenEVTInfo',
@@ -42,7 +33,8 @@ export class ShortcutsComponent {
         { text: '+' },
         { type: 'key', text: 'SHIFT' },
         { text: '+' },
-        { type: 'key', text: 'E' }],
+        { type: 'key', text: 'E' }
+      ]
     });
     this.shortcuts.push({
       label: 'OpenShortcuts',
@@ -51,7 +43,8 @@ export class ShortcutsComponent {
         { text: '+' },
         { type: 'key', text: 'SHIFT' },
         { text: '+' },
-        { type: 'key', text: 'S' }],
+        { type: 'key', text: 'S' }
+      ]
     });
     // this.shortcuts.push({
     //   label: 'ChangeView',
@@ -109,8 +102,7 @@ export class ShortcutsComponent {
     // });
     this.shortcuts.push({
       label: 'CloseModalIfOpened',
-      instructions: [
-        { type: 'key', text: 'ESC' }],
+      instructions: [{ type: 'key', text: 'ESC' }]
     });
   }
 }

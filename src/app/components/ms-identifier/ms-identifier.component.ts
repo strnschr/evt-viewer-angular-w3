@@ -5,9 +5,8 @@ import { register } from '../../services/component-register.service';
 @Component({
   selector: 'evt-ms-identifier',
   templateUrl: './ms-identifier.component.html',
-  styleUrls: ['./ms-identifier.component.scss'],
+  styleUrls: ['./ms-identifier.component.scss']
 })
-
 @register(MsIdentifier)
 export class MsIdentifierComponent {
   @Input() data: MsIdentifier;

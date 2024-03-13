@@ -8,9 +8,8 @@ describe('NamedEntityOccurrenceComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ NamedEntityOccurrenceComponent ],
-    })
-    .compileComponents();
+      declarations: [NamedEntityOccurrenceComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

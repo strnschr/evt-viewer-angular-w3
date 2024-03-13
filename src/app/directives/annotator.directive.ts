@@ -3,17 +3,13 @@ import { Directive } from '@angular/core';
 import { AnnotatorService } from '../services/annotator/annotator.service';
 
 @Directive({
-  selector: '[evtAnnotator]',
+  selector: '[evtAnnotator]'
 })
 export class AnnotatorDirective {
-
-  constructor(
-    public annotator: AnnotatorService,
-  ) { }
+  constructor(public annotator: AnnotatorService) {}
 
   @HostListener('mouseup')
   onMouseup() {
     this.annotator.selectedText();
   }
-
 }

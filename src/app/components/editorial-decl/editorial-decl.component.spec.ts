@@ -7,9 +7,8 @@ describe('EditorialDeclComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditorialDeclComponent ],
-    })
-    .compileComponents();
+      declarations: [EditorialDeclComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

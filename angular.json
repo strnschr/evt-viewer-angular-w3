@@ -22,13 +22,11 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "node_modules/prismjs/themes/prism.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -70,11 +68,55 @@
                   "maximumWarning": "10kb",
                   "maximumError": "15kb"
                 }
+              ],
+              "assets": [
+                "src/favicon.ico",
+                {
+                  "input": "src/assets/config",
+                  "glob": "*",
+                  "output": "/",
+                  "ignore": ["file_config.json"]
+                },
+                {
+                  "input": "src/assets/config_w3",
+                  "glob": "file_config.json",
+                  "output": "/"
+                },
+                {
+                  "input": "src/assets/data",
+                  "glob": "*",
+                  "output": "/"
+                },
+                {
+                  "input": "src/assets/fonts",
+                  "glob": "*",
+                  "output": "/"
+                },
+                {
+                  "input": "src/assets/i18n",
+                  "glob": "*",
+                  "output": "/"
+                },
+                {
+                  "input": "src/assets/images",
+                  "glob": "*",
+                  "output": "/"
+                },
+                {
+                  "input": "src/assets/osd/images",
+                  "glob": "*",
+                  "output": "/"
+                },
+                {
+                  "input": "src/assets/scss",
+                  "glob": "*",
+                  "output": "/"
+                }
               ]
             },
             "release": {
               "outputPath": "release/core",
-              "deployUrl": "core/",
+              "baseHref": "core/",
               "index": {
                 "input": "src/index.html",
                 "output": "./../index.html"
@@ -88,11 +130,7 @@
                 {
                   "glob": "**/*",
                   "input": "src/assets/",
-                  "ignore": [
-                    "fonts/evt-icons-project.json",
-                    "scss/**",
-                    "data/**"
-                  ],
+                  "ignore": ["fonts/evt-icons-project.json", "scss/**", "data/**"],
                   "output": "./../assets/"
                 }
               ],
@@ -131,13 +169,13 @@
           "options": {},
           "configurations": {
             "production": {
-              "browserTarget": "evt-viewer-angular:build:production"
+              "buildTarget": "evt-viewer-angular:build:production"
             },
             "release": {
-              "browserTarget": "evt-viewer-angular:build:release"
+              "buildTarget": "evt-viewer-angular:build:release"
             },
             "development": {
-              "browserTarget": "evt-viewer-angular:build:development"
+              "buildTarget": "evt-viewer-angular:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -145,7 +183,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "evt-viewer-angular:build"
+            "buildTarget": "evt-viewer-angular:build"
           }
         },
         "test": {
@@ -155,10 +193,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "node_modules/@ng-select/ng-select/themes/default.theme.css",
               "node_modules/prismjs/themes/prism.css",
@@ -189,18 +224,14 @@
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
     }
   },
-  "defaultProject": "evt-viewer-angular",
   "cli": {
     "analytics": "c373e515-eb44-4b1b-85c7-56dd668954af",
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": ["@angular-eslint/schematics"]
   }
 }

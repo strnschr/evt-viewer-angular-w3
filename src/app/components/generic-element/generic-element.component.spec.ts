@@ -8,9 +8,8 @@ describe('GenericElementComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ GenericElementComponent ],
-    })
-    .compileComponents();
+      declarations: [GenericElementComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

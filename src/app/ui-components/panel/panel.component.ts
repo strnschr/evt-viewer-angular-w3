@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'evt-panel',
   templateUrl: './panel.component.html',
-  styleUrls: ['./panel.component.scss'],
+  styleUrls: ['./panel.component.scss']
 })
 export class PanelComponent implements OnInit {
   @Input() comparable: boolean;

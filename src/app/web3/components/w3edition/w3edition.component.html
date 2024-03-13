@@ -1,0 +1,21 @@
+<p>{{ 'w3.edition.description' | translate }}</p>
+
+<span>{{ 'w3.edition.examples' | translate }}</span>
+
+<ul>
+  <li>bafkreiasdohw7ggasrdhjc46wfxxw76drrjhzapzsvv5noct6rl3fsmrjm</li>
+  <li>bafkreiet73fvbqi27olg4b3t5gxewg456fcrak2qtocfk3sindxghizqwu</li>
+</ul>
+
+<mat-form-field>
+  <mat-label>{{ 'w3.edition.editionCID' | translate }}</mat-label>
+  <input matInput type="text" [formControl]="editionCIDForm" />
+</mat-form-field>
+
+<button mat-flat-button [disabled]="!editionCIDForm.value || isLoadingEdition" color="primary" (click)="loadEdition()">
+  @if (isLoadingEdition) {
+    <mat-progress-spinner></mat-progress-spinner>
+  } @else {
+    {{ 'w3.edition.select' | translate }}
+  }
+</button>

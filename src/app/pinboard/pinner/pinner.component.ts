@@ -5,7 +5,7 @@ import { PinboardService } from '../pinboard.service';
 @Component({
   selector: 'evt-pinner',
   templateUrl: './pinner.component.html',
-  styleUrls: ['./pinner.component.scss'],
+  styleUrls: ['./pinner.component.scss']
 })
 export class PinnerComponent {
   @Input() item;
@@ -13,7 +13,8 @@ export class PinnerComponent {
   constructor(
     @Attribute('pinType') public pinType: string,
     @Attribute('renderer') public renderer: string,
-    private pinboard: PinboardService) { }
+    private pinboard: PinboardService
+  ) {}
 
   isItemPinned() {
     return this.pinboard.isItemPinned(this.item);

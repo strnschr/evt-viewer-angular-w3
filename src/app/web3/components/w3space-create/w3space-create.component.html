@@ -1,0 +1,15 @@
+<h4 mat-dialog-title>{{ 'w3.upload.createSpace' | translate }}</h4>
+
+<div mat-dialog-content class="content">
+  <mat-form-field>
+    <mat-label>{{ 'w3.upload.spaceName' | translate }}</mat-label>
+    <input matInput type="text" [formControl]="spaceNameForm" />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-flat-button mat-dialog-close>{{ 'w3.upload.cancel' | translate }}</button>
+  <button mat-flat-button cdkFocusInitial color="primary" [disabled]="!spaceNameForm.valid" (click)="close()">
+    {{ 'w3.upload.create' | translate }}
+  </button>
+</div>

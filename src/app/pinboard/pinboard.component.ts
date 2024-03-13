@@ -5,15 +5,14 @@ import { PinboardService } from './pinboard.service';
 @Component({
   selector: 'evt-pinboard',
   templateUrl: './pinboard.component.html',
-  styleUrls: ['./pinboard.component.scss'],
+  styleUrls: ['./pinboard.component.scss']
 })
 export class PinboardComponent implements OnInit, OnChanges {
   @Input() types: string[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   itemsPinned$: Observable<any[]>; // TODO: get rid of any
 
-  constructor(private pinboard: PinboardService) {
-  }
+  constructor(private pinboard: PinboardService) {}
 
   ngOnInit() {
     this.initPins();

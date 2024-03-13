@@ -5,7 +5,7 @@ import { register } from '../../services/component-register.service';
 @Component({
   selector: 'evt-sampling-decl',
   templateUrl: './sampling-decl.component.html',
-  styleUrls: ['./sampling-decl.component.scss'],
+  styleUrls: ['./sampling-decl.component.scss']
 })
 @register(SamplingDecl)
 export class SamplingDeclComponent {

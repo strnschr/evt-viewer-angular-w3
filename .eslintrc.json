@@ -1,31 +1,21 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
+  "ignorePatterns": ["projects/**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
+      "parser": "@typescript-eslint/parser",
       "parserOptions": {
-        "project": [
-          "tsconfig.json",
-          "e2e/tsconfig.json"
-        ],
+        "project": ["tsconfig.json", "e2e/tsconfig.json"],
         "createDefaultProgram": true
       },
-      "extends": [
-        "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
-      ],
+      "extends": ["plugin:@angular-eslint/recommended", "plugin:@angular-eslint/template/process-inline-templates"],
+      "plugins": ["@typescript-eslint"],
       "rules": {
         "@angular-eslint/component-class-suffix": [
           "error",
           {
-            "suffixes": [
-              "Component"
-            ]
+            "suffixes": ["Component"]
           }
         ],
         "@angular-eslint/component-selector": [
@@ -40,9 +30,7 @@
         "@angular-eslint/directive-class-suffix": [
           "error",
           {
-            "suffixes": [
-              "Directive"
-            ]
+            "suffixes": ["Directive"]
           }
         ],
         "@angular-eslint/directive-selector": [
@@ -70,12 +58,7 @@
         "@typescript-eslint/member-ordering": [
           "error",
           {
-            "default": [
-              "static-field",
-              "instance-field",
-              "static-method",
-              "instance-method"
-            ]
+            "default": ["static-field", "instance-field", "static-method", "instance-method"]
           }
         ],
         "@typescript-eslint/no-empty-function": "error",
@@ -91,34 +74,17 @@
         "@typescript-eslint/no-non-null-assertion": "error",
         "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
         "@typescript-eslint/no-var-requires": "error",
-        "arrow-parens": [
-          "error",
-          "always"
-        ],
-        "arrow-body-style": [
-          "error",
-          "as-needed"
-        ],
+        "arrow-body-style": ["error", "as-needed"],
         "camelcase": [
           "error",
           {
             "properties": "always",
             "ignoreImports": true,
-            "ignoreGlobals": true 
+            "ignoreGlobals": true
           }
         ],
-        "comma-dangle": [
-          "error",
-          "always-multiline"
-        ],
-        "curly": [
-          "error",
-          "all"
-        ],
-        "eol-last": [
-          "error",
-          "always"
-        ],
+        "curly": ["error", "all"],
+        "eol-last": ["error", "always"],
         "eqeqeq": "error",
         "key-spacing": "error",
         "max-len": [
@@ -132,11 +98,7 @@
         "no-console": [
           "error",
           {
-            "allow": [
-              "log",
-              "error",
-              "warn"
-            ]
+            "allow": ["log", "error", "warn"]
           }
         ],
         "no-duplicate-case": "error",
@@ -145,10 +107,7 @@
         "no-fallthrough": "error",
         "no-irregular-whitespace": "error",
         "no-multiple-empty-lines": "error",
-        "no-restricted-imports": [
-          "error",
-          "rxjs/Rx"
-        ],
+        "no-restricted-imports": ["error", "rxjs/Rx"],
         "no-shadow": "error",
         "no-template-curly-in-string": "error",
         "no-trailing-spaces": "error",
@@ -158,10 +117,7 @@
         "no-var": "error",
         "no-whitespace-before-property": "error",
         "prefer-const": "error",
-        "object-curly-spacing": [
-          "error",
-          "always"
-        ],
+        "object-curly-spacing": ["error", "always"],
         "quotes": [
           "error",
           "single",
@@ -170,10 +126,7 @@
             "allowTemplateLiterals": true
           }
         ],
-        "semi-style": [
-          "error",
-          "last"
-        ],
+        "semi-style": ["error", "last"],
         "sort-imports": [
           "error",
           {
@@ -193,12 +146,8 @@
       }
     },
     {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {}
     }
   ]

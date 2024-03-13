@@ -8,9 +8,8 @@ describe('SicComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SicComponent ],
-    })
-    .compileComponents();
+      declarations: [SicComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

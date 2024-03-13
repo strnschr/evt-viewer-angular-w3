@@ -1,6 +1,14 @@
 import {
-  Attribute, Component, ElementRef, EventEmitter, HostBinding, HostListener,
-  Input, OnInit, Output, ViewChild,
+  Attribute,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
 } from '@angular/core';
 
 import { ThemesService } from '../../services/themes.service';
@@ -10,7 +18,7 @@ import { ModalService } from './modal.service';
 @Component({
   selector: 'evt-modal',
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss'],
+  styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent implements OnInit {
   @Input() closeOnShadow: boolean;
@@ -30,15 +38,17 @@ export class ModalComponent implements OnInit {
 
   @ViewChild('modalDialog', { static: true }) modalDialog: ElementRef;
 
-  @HostBinding('attr.data-theme') get dataTheme() { return this.themes.getCurrentTheme().value; }
+  @HostBinding('attr.data-theme') get dataTheme() {
+    return this.themes.getCurrentTheme().value;
+  }
 
   constructor(
     @Attribute('modalId') public modalId: string,
     @Attribute('title') public title: string,
     @Attribute('bodyContentClass') public bodyContentClass: string,
     public themes: ThemesService,
-    private modalService: ModalService) {
-  }
+    private modalService: ModalService
+  ) {}
 
   ngOnInit() {
     this.closeOnShadow = this.closeOnShadow === undefined ? true : this.closeOnShadow;
@@ -49,7 +59,9 @@ export class ModalComponent implements OnInit {
   @HostListener('click', ['$event'])
   clickout(event) {
     const modal = this.modalDialog.nativeElement;
-    const internalClick: boolean = event.path.find((o) => o.className && o.className.indexOf && o.className.indexOf(modal.className) >= 0);
+    const internalClick: boolean = event.path.find(
+      o => o.className && o.className.indexOf && o.className.indexOf(modal.className) >= 0
+    );
     if (this.closeOnShadow && !internalClick) {
       this.closeDialog();
     }

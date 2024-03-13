@@ -6,13 +6,10 @@ import { GenericParserService } from './generic-parser.service';
 import { getID, ParseResult } from './parser-models';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class StructureXmlParserService {
-  constructor(
-    private genericParserService: GenericParserService,
-  ) {
-  }
+  constructor(private genericParserService: GenericParserService) {}
 
   private frontOrigContentAttr = 'document_front';
   readonly frontTagName = 'front';
@@ -20,32 +17,42 @@ export class StructureXmlParserService {
   readonly bodyTagName = 'body';
 
   parsePages(el: XMLElement): EditionStructure {
-    if (!el) { return { pages: [] }; }
+    if (!el) {
+      return { pages: [] };
+    }
 
     const front: XMLElement = el.querySelector(this.frontTagName);
     const body: XMLElement = el.querySelector(this.bodyTagName);
 
-    const pbs = Array.from(el.querySelectorAll(this.pageTagName)).filter((p) => !p.getAttribute('ed'));
-    const frontPbs = pbs.filter((p) => isNestedInElem(p, this.frontTagName));
-    const bodyPbs = pbs.filter((p) => isNestedInElem(p, this.bodyTagName));
+    const pbs = Array.from(el.querySelectorAll(this.pageTagName)).filter(p => !p.getAttribute('ed'));
+    const frontPbs = pbs.filter(p => isNestedInElem(p, this.frontTagName));
+    const bodyPbs = pbs.filter(p => isNestedInElem(p, this.bodyTagName));
     const doc = el.firstElementChild.ownerDocument;
 
     if (frontPbs.length > 0 && bodyPbs.length > 0) {
       return {
-        pages: pbs.map((pb: XMLElement, idx, arr: XMLElement[]) => this.parseDocumentPage(doc, pb, arr[idx + 1], 'text')),
+        pages: pbs.map((pb: XMLElement, idx, arr: XMLElement[]) =>
+          this.parseDocumentPage(doc, pb, arr[idx + 1], 'text')
+        )
       };
     }
 
-    const frontPages = frontPbs.length === 0 && front && this.isMarkedAsOrigContent(front)
-      ? [this.parseSinglePage(doc, front, 'page_front', this.frontTagName, 'facs_front')]
-      : frontPbs.map((pb, idx, arr) => this.parseDocumentPage(doc, pb as HTMLElement, arr[idx + 1] as HTMLElement, this.frontTagName));
+    const frontPages =
+      frontPbs.length === 0 && front && this.isMarkedAsOrigContent(front)
+        ? [this.parseSinglePage(doc, front, 'page_front', this.frontTagName, 'facs_front')]
+        : frontPbs.map((pb, idx, arr) =>
+            this.parseDocumentPage(doc, pb as HTMLElement, arr[idx + 1] as HTMLElement, this.frontTagName)
+          );
 
-    const bodyPages = bodyPbs.length === 0
-      ? [this.parseSinglePage(doc, body, 'page1', 'mainText', 'facs1')] // TODO: tranlsate mainText
-      : bodyPbs.map((pb, idx, arr) => this.parseDocumentPage(doc, pb as HTMLElement, arr[idx + 1] as HTMLElement, this.bodyTagName));
+    const bodyPages =
+      bodyPbs.length === 0
+        ? [this.parseSinglePage(doc, body, 'page1', 'mainText', 'facs1')] // TODO: tranlsate mainText
+        : bodyPbs.map((pb, idx, arr) =>
+            this.parseDocumentPage(doc, pb as HTMLElement, arr[idx + 1] as HTMLElement, this.bodyTagName)
+          );
 
     return {
-      pages: [...frontPages, ...bodyPages],
+      pages: [...frontPages, ...bodyPages]
     };
   }
 
@@ -55,8 +62,8 @@ export class StructureXmlParserService {
     // TODO: check if querySelectorAll can return an empty array in this case
     const nextNode = nextPb || Array.from(doc.querySelectorAll(ancestorTagName)).reverse()[0].lastChild;
     const originalContent = getElementsBetweenTreeNode(pb, nextNode)
-      .filter((n) => n.tagName !== this.pageTagName)
-      .filter((c) => ![4, 7, 8].includes(c.nodeType)); // Filter comments, CDATAs, and processing instructions
+      .filter(n => n.tagName !== this.pageTagName)
+      .filter(c => ![4, 7, 8].includes(c.nodeType)); // Filter comments, CDATAs, and processing instructions
 
     return {
       id: getID(pb, 'page'),
@@ -65,7 +72,7 @@ export class StructureXmlParserService {
       originalContent,
       parsedContent: this.parsePageContent(doc, originalContent),
       url: this.getPageUrl(getID(pb, 'page')),
-      facsUrl: this.getPageUrl((pb.getAttribute('facs') || getID(pb, 'page')).split('#').slice(-1)[0]),
+      facsUrl: this.getPageUrl((pb.getAttribute('facs') || getID(pb, 'page')).split('#').slice(-1)[0])
     };
   }
 
@@ -79,7 +86,7 @@ export class StructureXmlParserService {
       originalContent,
       parsedContent: this.parsePageContent(doc, originalContent),
       url: this.getPageUrl(id),
-      facsUrl: this.getPageUrl(facs || id),
+      facsUrl: this.getPageUrl(facs || id)
     };
   }
 
@@ -93,12 +100,13 @@ export class StructureXmlParserService {
 
   parsePageContent(doc: Document, pageContent: OriginalEncodingNodeType[]): Array<ParseResult<GenericElement>> {
     return pageContent
-      .map((node) => {
+      .map(node => {
         const origEl = getEditionOrigNode(node, doc);
         if (origEl.nodeName === this.frontTagName || isNestedInElem(origEl, this.frontTagName)) {
           if (this.hasOriginalContent(origEl)) {
-            return Array.from(origEl.querySelectorAll(`[type=${this.frontOrigContentAttr}]`))
-              .map((c) => this.genericParserService.parse(c as XMLElement));
+            return Array.from(origEl.querySelectorAll(`[type=${this.frontOrigContentAttr}]`)).map(c =>
+              this.genericParserService.parse(c as XMLElement)
+            );
           }
           if (this.isMarkedAsOrigContent(origEl)) {
             return [this.genericParserService.parse(origEl)];
@@ -107,7 +115,11 @@ export class StructureXmlParserService {
           return [] as Array<ParseResult<GenericElement>>;
         }
 
-        if (origEl.tagName === 'text' && origEl.querySelectorAll && origEl.querySelectorAll(this.frontTagName).length > 0) {
+        if (
+          origEl.tagName === 'text' &&
+          origEl.querySelectorAll &&
+          origEl.querySelectorAll(this.frontTagName).length > 0
+        ) {
           return this.parsePageContent(doc, Array.from(origEl.children) as HTMLElement[]);
         }
 
@@ -121,17 +133,20 @@ export class StructureXmlParserService {
   }
 
   isMarkedAsOrigContent(el: XMLElement): boolean {
-    return el.nodeType !== 3 &&
+    return (
+      el.nodeType !== 3 &&
       (el.getAttribute('type') === this.frontOrigContentAttr ||
         this.hasOriginalContent(el) ||
-        isNestedInElem(el, '', [{ key: 'type', value: this.frontOrigContentAttr }])
-      );
+        isNestedInElem(el, '', [{ key: 'type', value: this.frontOrigContentAttr }]))
+    );
   }
 }
 
 function getEditionOrigNode(el: XMLElement, doc: Document) {
   if (el.getAttribute && el.getAttribute('xpath')) {
-    const path = doc.documentElement.namespaceURI ? el.getAttribute('xpath').replace(/\//g, '/ns:') : el.getAttribute('xpath');
+    const path = doc.documentElement.namespaceURI
+      ? el.getAttribute('xpath').replace(/\//g, '/ns:')
+      : el.getAttribute('xpath');
     const xpathRes = doc.evaluate(path, doc, createNsResolver(doc), XPathResult.ANY_TYPE, undefined);
 
     return xpathRes.iterateNext() as XMLElement;

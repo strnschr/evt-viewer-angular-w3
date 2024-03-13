@@ -1,20 +1,24 @@
 import { Component, Input } from '@angular/core';
 
 import { EditorialConventionLayoutData } from '../../directives/editorial-convention-layout.directive';
-import { Addition } from '../../models/evt-models';
+import { Addition, HighlightData } from '../../models/evt-models';
 import { register } from '../../services/component-register.service';
 import { EditorialConventionDefaults } from '../../services/editorial-conventions.service';
-import { EditionlevelSusceptible, Highlightable } from '../components-mixins';
-
-export interface AdditionComponent extends EditionlevelSusceptible, Highlightable { }
+import { EditionlevelSusceptible, Highlightable, TextFlowSusceptible } from '../components-mixins';
+import { EditionLevelType, TextFlow } from 'src/app/app.config';
+import { EntitiesSelectItem } from '../entities-select/entities-select.component';
 
 @register(Addition)
 @Component({
   selector: 'evt-addition',
   templateUrl: './addition.component.html',
-  styleUrls: ['./addition.component.scss'],
+  styleUrls: ['./addition.component.scss']
 })
-export class AdditionComponent {
+export class AdditionComponent implements EditionlevelSusceptible, Highlightable, TextFlowSusceptible {
+  @Input() textFlow: TextFlow;
+  @Input() editionLevel: EditionLevelType;
+  @Input() highlightData: HighlightData;
+  @Input() itemsToHighlight: EntitiesSelectItem[];
   @Input() data: Addition;
 
   get editorialConventionData(): EditorialConventionLayoutData {
@@ -22,7 +26,7 @@ export class AdditionComponent {
       name: 'add',
       attributes: this.data.attributes,
       editionLevel: this.editionLevel,
-      defaultsKey: this._getDefaultLayoutsKeys(),
+      defaultsKey: this._getDefaultLayoutsKeys()
     };
   }
 
