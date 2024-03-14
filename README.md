@@ -1,5 +1,7 @@
 # EVT 3.0 (evt-viewer-angular) [![Build Status](https://travis-ci.org/evt-project/evt-viewer-angular.svg?branch=master)](https://travis-ci.org/evt-project/evt-viewer-angular)
 
+[Click here to view this application running live on IPFS!](https://w3s.link/ipfs/bafybeigollyqxwrt7hzslubdm6hfkta6silzzwaiykei3ggwvqn6i3rd7q)
+
 ## 1 - Introduction
 
 ### 1.1 - About EVT

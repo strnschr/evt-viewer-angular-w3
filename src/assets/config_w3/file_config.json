@@ -7,7 +7,7 @@
     },
     "graphics": {
       "value": "url",
-      "enable": false
+      "enable": true
     }
   },
   "imagesFolderUrl": "assets/data/images/single",
