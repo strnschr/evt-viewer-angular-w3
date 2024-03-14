@@ -5,8 +5,8 @@ import { Lb } from '../../models/evt-models';
 import { register } from '../../services/component-register.service';
 import { EVTModelService } from '../../services/evt-model.service';
 import { EditionlevelSusceptible, TextFlowSusceptible } from '../components-mixins';
-
-export interface LbComponent extends EditionlevelSusceptible, TextFlowSusceptible {}
+import { EditionLevelType } from 'src/app/app.config';
+import { TextFlow } from 'src/app/app.config';
 
 @register(Lb)
 @Component({
@@ -14,8 +14,10 @@ export interface LbComponent extends EditionlevelSusceptible, TextFlowSusceptibl
   templateUrl: './lb.component.html',
   styleUrls: ['./lb.component.scss']
 })
-export class LbComponent {
+export class LbComponent implements EditionlevelSusceptible, TextFlowSusceptible {
   @Input() data: Lb;
+  @Input() editionLevel: EditionLevelType;
+  @Input() textFlow: TextFlow;
 
   get displayBlock$() {
     return this.evtModelService.lines$.pipe(
