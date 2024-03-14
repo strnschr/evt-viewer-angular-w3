@@ -1,6 +1,6 @@
 # EVT 3.0 (evt-viewer-angular)
 
-[Click here to view this application running live on IPFS!](https://w3s.link/ipfs/bafybeie3moglnvrbh4ayvljg4cnxwltybldo3abj2cwartupkohbypnthm)
+[Click here to view this application running live on IPFS!](https://w3s.link/ipfs/bafybeie5akm3l66auytph5wdbkd73bpcqfdc2hgzxfi75ufykc37f3xbcq)
 
 ## 1 - Introduction
 
