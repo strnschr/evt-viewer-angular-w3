@@ -1,6 +1,10 @@
 # EVT 3.0 (evt-viewer-angular)
 
-[Click here to view this application running live on IPFS!](https://w3s.link/ipfs/bafybeie5akm3l66auytph5wdbkd73bpcqfdc2hgzxfi75ufykc37f3xbcq)
+CID of a recent application instance deployed to IPFS:
+**bafybeie5akm3l66auytph5wdbkd73bpcqfdc2hgzxfi75ufykc37f3xbcq**
+
+- [View using the w3s.link gateway](https://w3s.link/ipfs/bafybeie5akm3l66auytph5wdbkd73bpcqfdc2hgzxfi75ufykc37f3xbcq)
+- [View using the cf-ipfs.com gateway](https://bafybeie5akm3l66auytph5wdbkd73bpcqfdc2hgzxfi75ufykc37f3xbcq.ipfs.cf-ipfs.com/)
 
 ## 1 - Introduction
 
