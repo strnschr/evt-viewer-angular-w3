@@ -47,6 +47,10 @@ export class AppComponent implements OnInit, OnDestroy {
       weight: 'normal',
       style: 'normal',
       display: 'block'
+    }),
+    new FontFace('Roboto', `url(${environment.assetPathPrefix('fonts')}Roboto-Regular.ttf)`, {
+      weight: 'normal',
+      style: 'normal'
     })
   ];
 

@@ -1,4 +1,12 @@
-# EVT 3.0 (evt-viewer-angular) [![Build Status](https://travis-ci.org/evt-project/evt-viewer-angular.svg?branch=master)](https://travis-ci.org/evt-project/evt-viewer-angular)
+# EVT 3.0 (evt-viewer-angular)
+
+CID of a recent application instance deployed to IPFS:
+**bafybeie5akm3l66auytph5wdbkd73bpcqfdc2hgzxfi75ufykc37f3xbcq**
+
+[View using the cf-ipfs.com gateway](https://bafybeie5akm3l66auytph5wdbkd73bpcqfdc2hgzxfi75ufykc37f3xbcq.ipfs.cf-ipfs.com/)
+
+[View using the w3s.link gateway](https://w3s.link/ipfs/bafybeie5akm3l66auytph5wdbkd73bpcqfdc2hgzxfi75ufykc37f3xbcq)
+Note: Due to gateway-specific policies, interaction with the web3.storage API is not possible here, making the upload feature unusable
 
 ## 1 - Introduction
 
